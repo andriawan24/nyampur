@@ -1,0 +1,30 @@
+<resources>
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/colorBackgroundOrange</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="CardViewTopRadiusStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/CustomCardTopRadiusShape</item>
+    </style>
+
+    <style name="CustomCardTopRadiusShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">40dp</item>
+        <item name="cornerSizeTopLeft">40dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="CardViewPrefixPhoneRadiusStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/CustomCardPrefixPhoneShape</item>
+    </style>
+
+    <style name="CustomCardPrefixPhoneShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">8dp</item>
+    </style>
+</resources>

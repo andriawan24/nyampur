@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundOrange">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@id/cardMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_login" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardMain"
+        style="@style/CardViewTopRadiusStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:contentPaddingBottom="24dp"
+        app:contentPaddingLeft="24dp"
+        app:contentPaddingRight="24dp"
+        app:contentPaddingTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeWidth="0dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/title_login"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/satoshi_medium"
+                android:text="@string/description_login"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="16sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPhoneNumber"
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxCornerRadiusBottomEnd="8dp"
+                    app:boxCornerRadiusBottomStart="8dp"
+                    app:boxCornerRadiusTopEnd="8dp"
+                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxStrokeColor="@color/colorGrey"
+                    app:boxStrokeWidth="1dp"
+                    app:hintEnabled="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPhoneNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/satoshi_medium"
+                        android:hint="@string/hint_phone_number"
+                        android:imeOptions="actionDone"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:paddingStart="54dp"
+                        android:paddingEnd="0dp"
+                        android:textSize="16sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/CardViewPrefixPhoneRadiusStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_centerVertical="true"
+                    app:cardBackgroundColor="@color/colorGrey"
+                    app:cardElevation="0dp"
+                    app:contentPaddingLeft="8dp"
+                    app:contentPaddingRight="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/tilPhoneNumber"
+                    app:layout_constraintStart_toStartOf="@id/tilPhoneNumber"
+                    app:layout_constraintTop_toTopOf="@id/tilPhoneNumber"
+                    app:strokeWidth="0dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/satoshi_bold"
+                        android:text="@string/prefix_indonesia_code"
+                        android:textColor="@color/colorTextSecondary" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:insetLeft="@dimen/dimen_0dp"
+                android:insetTop="@dimen/dimen_0dp"
+                android:insetRight="@dimen/dimen_0dp"
+                android:insetBottom="@dimen/dimen_0dp"
+                android:text="@string/action_continue"
+                android:textSize="@dimen/text_size_16sp"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="@dimen/dimen_8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:text="@string/label_or"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGoogleSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/satoshi_bold"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/action_continue_with_google"
+                android:textAllCaps="false"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/colorGrey"
+                app:cornerRadius="8dp"
+                app:icon="@drawable/ic_google"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"
+                app:iconSize="22dp"
+                app:iconTintMode="multiply" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="title_login">Get Started</string>
+    <string name="description_login">Register to get the full experience.</string>
+    <string name="hint_phone_number">Enter your phone number</string>
+    <string name="action_continue">Continue</string>
+    <string name="label_or">Or</string>
+    <string name="action_continue_with_google">Continue with Google</string>
+    <string name="prefix_indonesia_code">+62</string>
+    <string name="title_otp_verification">OTP Verification</string>
+    <string name="message_otp_verification">We send a code to your phone number</string>
+    <string name="label_code_not_received">"Didn't get the code?  "</string>
+    <string name="action_resend">Resend</string>
+    <string name="content_description_resend_button">Resend Icon</string>
+</resources>
