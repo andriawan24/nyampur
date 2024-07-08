@@ -2,6 +2,7 @@
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:statusBarColor">@color/colorBackgroundOrange</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:colorAccent">@color/colorPrimary</item>
     </style>
 
     <style name="CardViewTopRadiusStyle" parent="@style/Widget.MaterialComponents.CardView">

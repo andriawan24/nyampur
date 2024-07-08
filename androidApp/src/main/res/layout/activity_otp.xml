@@ -68,7 +68,7 @@
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:boxStrokeColor="@color/colorGrey">
+            app:boxStrokeColor="@color/selector_text_input_layout_background_color">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etInputCode1"
@@ -76,10 +76,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/satoshi_bold"
                 android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
                 android:minWidth="@dimen/dimen_78dp"
                 android:minHeight="@dimen/dimen_78dp"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="@dimen/text_size_32sp"
+                android:textSize="@dimen/text_size_22sp"
                 tools:text="2" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -91,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_12dp"
             android:layout_weight="1"
-            app:boxStrokeColor="@color/colorGrey">
+            app:boxStrokeColor="@color/selector_text_input_layout_background_color">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etInputCode2"
@@ -99,10 +103,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/satoshi_bold"
                 android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
                 android:minWidth="@dimen/dimen_78dp"
                 android:minHeight="@dimen/dimen_78dp"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="@dimen/text_size_32sp"
+                android:textSize="@dimen/text_size_22sp"
                 tools:text="2" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_12dp"
             android:layout_weight="1"
-            app:boxStrokeColor="@color/colorGrey">
+            app:boxStrokeColor="@color/selector_text_input_layout_background_color">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etInputCode3"
@@ -122,10 +130,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/satoshi_bold"
                 android:gravity="center"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
                 android:minWidth="@dimen/dimen_78dp"
                 android:minHeight="@dimen/dimen_78dp"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="@dimen/text_size_32sp"
+                android:textSize="@dimen/text_size_22sp"
                 tools:text="2" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -136,7 +148,7 @@
             android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:boxStrokeColor="@color/colorGrey">
+            app:boxStrokeColor="@color/selector_text_input_layout_background_color">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etInputCode4"
@@ -144,10 +156,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/satoshi_bold"
                 android:gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="1"
+                android:maxLines="1"
                 android:minWidth="@dimen/dimen_78dp"
                 android:minHeight="@dimen/dimen_78dp"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="@dimen/text_size_32sp"
+                android:textSize="@dimen/text_size_22sp"
                 tools:text="2" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -211,6 +227,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_24dp"
         android:layout_marginBottom="@dimen/dimen_34dp"
+        android:enabled="false"
         android:fontFamily="@font/satoshi_bold"
         android:insetLeft="@dimen/dimen_0dp"
         android:insetTop="@dimen/dimen_0dp"
@@ -219,7 +236,7 @@
         android:paddingVertical="@dimen/dimen_12dp"
         android:text="@string/action_continue"
         android:textSize="@dimen/text_size_16sp"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/selector_button_background_color"
         app:cornerRadius="@dimen/dimen_8dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

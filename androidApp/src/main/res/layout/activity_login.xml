@@ -47,34 +47,34 @@
                 android:fontFamily="@font/satoshi_bold"
                 android:text="@string/title_login"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_size_18sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/dimen_8dp"
                 android:fontFamily="@font/satoshi_medium"
                 android:text="@string/description_login"
                 android:textColor="@color/colorTextSecondary"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_size_16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="@dimen/dimen_16dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPhoneNumber"
                     style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
+                    app:boxCornerRadiusBottomEnd="@dimen/dimen_8dp"
+                    app:boxCornerRadiusBottomStart="@dimen/dimen_8dp"
+                    app:boxCornerRadiusTopEnd="@dimen/dimen_8dp"
+                    app:boxCornerRadiusTopStart="@dimen/dimen_8dp"
                     app:boxStrokeColor="@color/colorGrey"
-                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidth="@dimen/dimen_1dp"
                     app:hintEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -89,25 +89,25 @@
                         android:imeOptions="actionDone"
                         android:inputType="phone"
                         android:maxLines="1"
-                        android:paddingStart="54dp"
-                        android:paddingEnd="0dp"
-                        android:textSize="16sp" />
+                        android:paddingStart="@dimen/dimen_60dp"
+                        android:paddingEnd="@dimen/dimen_16dp"
+                        android:textSize="@dimen/text_size_16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/CardViewPrefixPhoneRadiusStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="@dimen/dimen_0dp"
                     android:layout_centerVertical="true"
                     app:cardBackgroundColor="@color/colorGrey"
-                    app:cardElevation="0dp"
-                    app:contentPaddingLeft="8dp"
-                    app:contentPaddingRight="8dp"
+                    app:cardElevation="@dimen/dimen_0dp"
+                    app:contentPaddingLeft="@dimen/dimen_8dp"
+                    app:contentPaddingRight="@dimen/dimen_8dp"
                     app:layout_constraintBottom_toBottomOf="@id/tilPhoneNumber"
                     app:layout_constraintStart_toStartOf="@id/tilPhoneNumber"
                     app:layout_constraintTop_toTopOf="@id/tilPhoneNumber"
-                    app:strokeWidth="0dp">
+                    app:strokeWidth="@dimen/dimen_0dp">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
@@ -115,7 +115,8 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/satoshi_bold"
                         android:text="@string/prefix_indonesia_code"
-                        android:textColor="@color/colorTextSecondary" />
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="@dimen/text_size_16sp" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -133,32 +134,32 @@
                 android:insetBottom="@dimen/dimen_0dp"
                 android:text="@string/action_continue"
                 android:textSize="@dimen/text_size_16sp"
-                app:backgroundTint="@color/colorPrimary"
+                app:backgroundTint="@color/selector_button_background_color"
                 app:cornerRadius="@dimen/dimen_8dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
                 android:fontFamily="@font/satoshi_bold"
                 android:text="@string/label_or"
                 android:textAlignment="center"
-                android:textSize="12sp" />
+                android:textSize="@dimen/text_size_12sp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGoogleSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
                 android:fontFamily="@font/satoshi_bold"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
+                android:insetLeft="@dimen/dimen_0dp"
+                android:insetTop="@dimen/dimen_0dp"
+                android:insetRight="@dimen/dimen_0dp"
+                android:insetBottom="@dimen/dimen_0dp"
                 android:text="@string/action_continue_with_google"
                 android:textAllCaps="false"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_16sp"
                 android:textStyle="bold"
                 app:backgroundTint="@color/colorGrey"
                 app:cornerRadius="8dp"

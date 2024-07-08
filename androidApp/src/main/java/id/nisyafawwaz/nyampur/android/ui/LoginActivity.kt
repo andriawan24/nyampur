@@ -2,27 +2,22 @@ package id.nisyafawwaz.nyampur.android.ui
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityLoginBinding
-import id.nisyafawwaz.nyampur.android.databinding.ActivitySplashScreenBinding
-import id.nisyafawwaz.nyampur.android.utils.onClick
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClickThrottle
 
-class LoginActivity: AppCompatActivity() {
+class LoginActivity: BaseActivity<ActivityLoginBinding>() {
 
-    private val binding: ActivityLoginBinding by lazy {
+    override val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        initClickListener()
-    }
+    override fun initIntent() = Unit
+    override fun initViews() = Unit
 
-    private fun initClickListener() {
+    override fun initListener() {
         with(binding) {
-            btnContinue.onClick {
+            btnContinue.onClickThrottle {
                 OtpActivity.start(this@LoginActivity)
             }
         }
