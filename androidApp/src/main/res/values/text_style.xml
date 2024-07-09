@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="NyampurTextStyle">
+        <item name="android:fontFamily">@font/satoshi_regular</item>
+        <item name="android:textSize">@dimen/text_size_14sp</item>
+    </style>
+    <style name="NyampurTextStyle.Medium">
+        <item name="android:fontFamily">@font/satoshi_medium</item>
+    </style>
+    <style name="NyampurTextStyle.Medium.Small">
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+    </style>
+</resources>

@@ -7,8 +7,12 @@
     <string name="action_continue_with_google">Continue with Google</string>
     <string name="prefix_indonesia_code">+62</string>
     <string name="title_otp_verification">OTP Verification</string>
-    <string name="message_otp_verification">We send a code to your phone number</string>
+    <string name="message_otp_verification">We send a code to your email</string>
     <string name="label_code_not_received">"Didn't get the code?  "</string>
     <string name="action_resend">Resend</string>
     <string name="content_description_resend_button">Resend Icon</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="label_email">Email</string>
+    <string name="error_email_empty">Email cannot be empty</string>
+    <string name="error_email_invalid">Email should contain a single \'@\'</string>
 </resources>

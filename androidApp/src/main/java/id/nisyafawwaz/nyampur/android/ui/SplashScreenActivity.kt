@@ -22,10 +22,14 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         enableEdgeToEdge()
         binding.root.setStatusBarInset()
         lifecycleScope.launch {
-            delay(2_000)
+            delay(SPLASH_DELAY)
             LoginActivity.start(this@SplashScreenActivity)
         }
     }
 
     override fun initListener() = Unit
+
+    companion object {
+        private const val SPLASH_DELAY = 2_000L
+    }
 }

@@ -52,3 +52,11 @@ fun ViewGroup.setNavigationBarInset() {
         WindowInsetsCompat.CONSUMED
     }
 }
+
+fun View.setPaddingLeft(size: Int) {
+    setPadding(size, paddingTop, paddingEnd, paddingBottom)
+}
+
+fun View.setPaddingTop(size: Int) {
+    setPadding(paddingStart, size, paddingEnd, paddingBottom)
+}

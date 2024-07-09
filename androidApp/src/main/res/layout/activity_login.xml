@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundOrange">
@@ -47,7 +48,7 @@
                 android:fontFamily="@font/satoshi_bold"
                 android:text="@string/title_login"
                 android:textColor="@color/colorTextPrimary"
-                android:textSize="@dimen/text_size_18sp"
+                android:textSize="@dimen/text_size_22sp"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -59,74 +60,49 @@
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="@dimen/text_size_16sp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_16dp">
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:hint="@string/label_email"
+                android:textColorHint="@color/colorTextSecondary"
+                app:boxBackgroundColor="@color/selector_text_input_layout_background_color"
+                app:boxCornerRadiusBottomEnd="@dimen/dimen_8dp"
+                app:boxCornerRadiusBottomStart="@dimen/dimen_8dp"
+                app:boxCornerRadiusTopEnd="@dimen/dimen_8dp"
+                app:boxCornerRadiusTopStart="@dimen/dimen_8dp"
+                app:boxStrokeColor="@color/selector_text_input_layout_stroke_color"
+                app:boxStrokeErrorColor="@color/colorRed"
+                app:boxStrokeWidth="@dimen/dimen_1dp"
+                app:errorTextAppearance="@style/NyampurTextStyle.Medium.Small"
+                app:errorTextColor="@color/colorRed"
+                app:hintTextAppearance="@style/NyampurTextStyle.Medium"
+                app:hintTextColor="@color/colorTextSecondary"
+                app:placeholderText="@string/hint_email"
+                app:placeholderTextAppearance="@style/NyampurTextStyle.Medium"
+                app:placeholderTextColor="@color/colorTextSecondary">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilPhoneNumber"
-                    style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:boxCornerRadiusBottomEnd="@dimen/dimen_8dp"
-                    app:boxCornerRadiusBottomStart="@dimen/dimen_8dp"
-                    app:boxCornerRadiusTopEnd="@dimen/dimen_8dp"
-                    app:boxCornerRadiusTopStart="@dimen/dimen_8dp"
-                    app:boxStrokeColor="@color/colorGrey"
-                    app:boxStrokeWidth="@dimen/dimen_1dp"
-                    app:hintEnabled="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.5">
+                    android:fontFamily="@font/satoshi_medium"
+                    android:imeOptions="actionDone"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textColorHint="@color/colorTextSecondary"
+                    android:textSize="@dimen/text_size_14sp" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPhoneNumber"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/satoshi_medium"
-                        android:hint="@string/hint_phone_number"
-                        android:imeOptions="actionDone"
-                        android:inputType="phone"
-                        android:maxLines="1"
-                        android:paddingStart="@dimen/dimen_60dp"
-                        android:paddingEnd="@dimen/dimen_16dp"
-                        android:textSize="@dimen/text_size_16sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.card.MaterialCardView
-                    style="@style/CardViewPrefixPhoneRadiusStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_0dp"
-                    android:layout_centerVertical="true"
-                    app:cardBackgroundColor="@color/colorGrey"
-                    app:cardElevation="@dimen/dimen_0dp"
-                    app:contentPaddingLeft="@dimen/dimen_8dp"
-                    app:contentPaddingRight="@dimen/dimen_8dp"
-                    app:layout_constraintBottom_toBottomOf="@id/tilPhoneNumber"
-                    app:layout_constraintStart_toStartOf="@id/tilPhoneNumber"
-                    app:layout_constraintTop_toTopOf="@id/tilPhoneNumber"
-                    app:strokeWidth="@dimen/dimen_0dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/satoshi_bold"
-                        android:text="@string/prefix_indonesia_code"
-                        android:textColor="@color/colorTextSecondary"
-                        android:textSize="@dimen/text_size_16sp" />
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnContinue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"
+                android:enabled="false"
                 android:fontFamily="@font/satoshi_bold"
                 android:insetLeft="@dimen/dimen_0dp"
                 android:insetTop="@dimen/dimen_0dp"
