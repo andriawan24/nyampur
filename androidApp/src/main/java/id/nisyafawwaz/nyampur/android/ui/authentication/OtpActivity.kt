@@ -1,27 +1,27 @@
-package id.nisyafawwaz.nyampur.android.ui
+package id.nisyafawwaz.nyampur.android.ui.authentication
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.KeyEvent
+import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputLayout
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityOtpBinding
+import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
 import id.nisyafawwaz.nyampur.android.utils.constants.emptyString
-import id.nisyafawwaz.nyampur.android.utils.extensions.doAfterTextChanged
-import id.nisyafawwaz.nyampur.android.utils.extensions.getCompatColor
 import id.nisyafawwaz.nyampur.android.utils.extensions.getCompatColorList
-import id.nisyafawwaz.nyampur.android.utils.extensions.getValue
+import id.nisyafawwaz.nyampur.android.utils.extensions.gone
 import id.nisyafawwaz.nyampur.android.utils.extensions.hideKeyboard
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClickThrottle
 import id.nisyafawwaz.nyampur.android.utils.extensions.setNavigationBarInset
+import id.nisyafawwaz.nyampur.android.utils.extensions.visible
 
 class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
@@ -30,29 +30,33 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     }
 
     private var otpValue = emptyString()
+    private val textInputOtpLayouts: List<TextInputLayout> by lazy {
+        listOf(
+            binding.tilInputCode1, binding.tilInputCode2,
+            binding.tilInputCode3, binding.tilInputCode4
+        )
+    }
 
     override fun initIntent() = Unit
 
     override fun initViews() {
         enableEdgeToEdge()
         binding.root.setNavigationBarInset()
-        setupForm(
-            listOf(
-                binding.tilInputCode1,
-                binding.tilInputCode2,
-                binding.tilInputCode3,
-                binding.tilInputCode4
-            )
-        )
+        setupForm(textInputOtpLayouts)
     }
 
     private fun setupForm(textInputLayouts: List<TextInputLayout>) {
         textInputLayouts.forEachIndexed { index, textInputLayout ->
+            textInputLayout.editText?.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
+                if (hasFocus && binding.tvErrorOtp.isVisible) {
+                    setErrorMessage(null)
+                }
+            }
+
             textInputLayout.editText?.doAfterTextChanged {
                 otpValue = textInputLayouts.joinToString(separator = emptyString()) { otp ->
                     otp.editText?.text.toString()
                 }
-
                 if (it.toString().length == 1) {
                     textInputLayout.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_otp_stroke_color))
                     if (index == textInputLayouts.lastIndex || otpValue.length == 4) {
@@ -65,7 +69,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                     textInputLayout.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_stroke_color))
                     textInputLayouts.getOrNull(index - 1)?.requestFocus()
                 }
-                Log.d(OtpActivity::class.simpleName, "setupForm: ${otpValue}")
                 binding.btnContinue.isEnabled = otpValue.length == 4
             }
 
@@ -75,8 +78,24 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                 } else if (actionId == EditorInfo.IME_ACTION_DONE) {
                     hideKeyboard()
                 }
-
                 true
+            }
+        }
+    }
+
+    private fun setErrorMessage(error: String? = null) {
+        if (!error.isNullOrBlank()) {
+            binding.tvErrorOtp.apply {
+                visible()
+                text = error
+            }
+            textInputOtpLayouts.forEach {
+                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_error_stroke_color))
+            }
+        } else {
+            binding.tvErrorOtp.gone()
+            textInputOtpLayouts.forEach {
+                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_otp_stroke_color))
             }
         }
     }
@@ -117,7 +136,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
             }
 
             btnContinue.onClickThrottle {
-                Toast.makeText(this@OtpActivity, "Clicked continue", Toast.LENGTH_SHORT).show()
+                MainActivity.start(this@OtpActivity)
             }
         }
     }

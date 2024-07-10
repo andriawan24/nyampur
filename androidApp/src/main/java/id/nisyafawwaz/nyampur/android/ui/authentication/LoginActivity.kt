@@ -1,4 +1,4 @@
-package id.nisyafawwaz.nyampur.android.ui
+package id.nisyafawwaz.nyampur.android.ui.authentication
 
 import android.content.Context
 import android.content.Intent

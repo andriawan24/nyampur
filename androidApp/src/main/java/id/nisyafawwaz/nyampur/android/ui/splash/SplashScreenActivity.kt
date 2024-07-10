@@ -1,10 +1,12 @@
-package id.nisyafawwaz.nyampur.android.ui
+package id.nisyafawwaz.nyampur.android.ui.splash
 
 import android.annotation.SuppressLint
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.lifecycleScope
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivitySplashScreenBinding
+import id.nisyafawwaz.nyampur.android.ui.authentication.LoginActivity
+import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
 import id.nisyafawwaz.nyampur.android.utils.extensions.setStatusBarInset
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -23,7 +25,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         binding.root.setStatusBarInset()
         lifecycleScope.launch {
             delay(SPLASH_DELAY)
-            LoginActivity.start(this@SplashScreenActivity)
+            MainActivity.start(this@SplashScreenActivity)
         }
     }
 

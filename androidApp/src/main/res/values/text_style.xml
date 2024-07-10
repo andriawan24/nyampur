@@ -10,4 +10,10 @@
     <style name="NyampurTextStyle.Medium.Small">
         <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>
+    <style name="NyampurTextStyle.Medium.Smallest">
+        <item name="android:textSize">@dimen/text_size_10sp</item>
+    </style>
+    <style name="NyampurTextStyle.Medium.Small.Error">
+        <item name="android:textColor">@color/colorRed</item>
+    </style>
 </resources>

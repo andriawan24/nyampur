@@ -60,3 +60,15 @@ fun View.setPaddingLeft(size: Int) {
 fun View.setPaddingTop(size: Int) {
     setPadding(paddingStart, size, paddingEnd, paddingBottom)
 }
+
+fun View.visible() {
+    visibility = View.VISIBLE
+}
+
+fun View.gone() {
+    visibility = View.GONE
+}
+
+fun View.invisible() {
+    visibility = View.INVISIBLE
+}
