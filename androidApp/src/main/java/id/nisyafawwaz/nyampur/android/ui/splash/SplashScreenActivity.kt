@@ -25,7 +25,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         binding.root.setStatusBarInset()
         lifecycleScope.launch {
             delay(SPLASH_DELAY)
-            MainActivity.start(this@SplashScreenActivity)
+            LoginActivity.start(this@SplashScreenActivity)
         }
     }
 

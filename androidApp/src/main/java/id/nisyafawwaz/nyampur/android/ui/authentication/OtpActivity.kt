@@ -30,6 +30,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     }
 
     private var otpValue = emptyString()
+    private var email = emptyString()
     private val textInputOtpLayouts: List<TextInputLayout> by lazy {
         listOf(
             binding.tilInputCode1, binding.tilInputCode2,
@@ -37,11 +38,14 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         )
     }
 
-    override fun initIntent() = Unit
+    override fun initIntent() {
+        email = intent.getStringExtra(EXTRA_EMAIL).orEmpty()
+    }
 
     override fun initViews() {
         enableEdgeToEdge()
         binding.root.setNavigationBarInset()
+        binding.tvEmail.text = email
         setupForm(textInputOtpLayouts)
     }
 
@@ -142,8 +146,11 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     }
 
     companion object {
-        fun start(context: Context) {
-            val intent = Intent(context, OtpActivity::class.java)
+        private const val EXTRA_EMAIL = "extra_email"
+        fun start(context: Context, email: String) {
+            val intent = Intent(context, OtpActivity::class.java).apply {
+                putExtra(EXTRA_EMAIL, email)
+            }
             context.startActivity(intent)
         }
     }
