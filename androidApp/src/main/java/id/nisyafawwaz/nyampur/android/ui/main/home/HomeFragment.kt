@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import id.nisyafawwaz.nyampur.android.databinding.FragmentHomeBinding
+import id.nisyafawwaz.nyampur.ui.AccountManager
+import org.koin.android.ext.android.inject
 
 class HomeFragment : Fragment() {
 
+    private val accountManager: AccountManager by inject()
     private var hasInitialized = false
 
     private val binding: FragmentHomeBinding by lazy {
@@ -33,7 +36,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initViews() {
-
+        binding.tvEmail.text = "Sign in with: ${accountManager.getCurrentUser()?.email.orEmpty()}"
     }
 
     override fun onStop() {

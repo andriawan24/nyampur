@@ -35,5 +35,4 @@
             android:exported="true"
             android:theme="@style/AppTheme" />
     </application>
-
 </manifest>

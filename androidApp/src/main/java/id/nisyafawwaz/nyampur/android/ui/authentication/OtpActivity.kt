@@ -5,10 +5,10 @@ import android.content.Intent
 import android.view.KeyEvent
 import android.view.View.OnFocusChangeListener
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputLayout
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
@@ -22,8 +22,15 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClickThrottle
 import id.nisyafawwaz.nyampur.android.utils.extensions.setNavigationBarInset
 import id.nisyafawwaz.nyampur.android.utils.extensions.visible
+import id.nisyafawwaz.nyampur.domain.models.ResultState
+import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtpActivity : BaseActivity<ActivityOtpBinding>() {
+
+    private val authenticationViewModel: AuthenticationViewModel by viewModel()
 
     override val binding: ActivityOtpBinding by lazy {
         ActivityOtpBinding.inflate(layoutInflater)
@@ -34,7 +41,8 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     private val textInputOtpLayouts: List<TextInputLayout> by lazy {
         listOf(
             binding.tilInputCode1, binding.tilInputCode2,
-            binding.tilInputCode3, binding.tilInputCode4
+            binding.tilInputCode3, binding.tilInputCode4,
+            binding.tilInputCode5, binding.tilInputCode6
         )
     }
 
@@ -63,7 +71,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                 }
                 if (it.toString().length == 1) {
                     textInputLayout.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_otp_stroke_color))
-                    if (index == textInputLayouts.lastIndex || otpValue.length == 4) {
+                    if (index == textInputLayouts.lastIndex || otpValue.length == textInputLayouts.size) {
                         hideKeyboard()
                         textInputLayout.editText?.clearFocus()
                     } else {
@@ -73,7 +81,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                     textInputLayout.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_stroke_color))
                     textInputLayouts.getOrNull(index - 1)?.requestFocus()
                 }
-                binding.btnContinue.isEnabled = otpValue.length == 4
+                binding.btnContinue.isEnabled = otpValue.length == textInputLayouts.size
             }
 
             textInputLayout.editText?.setOnEditorActionListener { _, actionId, _ ->
@@ -109,20 +117,14 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
             if (binding.etInputCode1.isFocused) {
                 return super.dispatchKeyEvent(event)
             } else {
-                val textInputLayouts = listOf(
-                    binding.tilInputCode1,
-                    binding.tilInputCode2,
-                    binding.tilInputCode3,
-                    binding.tilInputCode4
-                )
-                val focusedInputIndex = textInputLayouts.indexOfFirst {
+                val focusedInputIndex = textInputOtpLayouts.indexOfFirst {
                     it.editText?.isFocused == true
                 }
 
-                if (textInputLayouts[focusedInputIndex].editText?.text.toString().isNotBlank()) {
+                if (textInputOtpLayouts[focusedInputIndex].editText?.text.toString().isNotBlank()) {
                     return super.dispatchKeyEvent(event)
                 } else {
-                    val textInput = textInputLayouts.getOrNull(focusedInputIndex - 1)
+                    val textInput = textInputOtpLayouts.getOrNull(focusedInputIndex - 1)
                     textInput?.editText?.setText(emptyString())
                     textInput?.requestFocus()
                     return true
@@ -140,7 +142,32 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
             }
 
             btnContinue.onClickThrottle {
-                MainActivity.start(this@OtpActivity)
+                authenticationViewModel.validateEmailOtp(otpValue, email)
+            }
+        }
+    }
+
+    override fun initObserver() {
+        lifecycleScope.launch {
+            authenticationViewModel.validateEmailOtpResult.collectLatest {
+                when (it) {
+                    ResultState.Idle -> {
+                        // Do nothing
+                    }
+
+                    ResultState.Loading -> {
+                        // TODO: Handle loading
+                    }
+
+                    is ResultState.Error -> {
+                        // TODO: Properly handle error exception
+                        setErrorMessage(it.error.message.orEmpty())
+                    }
+
+                    is ResultState.Success -> {
+                        MainActivity.start(this@OtpActivity)
+                    }
+                }
             }
         }
     }

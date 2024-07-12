@@ -43,8 +43,15 @@ android {
 
 dependencies {
     implementation(projects.shared)
+
+    // AndroidX
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // Material
     implementation(libs.material)
+
+    // Koin
+    implementation(libs.koin.android)
 }

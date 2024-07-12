@@ -21,5 +21,5 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     abstract fun initIntent()
     abstract fun initViews()
     abstract fun initListener()
-    protected fun initObserver() = Unit
+    protected open fun initObserver() = Unit
 }

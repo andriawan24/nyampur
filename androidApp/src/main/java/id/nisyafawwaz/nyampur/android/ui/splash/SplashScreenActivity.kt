@@ -8,11 +8,19 @@ import id.nisyafawwaz.nyampur.android.databinding.ActivitySplashScreenBinding
 import id.nisyafawwaz.nyampur.android.ui.authentication.LoginActivity
 import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
 import id.nisyafawwaz.nyampur.android.utils.extensions.setStatusBarInset
+import id.nisyafawwaz.nyampur.domain.models.ResultState
+import id.nisyafawwaz.nyampur.ui.AccountManager
+import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
+
+    private val authenticationViewModel: AuthenticationViewModel by viewModel()
 
     override val binding: ActivitySplashScreenBinding by lazy {
         ActivitySplashScreenBinding.inflate(layoutInflater)
@@ -25,7 +33,29 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         binding.root.setStatusBarInset()
         lifecycleScope.launch {
             delay(SPLASH_DELAY)
-            LoginActivity.start(this@SplashScreenActivity)
+            authenticationViewModel.retrieveUserSession()
+        }
+    }
+
+    override fun initObserver() {
+        lifecycleScope.launch {
+            authenticationViewModel.retrieveUserSessionResult.collectLatest {
+                when (it) {
+                    is ResultState.Error -> {
+                        LoginActivity.start(this@SplashScreenActivity)
+                    }
+
+                    is ResultState.Success -> {
+                        if (it.data != null) {
+                            MainActivity.start(this@SplashScreenActivity)
+                        } else {
+                            LoginActivity.start(this@SplashScreenActivity)
+                        }
+                    }
+
+                    else -> {}
+                }
+            }
         }
     }
 

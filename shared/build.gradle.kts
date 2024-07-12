@@ -30,19 +30,27 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            // Supabase
             api(project.dependencies.platform(libs.supabase.bom))
             api(libs.supabase.postgrest.kt)
             api(libs.supabase.gotrue.kt)
             api(libs.supabase.realtime.kt)
             api(libs.ktor.client.cio)
-        }
 
-        commonTest.dependencies {
-            api(libs.kotlin.test)
+            // Viewmodel
+            api(libs.androidx.lifecycle.viewmodel)
+
+            // Koin
+            api(libs.koin.core)
+            api(libs.koin.test)
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+        }
+
+        commonTest.dependencies {
+            api(libs.kotlin.test)
         }
     }
 }

@@ -1,11 +1,17 @@
 package id.nisyafawwaz.nyampur.android
 
 import android.app.Application
+import id.nisyafawwaz.nyampur.android.di.viewModelModules
+import id.nisyafawwaz.nyampur.di.appModules
+import org.koin.core.context.startKoin
 
-class MainApplication: Application() {
+class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        // TODO: Initialize Timber Logging and other dependencies
+
+        startKoin {
+            modules(appModules + viewModelModules)
+        }
     }
 }
