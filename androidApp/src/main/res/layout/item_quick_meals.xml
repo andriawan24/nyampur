@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivFood"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="H,1.11:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_food_placeholder" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFavorite"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_12dp"
+        app:backgroundTint="#80EFEFEF"
+        app:cornerRadius="@dimen/dimen_8dp"
+        app:icon="@drawable/ic_heart_outline"
+        app:iconSize="@dimen/dimen_34dp"
+        app:iconTintMode="multiply"
+        app:layout_constraintEnd_toEndOf="@id/ivFood"
+        app:layout_constraintTop_toTopOf="@id/ivFood" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvFoodName"
+        style="@style/NyampurTextStyle.Bold"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivFood"
+        tools:text="Pho" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCookTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        app:layout_constraintStart_toStartOf="@id/tvFoodName"
+        app:layout_constraintTop_toBottomOf="@id/tvFoodName"
+        app:srcCompat="@drawable/ic_time" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCookTime"
+        style="@style/NyampurTextStyle.Medium.Small"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_4dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivCookTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivCookTime"
+        app:layout_constraintTop_toTopOf="@id/ivCookTime"
+        tools:text="10 Minutes" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIngredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        app:layout_constraintStart_toStartOf="@id/tvFoodName"
+        app:layout_constraintTop_toBottomOf="@id/ivCookTime"
+        app:srcCompat="@drawable/ic_ingredient" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvIngredients"
+        style="@style/NyampurTextStyle.Medium.Small"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_4dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivIngredients"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivIngredients"
+        app:layout_constraintTop_toTopOf="@id/ivIngredients"
+        tools:text="3 Ingredients" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

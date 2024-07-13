@@ -18,4 +18,9 @@
     <string name="error_email_invalid">Email should contain a single \'@\'</string>
     <string name="label_home">Home</string>
     <string name="label_save">Save</string>
+    <string name="hint_search">What do you want to make today?</string>
+    <string name="label_ai_generated">AI-Generated</string>
+    <string name="description_ai_generated">Find the best menu with ingredients you have</string>
+    <string name="action_lets_start">Let\'s Start</string>
+    <string name="title_quick_simple_meals">Quick and Simple Meals</string>
 </resources>

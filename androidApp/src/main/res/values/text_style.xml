@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="NyampurTextStyle">
         <item name="android:fontFamily">@font/satoshi_regular</item>
         <item name="android:textSize">@dimen/text_size_14sp</item>
     </style>
+
     <style name="NyampurTextStyle.Medium">
         <item name="android:fontFamily">@font/satoshi_medium</item>
     </style>
+
+    <style name="NyampurTextStyle.Bold">
+        <item name="android:fontFamily">@font/satoshi_bold</item>
+    </style>
+
+    <style name="NyampurTextStyle.Bold.Primary">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="NyampurTextStyle.Bold.Large">
+        <item name="android:textSize">@dimen/text_size_22sp</item>
+    </style>
+
     <style name="NyampurTextStyle.Medium.Small">
         <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>
+
     <style name="NyampurTextStyle.Medium.Smallest">
         <item name="android:textSize">@dimen/text_size_10sp</item>
     </style>
+
     <style name="NyampurTextStyle.Medium.Small.Error">
         <item name="android:textColor">@color/colorRed</item>
     </style>

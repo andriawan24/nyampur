@@ -1,6 +1,6 @@
 [versions]
 #noinspection AndroidGradlePluginVersion
-agp = "8.6.0-alpha05"
+agp = "8.5.1"
 koinCore = "3.2.0"
 ktorClient = "2.3.12"
 lifecycleViewmodel = "2.8.3"

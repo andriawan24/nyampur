@@ -1,4 +1,6 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 plugins {
@@ -10,11 +12,8 @@ plugins {
 
 kotlin {
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
     }
 
     listOf(
@@ -56,7 +55,7 @@ kotlin {
 }
 
 buildkonfig {
-    packageName = "id.nisyafawwaz.nyampur"
+    packageName = Configs.APPLICATION_ID
 
     val props = Properties()
     try {
@@ -80,13 +79,15 @@ buildkonfig {
 }
 
 android {
-    namespace = "id.nisyafawwaz.nyampur"
-    compileSdk = 34
+    namespace = Configs.APPLICATION_ID
+    compileSdk = Configs.COMPILE_SDK
+
     defaultConfig {
-        minSdk = 24
+        minSdk = Configs.MIN_SDK
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = Configs.sourceCompatibility
+        targetCompatibility = Configs.targetCompatibility
     }
 }

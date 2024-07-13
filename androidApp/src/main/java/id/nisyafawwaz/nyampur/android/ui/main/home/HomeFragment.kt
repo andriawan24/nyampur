@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initViews() {
-        binding.tvEmail.text = "Sign in with: ${accountManager.getCurrentUser()?.email.orEmpty()}"
+
     }
 
     override fun onStop() {

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "id.nisyafawwaz.nyampur.android"
+    namespace = "${Configs.APPLICATION_ID}.android"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "id.nisyafawwaz.nyampur.android"
+        applicationId = "${Configs.APPLICATION_ID}.android"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
