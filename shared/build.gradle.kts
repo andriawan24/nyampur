@@ -34,7 +34,13 @@ kotlin {
             api(libs.supabase.postgrest.kt)
             api(libs.supabase.gotrue.kt)
             api(libs.supabase.realtime.kt)
-            api(libs.ktor.client.cio)
+
+            // Ktor
+            api(libs.ktor.client.core)
+            api(libs.ktor.client.logging)
+            api(libs.ktor.serialization.kotlinx.json)
+            api(libs.ktor.client.resources)
+            api(libs.ktor.client.auth)
 
             // Viewmodel
             api(libs.androidx.lifecycle.viewmodel)
@@ -42,6 +48,10 @@ kotlin {
             // Koin
             api(libs.koin.core)
             api(libs.koin.test)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
         }
 
         iosMain.dependencies {

@@ -1,17 +1,20 @@
 package id.nisyafawwaz.nyampur.android.ui.main.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import id.nisyafawwaz.nyampur.android.databinding.FragmentHomeBinding
-import id.nisyafawwaz.nyampur.ui.AccountManager
-import org.koin.android.ext.android.inject
+import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
+import id.nisyafawwaz.nyampur.ui.RecipeViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    private val accountManager: AccountManager by inject()
+    private val recipeViewModel: RecipeViewModel by viewModel()
+
     private var hasInitialized = false
 
     private val binding: FragmentHomeBinding by lazy {
@@ -36,7 +39,23 @@ class HomeFragment : Fragment() {
     }
 
     private fun initViews() {
+        initObserver()
+        recipeViewModel.getRecipes("sarapan", 1)
+    }
 
+    private fun initObserver() {
+        recipeViewModel.getRecipesResult.observeLiveData(
+            requireActivity(),
+            onLoading = {
+
+            },
+            onSuccess = { recipes ->
+                Log.d(HomeFragment::class.simpleName, "initObserver: $recipes")
+            },
+            onFailure = {
+
+            }
+        )
     }
 
     override fun onStop() {

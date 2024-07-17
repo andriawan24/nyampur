@@ -1,4 +1,4 @@
-package id.nisyafawwaz.nyampur.domain.usecases
+package id.nisyafawwaz.nyampur.domain.usecases.auth
 
 import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.domain.repository.AuthRepository

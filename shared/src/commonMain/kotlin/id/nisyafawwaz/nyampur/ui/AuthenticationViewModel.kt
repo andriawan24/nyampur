@@ -3,9 +3,9 @@ package id.nisyafawwaz.nyampur.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import id.nisyafawwaz.nyampur.domain.models.ResultState
-import id.nisyafawwaz.nyampur.domain.usecases.RetrieveUserSessionUseCase
-import id.nisyafawwaz.nyampur.domain.usecases.SendEmailOtpUseCase
-import id.nisyafawwaz.nyampur.domain.usecases.ValidateEmailOtpUseCase
+import id.nisyafawwaz.nyampur.domain.usecases.auth.RetrieveUserSessionUseCase
+import id.nisyafawwaz.nyampur.domain.usecases.auth.SendEmailOtpUseCase
+import id.nisyafawwaz.nyampur.domain.usecases.auth.ValidateEmailOtpUseCase
 import io.github.jan.supabase.gotrue.user.UserInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
