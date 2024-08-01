@@ -30,4 +30,9 @@
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">8dp</item>
     </style>
+    
+    <style name="ShapeAppearanceOverlay.CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/dimen_8dp</item>
+    </style>
 </resources>

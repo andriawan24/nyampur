@@ -78,7 +78,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:paddingVertical="@dimen/dimen_12dp"
@@ -114,23 +114,33 @@
                         android:text="@string/description_ai_generated"
                         android:textSize="@dimen/text_size_12sp" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_0dp"
+                        android:layout_weight="1" />
+
                     <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_12dp"
-                        android:paddingHorizontal="@dimen/dimen_32dp"
-                        android:insetBottom="@dimen/dimen_0dp"
-                        android:insetRight="@dimen/dimen_0dp"
                         android:insetLeft="@dimen/dimen_0dp"
                         android:insetTop="@dimen/dimen_0dp"
+                        android:insetRight="@dimen/dimen_0dp"
+                        android:insetBottom="@dimen/dimen_0dp"
+                        android:minHeight="@dimen/dimen_35dp"
+                        android:paddingHorizontal="@dimen/dimen_32dp"
+                        android:paddingVertical="@dimen/dimen_8dp"
                         android:text="@string/action_lets_start"
+                        android:textSize="@dimen/text_size_14sp"
+                        app:backgroundTint="@color/colorPrimary"
+                        app:backgroundTintMode="add"
                         app:cornerRadius="@dimen/dimen_8dp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="139dp"
+                    android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/img_search_banner" />
 
@@ -151,6 +161,8 @@
             android:id="@+id/rvQuickMeals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never"
             tools:layoutManager="GridLayoutManager"
             tools:listitem="@layout/item_quick_meals"
             tools:spanCount="2" />

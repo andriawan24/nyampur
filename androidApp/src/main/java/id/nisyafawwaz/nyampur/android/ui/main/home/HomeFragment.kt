@@ -1,56 +1,50 @@
 package id.nisyafawwaz.nyampur.android.ui.main.home
 
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import id.nisyafawwaz.nyampur.android.adapters.QuickMealAdapter
+import id.nisyafawwaz.nyampur.android.base.BaseFragment
 import id.nisyafawwaz.nyampur.android.databinding.FragmentHomeBinding
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
+import id.nisyafawwaz.nyampur.android.utils.list.GridItemDecoration
 import id.nisyafawwaz.nyampur.ui.RecipeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val recipeViewModel: RecipeViewModel by viewModel()
 
-    private var hasInitialized = false
+    private val quickMealAdapter = QuickMealAdapter()
 
-    private val binding: FragmentHomeBinding by lazy {
+    override val binding: FragmentHomeBinding by lazy {
         FragmentHomeBinding.inflate(layoutInflater)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return binding.root
+    override fun initViews() {
+        initRecycler()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        if (!hasInitialized) {
-            initViews()
-            hasInitialized = true
+    private fun initRecycler() {
+        with(binding.rvQuickMeals) {
+            adapter = quickMealAdapter
+            layoutManager = GridLayoutManager(requireActivity(), 2)
+            addItemDecoration(GridItemDecoration(2))
         }
     }
 
-    private fun initViews() {
-        initObserver()
+    override fun initProcess() {
         recipeViewModel.getRecipes("sarapan", 1)
     }
 
-    private fun initObserver() {
+    override fun initActions() = Unit
+
+    override fun initObservers() {
         recipeViewModel.getRecipesResult.observeLiveData(
             requireActivity(),
             onLoading = {
 
             },
             onSuccess = { recipes ->
-                Log.d(HomeFragment::class.simpleName, "initObserver: $recipes")
+                quickMealAdapter.addAll(recipes)
             },
             onFailure = {
 
@@ -58,14 +52,7 @@ class HomeFragment : Fragment() {
         )
     }
 
-    override fun onStop() {
-        super.onStop()
-        hasInitialized = false
-    }
-
     companion object {
-        fun newInstance(): HomeFragment {
-            return HomeFragment()
-        }
+        fun newInstance(): HomeFragment = HomeFragment()
     }
 }

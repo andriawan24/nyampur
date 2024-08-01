@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivFood"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="@dimen/dimen_0dp"
@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CircleImageView"
         app:srcCompat="@drawable/img_food_placeholder" />
 
     <com.google.android.material.button.MaterialButton
@@ -23,11 +24,11 @@
         style="@style/Widget.Material3.Button.IconButton.Filled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_12dp"
+        android:layout_margin="@dimen/dimen_8dp"
         app:backgroundTint="#80EFEFEF"
         app:cornerRadius="@dimen/dimen_8dp"
         app:icon="@drawable/ic_heart_outline"
-        app:iconSize="@dimen/dimen_34dp"
+        app:iconSize="@dimen/dimen_18dp"
         app:iconTintMode="multiply"
         app:layout_constraintEnd_toEndOf="@id/ivFood"
         app:layout_constraintTop_toTopOf="@id/ivFood" />
@@ -38,6 +39,8 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
