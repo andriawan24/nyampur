@@ -1,19 +1,21 @@
 [versions]
 #noinspection AndroidGradlePluginVersion
 agp = "8.5.1"
+glide = "4.16.0"
 koinCore = "3.2.0"
 ktorClient = "2.3.12"
-lifecycleViewmodel = "2.8.3"
+lifecycleViewmodel = "2.8.4"
 supabase-bom = "2.5.2"
 kotlin = "2.0.0"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.0"
+activity = "1.9.1"
 constraintlayout = "2.1.4"
 buildKonfig = "0.15.1"
 
 [libraries]
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinCore" }

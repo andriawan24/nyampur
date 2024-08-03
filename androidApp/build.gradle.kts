@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "${Configs.APPLICATION_ID}.android"
-    compileSdk = 34
+    compileSdk = Configs.COMPILE_SDK
 
     defaultConfig {
         applicationId = "${Configs.APPLICATION_ID}.android"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = Configs.MIN_SDK
+        targetSdk = Configs.COMPILE_SDK
         versionCode = 1
         versionName = "1.0"
     }
@@ -32,12 +32,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = Configs.sourceCompatibility
+        targetCompatibility = Configs.targetCompatibility
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Configs.JVM_TARGET
     }
 }
 
@@ -48,6 +48,9 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // Glide
+    implementation(libs.glide)
 
     // Material
     implementation(libs.material)

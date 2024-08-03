@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/dimen_24dp"
+    android:paddingVertical="@dimen/dimen_48dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/NyampurTextStyle.Bold.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_error_unknown"
+        android:textAlignment="center" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/NyampurTextStyle.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:text="@string/action_try_again" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

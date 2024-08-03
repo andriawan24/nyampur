@@ -53,7 +53,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
                         }
                     }
 
-                    else -> {}
+                    else -> Unit
                 }
             }
         }

@@ -12,6 +12,7 @@ fun <T> StateFlow<ResultState<T>>.observeLiveData(
     onLoading: () -> Unit,
     onSuccess: (T) -> Unit,
     onFailure: (Exception) -> Unit,
+    onEmpty: (() -> Unit)? = null,
     onIdle: (() -> Unit)? = null
 ) {
     lifecycleOwner.lifecycleScope.launch {
@@ -21,6 +22,7 @@ fun <T> StateFlow<ResultState<T>>.observeLiveData(
                 is ResultState.Error -> onFailure.invoke(it.error)
                 ResultState.Loading -> onLoading.invoke()
                 is ResultState.Success -> onSuccess.invoke(it.data)
+                ResultState.Empty -> onEmpty?.invoke()
             }
         }
     }

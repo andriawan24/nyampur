@@ -5,6 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.databinding.ItemQuickMealsBinding
 import id.nisyafawwaz.nyampur.domain.models.RecipeModel
 
@@ -21,6 +24,11 @@ class QuickMealAdapter : RecyclerView.Adapter<QuickMealAdapter.QuickMealViewHold
                 tvFoodName.text = recipe.title
                 tvCookTime.text = recipe.cookTime.toString()
                 tvIngredients.text = recipe.level
+                Glide.with(root.context)
+                    .load(recipe.imageUrl)
+                    .placeholder(R.drawable.img_food_placeholder)
+                    .error(R.drawable.img_food_placeholder)
+                    .into(ivFood)
             }
         }
     }

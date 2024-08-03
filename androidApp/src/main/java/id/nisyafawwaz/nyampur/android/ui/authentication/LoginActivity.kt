@@ -26,8 +26,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
-    override fun initIntent() = Unit
-
     override fun initViews() {
         binding.apply {
             tilEmail.removeExtraPaddingError()

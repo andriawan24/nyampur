@@ -11,8 +11,12 @@ class GetRecipesUseCase(private val recipeRepository: RecipeRepository) {
     fun execute(type: String, page: Int): Flow<ResultState<List<RecipeModel>>> = flow {
         emit(ResultState.Loading)
         try {
-            val user = recipeRepository.getRecipe(type, page)
-            emit(ResultState.Success(user))
+            val recipes = recipeRepository.getRecipe(type, page)
+            if (recipes.isEmpty()) {
+                emit(ResultState.Empty)
+            } else {
+                emit(ResultState.Success(recipes))
+            }
         } catch (e: Exception) {
             print(e.message)
             emit(ResultState.Error(e))

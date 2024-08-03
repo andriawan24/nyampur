@@ -157,15 +157,25 @@
             android:text="@string/title_quick_simple_meals"
             android:textSize="@dimen/text_size_18sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvQuickMeals"
+        <id.nisyafawwaz.nyampur.android.utils.views.MultiStateView
+            android:id="@+id/msvQuickMeals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:overScrollMode="never"
-            tools:layoutManager="GridLayoutManager"
-            tools:listitem="@layout/item_quick_meals"
-            tools:spanCount="2" />
+            app:msvEmptyView="@layout/layout_default_empty"
+            app:msvErrorView="@layout/layout_default_error"
+            app:msvLoadingView="@layout/layout_default_loading">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvQuickMeals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                tools:layoutManager="GridLayoutManager"
+                tools:listitem="@layout/item_quick_meals"
+                tools:spanCount="2" />
+
+        </id.nisyafawwaz.nyampur.android.utils.views.MultiStateView>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

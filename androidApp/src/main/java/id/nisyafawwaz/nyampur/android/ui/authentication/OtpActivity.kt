@@ -18,6 +18,7 @@ import id.nisyafawwaz.nyampur.android.utils.constants.emptyString
 import id.nisyafawwaz.nyampur.android.utils.extensions.getCompatColorList
 import id.nisyafawwaz.nyampur.android.utils.extensions.gone
 import id.nisyafawwaz.nyampur.android.utils.extensions.hideKeyboard
+import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClickThrottle
 import id.nisyafawwaz.nyampur.android.utils.extensions.setNavigationBarInset
@@ -148,28 +149,18 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     }
 
     override fun initObserver() {
-        lifecycleScope.launch {
-            authenticationViewModel.validateEmailOtpResult.collectLatest {
-                when (it) {
-                    ResultState.Idle -> {
-                        // Do nothing
-                    }
+        authenticationViewModel.validateEmailOtpResult.observeLiveData(
+            this,
+            onLoading = {
 
-                    ResultState.Loading -> {
-                        // TODO: Handle loading
-                    }
-
-                    is ResultState.Error -> {
-                        // TODO: Properly handle error exception
-                        setErrorMessage(it.error.message.orEmpty())
-                    }
-
-                    is ResultState.Success -> {
-                        MainActivity.start(this@OtpActivity)
-                    }
-                }
+            },
+            onSuccess = {
+                MainActivity.start(this@OtpActivity)
+            },
+            onFailure = {
+                setErrorMessage(it.message.orEmpty())
             }
-        }
+        )
     }
 
     companion object {

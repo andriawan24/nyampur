@@ -23,4 +23,7 @@
     <string name="description_ai_generated">Find the best menu with ingredients you have</string>
     <string name="action_lets_start">Let\'s Start</string>
     <string name="title_quick_simple_meals">Quick and Simple Meals</string>
+    <string name="title_error_unknown">Oops! Sorry, I think there is a problem with our server</string>
+    <string name="action_try_again">Try Again</string>
+    <string name="title_empty">There is no data, please comeback again later</string>
 </resources>

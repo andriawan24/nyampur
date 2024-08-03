@@ -40,6 +40,6 @@ abstract class BaseFragment<VB: ViewBinding>: Fragment() {
 
     abstract fun initViews()
     abstract fun initProcess()
-    abstract fun initActions()
+    protected open fun initActions() = Unit
     abstract fun initObservers()
 }
