@@ -8,7 +8,6 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputLayout
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
@@ -20,13 +19,10 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.gone
 import id.nisyafawwaz.nyampur.android.utils.extensions.hideKeyboard
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
-import id.nisyafawwaz.nyampur.android.utils.extensions.onClickThrottle
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClickWithThrottle
 import id.nisyafawwaz.nyampur.android.utils.extensions.setNavigationBarInset
 import id.nisyafawwaz.nyampur.android.utils.extensions.visible
-import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtpActivity : BaseActivity<ActivityOtpBinding>() {
@@ -142,7 +138,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                 finish()
             }
 
-            btnContinue.onClickThrottle {
+            btnContinue.onClickWithThrottle {
                 authenticationViewModel.validateEmailOtp(otpValue, email)
             }
         }
