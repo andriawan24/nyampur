@@ -28,14 +28,8 @@ abstract class BaseFragment<VB: ViewBinding>: Fragment() {
             initViews()
             initProcess()
             initActions()
-
             hasInitialized = true
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        hasInitialized = false
     }
 
     abstract fun initViews()

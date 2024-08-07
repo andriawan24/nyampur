@@ -5,6 +5,7 @@
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:title="@string/label_home" />
+    <item android:title="" android:enabled="false" />
     <item
         android:id="@+id/menu_save"
         android:enabled="true"

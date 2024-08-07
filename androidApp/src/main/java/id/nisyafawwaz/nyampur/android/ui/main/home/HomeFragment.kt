@@ -37,10 +37,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initProcess() {
-        recipeViewModel.getRecipes("sarapan", 1)
+        recipeViewModel.getRecipes(DEFAULT_TYPE, 1)
     }
 
     override fun initObservers() {
+        observerRecipeResult()
+    }
+
+    private fun observerRecipeResult() {
         recipeViewModel.getRecipesResult.observeLiveData(
             requireActivity(),
             onLoading = {
@@ -60,6 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     companion object {
+        private const val DEFAULT_TYPE = "sarapan"
         fun newInstance(): HomeFragment = HomeFragment()
     }
 }

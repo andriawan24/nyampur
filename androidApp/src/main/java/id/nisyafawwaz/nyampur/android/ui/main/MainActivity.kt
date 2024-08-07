@@ -18,6 +18,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private val homeFragment = HomeFragment.newInstance()
+    private val savedFragment = SavedFragment.newInstance()
+
     override fun initIntent() = Unit
 
     override fun initViews() {
@@ -28,7 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             when (item.itemId) {
                 R.id.menu_home -> {
                     supportFragmentManager.showFragment(
-                        HomeFragment.newInstance(),
+                        homeFragment,
                         binding.flFragment.id
                     )
                     true
@@ -36,7 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
                 R.id.menu_save -> {
                     supportFragmentManager.showFragment(
-                        SavedFragment.newInstance(),
+                        savedFragment,
                         binding.flFragment.id
                     )
                     true
@@ -49,7 +52,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun initDefaultHomeMenu() {
         supportFragmentManager.showFragment(
-            HomeFragment.newInstance(),
+            homeFragment,
             binding.flFragment.id
         )
     }
