@@ -9,9 +9,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.databinding.ItemQuickMealsBinding
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.domain.models.RecipeModel
 
-class QuickMealAdapter : RecyclerView.Adapter<QuickMealAdapter.QuickMealViewHolder>() {
+class QuickMealAdapter(
+    private val onFavoriteClicked: (data: RecipeModel) -> Unit
+) : RecyclerView.Adapter<QuickMealAdapter.QuickMealViewHolder>() {
 
     private var recipeDiffer = AsyncListDiffer(this, DIFF_CALLBACK)
 
@@ -29,6 +32,10 @@ class QuickMealAdapter : RecyclerView.Adapter<QuickMealAdapter.QuickMealViewHold
                     .placeholder(R.drawable.img_food_placeholder)
                     .error(R.drawable.img_food_placeholder)
                     .into(ivFood)
+
+                btnFavorite.onClick {
+                    onFavoriteClicked.invoke(recipe)
+                }
             }
         }
     }

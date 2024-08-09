@@ -10,15 +10,29 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.showEmpty
 import id.nisyafawwaz.nyampur.android.utils.extensions.showError
 import id.nisyafawwaz.nyampur.android.utils.extensions.showLoading
 import id.nisyafawwaz.nyampur.android.utils.list.GridItemDecoration
-import id.nisyafawwaz.nyampur.android.utils.views.MultiStateView
-import id.nisyafawwaz.nyampur.ui.RecipeViewModel
+import id.nisyafawwaz.nyampur.data.models.responses.RecipeResponse
+import id.nisyafawwaz.nyampur.ui.AccountManager
+import id.nisyafawwaz.nyampur.ui.AuthVM
+import id.nisyafawwaz.nyampur.ui.RecipeVM
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private val recipeViewModel: RecipeViewModel by viewModel()
+    private val recipeVM: RecipeVM by viewModel()
+    private val accountManager: AccountManager by inject()
 
-    private val quickMealAdapter = QuickMealAdapter()
+    private val quickMealAdapter = QuickMealAdapter {
+        recipeVM.saveRecipes(
+            RecipeResponse(
+                imageUrl = it.imageUrl,
+                cookTime = it.cookTime,
+                title = it.title,
+                level = it.level,
+                usersId = accountManager.getCurrentUser()?.id.orEmpty()
+            )
+        )
+    }
 
     override val binding: FragmentHomeBinding by lazy {
         FragmentHomeBinding.inflate(layoutInflater)
@@ -37,15 +51,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initProcess() {
-        recipeViewModel.getRecipes(DEFAULT_TYPE, 1)
+        recipeVM.getRecipes(DEFAULT_TYPE, 1)
     }
 
     override fun initObservers() {
         observerRecipeResult()
+        observerSaveRecipeResult()
+    }
+
+    private fun observerSaveRecipeResult() {
+        recipeVM.saveRecipesResult.observeLiveData(
+            requireActivity(),
+            onLoading = {
+                binding.msvQuickMeals.showLoading()
+            },
+            onEmpty = {
+                binding.msvQuickMeals.showEmpty()
+            },
+            onSuccess = {
+
+            },
+            onFailure = {
+                binding.msvQuickMeals.showError()
+            }
+        )
     }
 
     private fun observerRecipeResult() {
-        recipeViewModel.getRecipesResult.observeLiveData(
+        recipeVM.getRecipesResult.observeLiveData(
             requireActivity(),
             onLoading = {
                 binding.msvQuickMeals.showLoading()

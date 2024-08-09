@@ -9,18 +9,16 @@ import id.nisyafawwaz.nyampur.android.ui.authentication.LoginActivity
 import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
 import id.nisyafawwaz.nyampur.android.utils.extensions.setStatusBarInset
 import id.nisyafawwaz.nyampur.domain.models.ResultState
-import id.nisyafawwaz.nyampur.ui.AccountManager
-import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
+import id.nisyafawwaz.nyampur.ui.AuthVM
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
 
-    private val authenticationViewModel: AuthenticationViewModel by viewModel()
+    private val authVM: AuthVM by viewModel()
 
     override val binding: ActivitySplashScreenBinding by lazy {
         ActivitySplashScreenBinding.inflate(layoutInflater)
@@ -33,13 +31,13 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         binding.root.setStatusBarInset()
         lifecycleScope.launch {
             delay(SPLASH_DELAY)
-            authenticationViewModel.retrieveUserSession()
+            authVM.retrieveUserSession()
         }
     }
 
     override fun initObserver() {
         lifecycleScope.launch {
-            authenticationViewModel.retrieveUserSessionResult.collectLatest {
+            authVM.retrieveUserSessionResult.collectLatest {
                 when (it) {
                     is ResultState.Error -> {
                         LoginActivity.start(this@SplashScreenActivity)

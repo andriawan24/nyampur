@@ -13,12 +13,12 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.getValue
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClickWithThrottle
 import id.nisyafawwaz.nyampur.android.utils.extensions.removeExtraPaddingError
-import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
+import id.nisyafawwaz.nyampur.ui.AuthVM
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
-    private val authenticationViewModel: AuthenticationViewModel by viewModel()
+    private val authVM: AuthVM by viewModel()
 
     override val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
@@ -60,13 +60,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun initListener() {
         with(binding) {
             btnContinue.onClickWithThrottle {
-                authenticationViewModel.signInOtp(etEmail.getValue())
+                authVM.signInOtp(etEmail.getValue())
             }
         }
     }
 
     override fun initObserver() {
-        authenticationViewModel.signInOtpResult.observeLiveData(
+        authVM.signInOtpResult.observeLiveData(
             this,
             onLoading = {
                 // TODO: Handle Loading State
