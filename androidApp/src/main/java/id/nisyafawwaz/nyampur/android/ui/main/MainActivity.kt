@@ -64,6 +64,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        binding.bottomNavMain.setOnApplyWindowInsetsListener(null)
+        binding.bottomNavMain.setPadding(0,0,0,0)
     }
 
     override fun initListener() = Unit

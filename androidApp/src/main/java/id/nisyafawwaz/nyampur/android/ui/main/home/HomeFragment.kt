@@ -69,7 +69,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 binding.msvQuickMeals.showEmpty()
             },
             onSuccess = {
-
+                binding.msvQuickMeals.showDefault()
             },
             onFailure = {
                 binding.msvQuickMeals.showError()

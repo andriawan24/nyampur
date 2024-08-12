@@ -1,7 +1,10 @@
 package id.nisyafawwaz.nyampur.android.ui.splash
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivitySplashScreenBinding
@@ -27,7 +30,12 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
     override fun initIntent() = Unit
 
     override fun initViews() {
-        enableEdgeToEdge()
+        enableEdgeToEdge(
+            navigationBarStyle = SystemBarStyle.light(
+                Color.TRANSPARENT,
+                Color.TRANSPARENT
+            )
+        )
         binding.root.setStatusBarInset()
         lifecycleScope.launch {
             delay(SPLASH_DELAY)

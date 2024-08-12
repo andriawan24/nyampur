@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.databinding.ItemQuickMealsBinding
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
@@ -26,7 +25,8 @@ class QuickMealAdapter(
             with(binding) {
                 tvFoodName.text = recipe.title
                 tvCookTime.text = recipe.cookTime.toString()
-                tvIngredients.text = recipe.level
+                tvLevel.text = recipe.level
+
                 Glide.with(root.context)
                     .load(recipe.imageUrl)
                     .placeholder(R.drawable.img_food_placeholder)
