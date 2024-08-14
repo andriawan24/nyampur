@@ -6,6 +6,7 @@ import id.nisyafawwaz.nyampur.data.models.responses.RecipeResponse
 import id.nisyafawwaz.nyampur.domain.models.RecipeModel
 import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.domain.usecases.recipes.GetRecipesUseCase
+import id.nisyafawwaz.nyampur.domain.usecases.recipes.GetSavedRecipeUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.recipes.SaveRecipeUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -22,6 +23,7 @@ class RecipeVM : ViewModel(), KoinComponent {
 
     private val getRecipesUseCase: GetRecipesUseCase by inject()
     private val saveRecipeUseCase: SaveRecipeUseCase by inject()
+    private val getSavedRecipeUseCase: GetSavedRecipeUseCase by inject()
 
     private val _getRecipesResult = MutableStateFlow<GetRecipesResult>(ResultState.Idle)
     val getRecipesResult = _getRecipesResult.asStateFlow()
@@ -29,10 +31,21 @@ class RecipeVM : ViewModel(), KoinComponent {
     private val _saveRecipesResult = MutableStateFlow<ResultState<RecipeModel?>>(ResultState.Idle)
     val saveRecipesResult = _saveRecipesResult.asStateFlow()
 
+    private val _getSavedRecipesResult = MutableStateFlow<ResultState<List<RecipeModel>>>(ResultState.Idle)
+    val getSavedRecipesResult = _getSavedRecipesResult.asStateFlow()
+
     fun getRecipes(type: String, page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             getRecipesUseCase.execute(type, page).collectLatest {
                 _getRecipesResult.emit(it)
+            }
+        }
+    }
+
+    fun getSavedRecipes(userId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            getSavedRecipeUseCase.execute(userId).collectLatest {
+                _getSavedRecipesResult.emit(it)
             }
         }
     }

@@ -1,7 +1,7 @@
 package id.nisyafawwaz.nyampur.di
 
-import id.nisyafawwaz.nyampur.data.remote.RemoteDataSource
-import id.nisyafawwaz.nyampur.data.remote.SupabaseDataSource
+import id.nisyafawwaz.nyampur.data.remote.datasources.RemoteDataSource
+import id.nisyafawwaz.nyampur.data.remote.datasources.SupabaseDataSource
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 

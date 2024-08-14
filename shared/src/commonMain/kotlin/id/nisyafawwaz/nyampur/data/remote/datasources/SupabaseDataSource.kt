@@ -1,4 +1,4 @@
-package id.nisyafawwaz.nyampur.data.remote
+package id.nisyafawwaz.nyampur.data.remote.datasources
 
 import id.nisyafawwaz.nyampur.data.models.responses.RecipeResponse
 import io.github.jan.supabase.SupabaseClient
@@ -23,9 +23,13 @@ class SupabaseDataSource(private val client: SupabaseClient) {
         return user?.user
     }
 
-    suspend fun getSavedRecipes(): List<RecipeResponse> {
+    suspend fun getSavedRecipes(userId: String): List<RecipeResponse> {
         return client.from(RecipeResponse.TABLE_NAME)
-            .select()
+            .select {
+                filter {
+                    RecipeResponse::usersId eq userId
+                }
+            }
             .decodeList<RecipeResponse>()
     }
 

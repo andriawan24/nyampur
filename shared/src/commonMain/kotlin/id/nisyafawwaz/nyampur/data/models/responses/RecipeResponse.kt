@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RecipeResponse(
+    @SerialName("id")
+    val id: Int? = null,
     @SerialName("image_url")
     val imageUrl: String? = null,
     @SerialName("cook_time")

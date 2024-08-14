@@ -1,5 +1,6 @@
 package id.nisyafawwaz.nyampur.android.ui.main.home
 
+import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import id.nisyafawwaz.nyampur.android.adapters.QuickMealAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseFragment
@@ -52,27 +53,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initProcess() {
         recipeVM.getRecipes(DEFAULT_TYPE, 1)
+        recipeVM.getSavedRecipes(accountManager.getCurrentUser()?.id.orEmpty())
     }
 
     override fun initObservers() {
         observerRecipeResult()
         observerSaveRecipeResult()
+        observerSavedRecipesResult()
+    }
+
+    private fun observerSavedRecipesResult() {
+        recipeVM.getSavedRecipesResult.observeLiveData(
+            requireActivity(),
+            onSuccess = {
+                Log.d(HomeFragment::class.simpleName, "observerSavedRecipesResult: $it")
+            },
+            onFailure = {
+                Log.e(HomeFragment::class.simpleName, "observerSavedRecipesResult: ${it.message}", )
+            }
+        )
     }
 
     private fun observerSaveRecipeResult() {
         recipeVM.saveRecipesResult.observeLiveData(
             requireActivity(),
-            onLoading = {
-                binding.msvQuickMeals.showLoading()
-            },
-            onEmpty = {
-                binding.msvQuickMeals.showEmpty()
-            },
             onSuccess = {
-                binding.msvQuickMeals.showDefault()
+
             },
             onFailure = {
-                binding.msvQuickMeals.showError()
+
             }
         )
     }
