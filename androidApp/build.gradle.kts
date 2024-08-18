@@ -49,6 +49,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    // Swipe Refresh Layout
+    implementation(libs.androidx.swiperefreshlayout)
+
     // Glide
     implementation(libs.glide)
 

@@ -41,6 +41,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun initViews() {
         initRecycler()
+        binding.root.setOnRefreshListener {
+            binding.root.isRefreshing = true
+            initProcess()
+        }
     }
 
     private fun initRecycler() {
@@ -52,61 +56,51 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initProcess() {
-        recipeVM.getRecipes(DEFAULT_TYPE, 1)
-        recipeVM.getSavedRecipes(accountManager.getCurrentUser()?.id.orEmpty())
+        recipeVM.getRecipes(type = DEFAULT_TYPE, userId = accountManager.getCurrentUser()?.id.orEmpty(), page = 1)
     }
 
     override fun initObservers() {
         observerRecipeResult()
         observerSaveRecipeResult()
-        observerSavedRecipesResult()
-    }
-
-    private fun observerSavedRecipesResult() {
-        recipeVM.getSavedRecipesResult.observeLiveData(
-            requireActivity(),
-            onSuccess = {
-                Log.d(HomeFragment::class.simpleName, "observerSavedRecipesResult: $it")
-            },
-            onFailure = {
-                Log.e(HomeFragment::class.simpleName, "observerSavedRecipesResult: ${it.message}", )
-            }
-        )
     }
 
     private fun observerSaveRecipeResult() {
         recipeVM.saveRecipesResult.observeLiveData(
             requireActivity(),
             onSuccess = {
-
+                // TODO: Immediately changed the saved recipes
             },
             onFailure = {
-
+                // TODO: Show error when save recipe
             }
         )
     }
 
-    private fun observerRecipeResult() {
+    private fun observerRecipeResult() = with(binding) {
         recipeVM.getRecipesResult.observeLiveData(
             requireActivity(),
             onLoading = {
-                binding.msvQuickMeals.showLoading()
+                msvQuickMeals.showLoading()
             },
             onEmpty = {
-                binding.msvQuickMeals.showEmpty()
+                root.isRefreshing = false
+                msvQuickMeals.showEmpty()
             },
             onSuccess = { recipes ->
+                root.isRefreshing = false
                 quickMealAdapter.addAll(recipes)
-                binding.msvQuickMeals.showDefault()
+                msvQuickMeals.showDefault()
             },
             onFailure = {
-                binding.msvQuickMeals.showError()
+                root.isRefreshing = false
+                msvQuickMeals.showError()
             }
         )
     }
 
     companion object {
         private const val DEFAULT_TYPE = "sarapan"
+
         fun newInstance(): HomeFragment = HomeFragment()
     }
 }

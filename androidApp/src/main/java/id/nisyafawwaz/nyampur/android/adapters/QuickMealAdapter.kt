@@ -2,6 +2,7 @@ package id.nisyafawwaz.nyampur.android.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,9 @@ class QuickMealAdapter(
                     .placeholder(R.drawable.img_food_placeholder)
                     .error(R.drawable.img_food_placeholder)
                     .into(ivFood)
+
+                btnFavorite.icon =
+                    ContextCompat.getDrawable(root.context, if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline)
 
                 btnFavorite.onClick {
                     onFavoriteClicked.invoke(recipe)

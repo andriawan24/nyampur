@@ -34,9 +34,9 @@ class RecipeVM : ViewModel(), KoinComponent {
     private val _getSavedRecipesResult = MutableStateFlow<ResultState<List<RecipeModel>>>(ResultState.Idle)
     val getSavedRecipesResult = _getSavedRecipesResult.asStateFlow()
 
-    fun getRecipes(type: String, page: Int) {
+    fun getRecipes(type: String, userId: String, page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            getRecipesUseCase.execute(type, page).collectLatest {
+            getRecipesUseCase.execute(type, userId, page).collectLatest {
                 _getRecipesResult.emit(it)
             }
         }

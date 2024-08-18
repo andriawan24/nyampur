@@ -7,7 +7,8 @@ data class RecipeModel(
     val cookTime: Int,
     val title: String,
     val level: String,
-    val usersId: String
+    val usersId: String,
+    var isSaved: Boolean = false
 ) {
     companion object {
         fun from(response: RecipeResponse?): RecipeModel {

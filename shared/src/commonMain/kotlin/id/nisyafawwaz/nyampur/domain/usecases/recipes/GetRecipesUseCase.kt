@@ -8,10 +8,20 @@ import kotlinx.coroutines.flow.flow
 
 class GetRecipesUseCase(private val recipeRepository: RecipeRepository) {
 
-    fun execute(type: String, page: Int): Flow<ResultState<List<RecipeModel>>> = flow {
+    fun execute(type: String, userId: String, page: Int): Flow<ResultState<List<RecipeModel>>> = flow {
         emit(ResultState.Loading)
         try {
             val recipes = recipeRepository.getRecipe(type, page)
+
+            if (userId.isNotBlank()) {
+                val savedRecipes = recipeRepository.getSavedRecipes(userId)
+                recipes.forEach { recipe ->
+                    if (savedRecipes.any { it.title.contains(recipe.title, true) }) {
+                        recipe.isSaved = true
+                    }
+                }
+            }
+
             if (recipes.isEmpty()) {
                 emit(ResultState.Empty)
             } else {
