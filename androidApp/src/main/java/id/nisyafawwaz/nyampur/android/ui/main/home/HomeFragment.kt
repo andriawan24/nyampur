@@ -1,6 +1,5 @@
 package id.nisyafawwaz.nyampur.android.ui.main.home
 
-import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import id.nisyafawwaz.nyampur.android.adapters.QuickMealAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseFragment
@@ -13,7 +12,6 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.showLoading
 import id.nisyafawwaz.nyampur.android.utils.list.GridItemDecoration
 import id.nisyafawwaz.nyampur.data.models.responses.RecipeResponse
 import id.nisyafawwaz.nyampur.ui.AccountManager
-import id.nisyafawwaz.nyampur.ui.AuthVM
 import id.nisyafawwaz.nyampur.ui.RecipeVM
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
