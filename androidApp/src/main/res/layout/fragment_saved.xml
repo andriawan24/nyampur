@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,11 +17,55 @@
             android:layout_height="wrap_content"
             android:text="@string/label_save" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSaved"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_24dp" />
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSortBy"
+                style="@style/NyampurTextStyle.Bold.TextSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_sort_by" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/dropdownSortBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:spinnerMode="dropdown"
+                android:theme="@style/DropdownTheme" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgDropdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_4dp"
+                app:srcCompat="@drawable/ic_dropdown" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <id.nisyafawwaz.nyampur.android.utils.views.MultiStateView
+            android:id="@+id/msvSavedRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:msvEmptyView="@layout/layout_default_empty"
+            app:msvErrorView="@layout/layout_default_error"
+            app:msvLoadingView="@layout/layout_default_loading">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSaved"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                tools:listitem="@layout/item_saved_recipe" />
+
+        </id.nisyafawwaz.nyampur.android.utils.views.MultiStateView>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

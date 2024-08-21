@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:statusBarColor">@color/colorBackgroundOrange</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -30,9 +31,15 @@
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">8dp</item>
     </style>
-    
+
     <style name="ShapeAppearanceOverlay.CircleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/dimen_8dp</item>
+    </style>
+
+    <style name="DropdownTheme">
+        <item name="android:fontFamily">@font/satoshi_bold</item>
+        <item name="android:textSize">@dimen/text_size_12sp</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 </resources>

@@ -28,4 +28,6 @@
     <string name="title_empty">There is no data, please comeback again later</string>
     <string name="content_description_scan_ingredients">Button to go to the scan ingredients page</string>
     <string name="message_failed_save_recipe">Failed to save recipe</string>
+    <string name="label_sort_by">Sort by</string>
+    <string name="hint_choose_sort_by">Choose sort by</string>
 </resources>

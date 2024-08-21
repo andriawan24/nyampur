@@ -12,9 +12,12 @@ class GetSavedRecipeUseCase(private val recipeRepository: RecipeRepository) {
         emit(ResultState.Loading)
         try {
             val response = recipeRepository.getSavedRecipes(userId)
-            emit(ResultState.Success(response))
+            if (response.isNotEmpty()) {
+                emit(ResultState.Success(response))
+            } else {
+                emit(ResultState.Empty)
+            }
         } catch (e: Exception) {
-            print(e.message)
             emit(ResultState.Error(e))
         }
     }

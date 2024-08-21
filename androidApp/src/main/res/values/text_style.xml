@@ -18,6 +18,10 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="NyampurTextStyle.Bold.TextSecondary">
+        <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
+
     <style name="NyampurTextStyle.Bold.Large">
         <item name="android:textSize">@dimen/text_size_22sp</item>
     </style>
