@@ -19,7 +19,11 @@ class RecipeRepositoryImpl(
         return supabaseDataSource.getSavedRecipes(usersId).map(RecipeModel::from)
     }
 
-    override suspend fun saveRecipe(response: RecipeResponse) {
-        supabaseDataSource.saveRecipe(response)
+    override suspend fun saveRecipe(response: RecipeResponse): RecipeModel {
+        return RecipeModel.from(supabaseDataSource.saveRecipe(response))
+    }
+
+    override suspend fun deleteSavedRecipe(response: RecipeResponse): RecipeModel {
+        return RecipeModel.from(supabaseDataSource.deleteSavedRecipe(response))
     }
 }

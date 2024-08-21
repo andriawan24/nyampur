@@ -7,12 +7,12 @@ import id.nisyafawwaz.nyampur.domain.repository.RecipeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class SaveRecipeUseCase(private val recipeRepository: RecipeRepository) {
+class DeleteSavedRecipeUseCase(private val recipeRepository: RecipeRepository) {
 
     fun execute(response: RecipeResponse): Flow<ResultState<RecipeModel>> = flow {
         emit(ResultState.Loading)
         try {
-            val result = recipeRepository.saveRecipe(response)
+            val result = recipeRepository.deleteSavedRecipe(response)
             emit(ResultState.Success(result))
         } catch (e: Exception) {
             print(e.message)

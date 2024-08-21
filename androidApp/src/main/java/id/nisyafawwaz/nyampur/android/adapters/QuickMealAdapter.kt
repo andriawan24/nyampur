@@ -34,11 +34,11 @@ class QuickMealAdapter(
                     .error(R.drawable.img_food_placeholder)
                     .into(ivFood)
 
-                btnFavorite.icon =
-                    ContextCompat.getDrawable(root.context, if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline)
-
-                btnFavorite.onClick {
-                    onFavoriteClicked.invoke(recipe)
+                btnFavorite.apply {
+                    icon = ContextCompat.getDrawable(root.context, if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline)
+                    onClick {
+                        onFavoriteClicked.invoke(recipe)
+                    }
                 }
             }
         }
@@ -58,6 +58,14 @@ class QuickMealAdapter(
 
     override fun onBindViewHolder(holder: QuickMealViewHolder, position: Int) {
         holder.bind(recipeDiffer.currentList[position])
+    }
+
+    fun updateSavedRecipe(name: String, isSaved: Boolean) {
+        val recipeIndex = recipeDiffer.currentList.indexOfFirst { it.title == name }
+        if (recipeIndex != -1) {
+            recipeDiffer.currentList[recipeIndex].isSaved = isSaved
+            notifyItemChanged(recipeIndex)
+        }
     }
 
     fun addAll(newData: List<RecipeModel>) {
