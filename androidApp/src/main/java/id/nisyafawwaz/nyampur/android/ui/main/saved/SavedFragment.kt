@@ -33,13 +33,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
     }
 
     private fun initSortDropdown() {
-        binding.dropdownSortBy.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                listOf("Recently Added")
-            )
-        )
+
     }
 
     private fun initAdapter() {
@@ -54,9 +48,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
     }
 
     override fun initActions() {
-//        binding.dropdownSortBy.addTextChangedListener {
-//
-//        }
+
     }
 
     override fun initObservers() {

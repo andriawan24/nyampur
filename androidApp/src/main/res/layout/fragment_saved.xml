@@ -25,26 +25,20 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvSortBy"
                 style="@style/NyampurTextStyle.Bold.TextSecondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_sort_by" />
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/dropdownSortBy"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSortBy"
+                style="@style/NyampurTextStyle.Bold.TextPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:spinnerMode="dropdown"
-                android:theme="@style/DropdownTheme" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDropdown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_4dp"
-                app:srcCompat="@drawable/ic_dropdown" />
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:drawableEnd="@drawable/ic_dropdown"
+                android:drawablePadding="@dimen/dimen_4dp"
+                tools:text="Recently Added" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

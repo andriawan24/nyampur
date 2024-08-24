@@ -20,16 +20,28 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
+    <style name="CustomCardTopRadiusBottomSheetShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/dimen_20dp</item>
+        <item name="cornerSizeTopLeft">@dimen/dimen_20dp</item>
+        <item name="cornerSizeBottomRight">@dimen/dimen_0dp</item>
+        <item name="cornerSizeBottomLeft">@dimen/dimen_0dp</item>
+    </style>
+
     <style name="CardViewPrefixPhoneRadiusStyle" parent="@style/Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">@style/CustomCardPrefixPhoneShape</item>
     </style>
 
+    <style name="CardViewPrefixBottomSheetRadiusStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/CustomCardTopRadiusBottomSheetShape</item>
+    </style>
+
     <style name="CustomCardPrefixPhoneShape">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">0dp</item>
-        <item name="cornerSizeTopLeft">8dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
-        <item name="cornerSizeBottomLeft">8dp</item>
+        <item name="cornerSizeTopRight">@dimen/dimen_0dp</item>
+        <item name="cornerSizeTopLeft">@dimen/dimen_8dp</item>
+        <item name="cornerSizeBottomRight">@dimen/dimen_0dp</item>
+        <item name="cornerSizeBottomLeft">@dimen/dimen_8dp</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.CircleImageView" parent="">
