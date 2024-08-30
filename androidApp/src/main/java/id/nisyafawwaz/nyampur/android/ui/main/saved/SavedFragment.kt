@@ -32,9 +32,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
         initSortDropdown()
     }
 
-    private fun initSortDropdown() {
-
-    }
+    private fun initSortDropdown() = Unit
 
     private fun initAdapter() {
         binding.rvSaved.apply {
@@ -47,9 +45,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
         recipeVM.getSavedRecipes(accountManager.getCurrentUser()?.id.orEmpty())
     }
 
-    override fun initActions() {
-
-    }
+    override fun initActions() = Unit
 
     override fun initObservers() {
         observeSavedRecipesResult()
