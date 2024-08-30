@@ -10,6 +10,7 @@
     app:contentPaddingLeft="@dimen/dimen_24dp"
     app:contentPaddingRight="@dimen/dimen_24dp"
     app:contentPaddingTop="@dimen/dimen_24dp"
+    app:strokeWidth="@dimen/dimen_0dp"
     tools:background="@color/colorGreyBackground">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -42,6 +43,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24dp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -51,15 +53,121 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NyampurTextStyle.Medium"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_16sp"
                     tools:text="Recently Added" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radioRecentlyAdded"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/dimen_0dp"
+                    android:minHeight="@dimen/dimen_0dp"
+                    android:padding="@dimen/dimen_0dp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NyampurTextStyle.Medium"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="Level (Easy to difficult)" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/dimen_0dp"
+                    android:minHeight="@dimen/dimen_0dp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NyampurTextStyle.Medium"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="Minutes to Make (quick to slow)" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioMinutesToMake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/dimen_0dp"
+                    android:minHeight="@dimen/dimen_0dp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NyampurTextStyle.Medium"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="A - Z" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioAToZ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/dimen_0dp"
+                    android:minHeight="@dimen/dimen_0dp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NyampurTextStyle.Medium"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="@dimen/text_size_16sp"
+                    tools:text="Z - A" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioZToA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/dimen_0dp"
+                    android:minHeight="@dimen/dimen_0dp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
