@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.nisyafawwaz.nyampur.android.adapters.SavedRecipeAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseFragment
 import id.nisyafawwaz.nyampur.android.databinding.FragmentSavedBinding
+import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.showDefault
 import id.nisyafawwaz.nyampur.android.utils.extensions.showEmpty
 import id.nisyafawwaz.nyampur.android.utils.extensions.showError
@@ -45,7 +47,11 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
         recipeVM.getSavedRecipes(accountManager.getCurrentUser()?.id.orEmpty())
     }
 
-    override fun initActions() = Unit
+    override fun initActions() {
+        binding.tvSortBy.onClick {
+            SortSavedBottomSheetFragment.newInstance().show(childFragmentManager, MainActivity::class.simpleName)
+        }
+    }
 
     override fun initObservers() {
         observeSavedRecipesResult()
