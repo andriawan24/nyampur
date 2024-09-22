@@ -1,6 +1,7 @@
 package id.nisyafawwaz.nyampur.data.models.responses
 
 import io.github.jan.supabase.gotrue.user.UserInfo
+import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +17,7 @@ data class RecipeResponse(
     val level: String? = null,
     val user: UserInfo? = null,
     @SerialName("users_id")
-    val usersId: String? = null
+    val usersId: String? = null,
 ) {
     companion object {
         const val TABLE_NAME = "saved_recipes"

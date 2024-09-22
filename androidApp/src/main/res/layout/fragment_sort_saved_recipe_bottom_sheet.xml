@@ -57,9 +57,9 @@
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/sort_recently"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_size_16sp"
-                    tools:text="Recently Added" />
+                    android:textSize="@dimen/text_size_16sp" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radioRecentlyAdded"
@@ -83,9 +83,9 @@
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/sort_level"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_size_16sp"
-                    tools:text="Level (Easy to difficult)" />
+                    android:textSize="@dimen/text_size_16sp" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radioLevel"
@@ -108,9 +108,9 @@
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/sort_times"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_size_16sp"
-                    tools:text="Minutes to Make (quick to slow)" />
+                    android:textSize="@dimen/text_size_16sp" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radioMinutesToMake"
@@ -133,9 +133,9 @@
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/sort_increasing"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_size_16sp"
-                    tools:text="A - Z" />
+                    android:textSize="@dimen/text_size_16sp" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radioAToZ"
@@ -158,9 +158,9 @@
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="@string/sort_decreasing"
                     android:textColor="@color/colorTextPrimary"
-                    android:textSize="@dimen/text_size_16sp"
-                    tools:text="Z - A" />
+                    android:textSize="@dimen/text_size_16sp" />
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/radioZToA"

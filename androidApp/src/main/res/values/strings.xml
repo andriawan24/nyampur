@@ -30,4 +30,9 @@
     <string name="message_failed_save_recipe">Failed to save recipe</string>
     <string name="label_sort_by">Sort by</string>
     <string name="hint_choose_sort_by">Choose sort by</string>
+    <string name="sort_recently">Recently Added</string>
+    <string name="sort_level">Level (Easy to difficult)</string>
+    <string name="sort_times">Minutes to Make (quick to slow)</string>
+    <string name="sort_increasing">A - Z</string>
+    <string name="sort_decreasing">Z - A</string>
 </resources>

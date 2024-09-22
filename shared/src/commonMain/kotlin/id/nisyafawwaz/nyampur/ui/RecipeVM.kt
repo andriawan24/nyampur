@@ -9,6 +9,7 @@ import id.nisyafawwaz.nyampur.domain.usecases.recipes.DeleteSavedRecipeUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.recipes.GetRecipesUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.recipes.GetSavedRecipeUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.recipes.SaveRecipeUseCase
+import id.nisyafawwaz.nyampur.utils.enums.SortType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,9 +48,9 @@ class RecipeVM : ViewModel(), KoinComponent {
         }
     }
 
-    fun getSavedRecipes(userId: String) {
+    fun getSavedRecipes(userId: String, sortType: SortType = SortType.RECENTLY) {
         viewModelScope.launch(Dispatchers.IO) {
-            getSavedRecipeUseCase.execute(userId).collectLatest {
+            getSavedRecipeUseCase.execute(userId, sortType).collectLatest {
                 _getSavedRecipesResult.emit(it)
             }
         }

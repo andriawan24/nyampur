@@ -1,8 +1,5 @@
 package id.nisyafawwaz.nyampur.android.ui.main.saved
 
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.nisyafawwaz.nyampur.android.adapters.SavedRecipeAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseFragment
@@ -16,6 +13,7 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.showError
 import id.nisyafawwaz.nyampur.android.utils.extensions.showLoading
 import id.nisyafawwaz.nyampur.ui.AccountManager
 import id.nisyafawwaz.nyampur.ui.RecipeVM
+import id.nisyafawwaz.nyampur.utils.enums.SortType
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,6 +22,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
     private val recipeVM: RecipeVM by viewModel()
     private val accountManager: AccountManager by inject()
     private val savedRecipeAdapter = SavedRecipeAdapter()
+    private var currentSort = SortType.RECENTLY
 
     override val binding: FragmentSavedBinding by lazy {
         FragmentSavedBinding.inflate(layoutInflater)
@@ -44,12 +43,18 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
     }
 
     override fun initProcess() {
-        recipeVM.getSavedRecipes(accountManager.getCurrentUser()?.id.orEmpty())
+        recipeVM.getSavedRecipes(userId = accountManager.getCurrentUser()?.id.orEmpty(), sortType = currentSort)
     }
 
     override fun initActions() {
         binding.tvSortBy.onClick {
-            SortSavedBottomSheetFragment.newInstance().show(childFragmentManager, MainActivity::class.simpleName)
+            SortSavedBottomSheetFragment.newInstance(
+                currentlySelected = currentSort,
+                onSortChanged = {
+                    currentSort = it
+                    initProcess()
+                }
+            ).show(childFragmentManager, MainActivity::class.simpleName)
         }
     }
 

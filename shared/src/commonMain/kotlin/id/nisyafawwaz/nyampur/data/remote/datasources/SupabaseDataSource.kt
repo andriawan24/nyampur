@@ -1,12 +1,14 @@
 package id.nisyafawwaz.nyampur.data.remote.datasources
 
 import id.nisyafawwaz.nyampur.data.models.responses.RecipeResponse
+import id.nisyafawwaz.nyampur.utils.enums.SortType
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.OtpType
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.OTP
 import io.github.jan.supabase.gotrue.user.UserInfo
 import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Order
 
 class SupabaseDataSource(private val client: SupabaseClient) {
 
@@ -23,11 +25,18 @@ class SupabaseDataSource(private val client: SupabaseClient) {
         return user?.user
     }
 
-    suspend fun getSavedRecipes(userId: String): List<RecipeResponse> {
+    suspend fun getSavedRecipes(userId: String, sortType: SortType): List<RecipeResponse> {
         return client.from(RecipeResponse.TABLE_NAME)
             .select {
                 filter {
                     RecipeResponse::usersId eq userId
+                }
+                when (sortType) {
+                    SortType.RECENTLY -> order("created_at", Order.DESCENDING)
+                    SortType.LEVEL -> order("level", Order.ASCENDING)
+                    SortType.MINUTES -> order("cook_time", Order.ASCENDING)
+                    SortType.INCREASING -> order("title", Order.ASCENDING)
+                    SortType.DECREASING -> order("title", Order.DESCENDING)
                 }
             }
             .decodeList<RecipeResponse>()
