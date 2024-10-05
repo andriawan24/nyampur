@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
+    alias(fall.plugins.androidApplication)
+    alias(fall.plugins.kotlinAndroid)
 }
 
 android {
@@ -45,19 +45,19 @@ dependencies {
     implementation(project(":shared"))
 
     // AndroidX
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
+    implementation(fall.androidx.appcompat)
+    implementation(fall.androidx.activity)
+    implementation(fall.androidx.constraintlayout)
 
     // Swipe Refresh Layout
-    implementation(libs.androidx.swiperefreshlayout)
+    implementation(fall.androidx.swiperefreshlayout)
 
     // Glide
-    implementation(libs.glide)
+    implementation(fall.glide)
 
     // Material
-    implementation(libs.material)
+    implementation(fall.material)
 
     // Koin
-    implementation(libs.koin.android)
+    implementation(fall.koin.android)
 }
