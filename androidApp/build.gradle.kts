@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "${Configs.APPLICATION_ID}.android"
+    namespace = Configs.ANDROID_APPLICATION_ID
     compileSdk = Configs.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "${Configs.APPLICATION_ID}.android"
+        applicationId = Configs.ANDROID_APPLICATION_ID
         minSdk = Configs.MIN_SDK
-        targetSdk = Configs.COMPILE_SDK
+        targetSdk = Configs.TARGET_SDK
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.1"
     }
 
     buildFeatures {
@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.shared)
+    implementation(project(":shared"))
 
     // AndroidX
     implementation(libs.androidx.appcompat)

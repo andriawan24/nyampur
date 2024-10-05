@@ -13,7 +13,7 @@ plugins {
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_18)
     }
 
     listOf(
@@ -29,23 +29,19 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            // Supabase
             api(project.dependencies.platform(libs.supabase.bom))
             api(libs.supabase.postgrest.kt)
             api(libs.supabase.gotrue.kt)
             api(libs.supabase.realtime.kt)
 
-            // Ktor
             api(libs.ktor.client.core)
             api(libs.ktor.client.logging)
             api(libs.ktor.serialization.kotlinx.json)
             api(libs.ktor.client.resources)
             api(libs.ktor.client.auth)
 
-            // Viewmodel
             api(libs.androidx.lifecycle.viewmodel)
 
-            // Koin
             api(libs.koin.core)
             api(libs.koin.test)
         }
@@ -71,7 +67,7 @@ buildkonfig {
     try {
         props.load(file(project.rootProject.file("local.properties")).inputStream())
     } catch (_: Exception) {
-        // Handle exception
+        // TODO: Handle exception
     }
 
     defaultConfigs {

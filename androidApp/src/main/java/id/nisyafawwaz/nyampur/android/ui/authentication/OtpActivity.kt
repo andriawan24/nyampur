@@ -22,12 +22,12 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClickWithThrottle
 import id.nisyafawwaz.nyampur.android.utils.extensions.setNavigationBarInset
 import id.nisyafawwaz.nyampur.android.utils.extensions.visible
-import id.nisyafawwaz.nyampur.ui.AuthVM
+import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtpActivity : BaseActivity<ActivityOtpBinding>() {
 
-    private val authVM: AuthVM by viewModel()
+    private val authenticationViewModel: AuthenticationViewModel by viewModel()
 
     override val binding: ActivityOtpBinding by lazy {
         ActivityOtpBinding.inflate(layoutInflater)
@@ -139,13 +139,13 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
             }
 
             btnContinue.onClickWithThrottle {
-                authVM.validateEmailOtp(otpValue, email)
+                authenticationViewModel.validateEmailOtp(otpValue, email)
             }
         }
     }
 
     override fun initObserver() {
-        authVM.validateEmailOtpResult.observeLiveData(
+        authenticationViewModel.validateEmailOtpResult.observeLiveData(
             this,
             onLoading = {
 
