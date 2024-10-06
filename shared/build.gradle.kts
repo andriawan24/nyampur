@@ -8,6 +8,7 @@ plugins {
     alias(fall.plugins.androidLibrary)
     alias(fall.plugins.buildKonfig)
     alias(fall.plugins.kotlinSerialization)
+    alias(fall.plugins.sharedAndroidConfiguration)
 }
 
 kotlin {
@@ -61,7 +62,7 @@ kotlin {
 }
 
 buildkonfig {
-    packageName = Configs.APPLICATION_ID
+    packageName = "id.nisyafawwaz.nyampur"
 
     val props = Properties()
     try {
@@ -81,19 +82,5 @@ buildkonfig {
             "SUPABASE_URL",
             props["supabase_url"]?.toString() ?: "https://fakeapi.com"
         )
-    }
-}
-
-android {
-    namespace = Configs.APPLICATION_ID
-    compileSdk = Configs.COMPILE_SDK
-
-    defaultConfig {
-        minSdk = Configs.MIN_SDK
-    }
-
-    compileOptions {
-        sourceCompatibility = Configs.sourceCompatibility
-        targetCompatibility = Configs.targetCompatibility
     }
 }
