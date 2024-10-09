@@ -25,7 +25,7 @@
     <string name="title_quick_simple_meals">Quick and Simple Meals</string>
     <string name="title_error_unknown">Oops! Sorry, I think there is a problem with our server</string>
     <string name="action_try_again">Try Again</string>
-    <string name="title_empty">There is no data, please comeback again later</string>
+    <string name="title_empty">There is no data, please come back again later</string>
     <string name="content_description_scan_ingredients">Button to go to the scan ingredients page</string>
     <string name="message_failed_save_recipe">Failed to save recipe</string>
     <string name="message_failed_delete_recipe">Failed to delete recipe</string>

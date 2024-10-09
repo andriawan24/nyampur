@@ -1,29 +1,12 @@
-package id.nisyafawwaz.nyampur.data.remote.datasources
+package id.nisyafawwaz.nyampur.data.remote.datasources.supabase
 
 import id.nisyafawwaz.nyampur.data.models.responses.RecipeResponse
 import id.nisyafawwaz.nyampur.utils.enums.SortType
 import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.gotrue.OtpType
-import io.github.jan.supabase.gotrue.auth
-import io.github.jan.supabase.gotrue.providers.builtin.OTP
-import io.github.jan.supabase.gotrue.user.UserInfo
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Order
 
-class SupabaseDataSource(private val client: SupabaseClient) {
-
-    suspend fun sendEmailSignInOtp(email: String) {
-        client.auth.signInWith(provider = OTP) { this.email = email }
-    }
-
-    suspend fun validateEmailOtp(token: String, email: String) {
-        client.auth.verifyEmailOtp(OtpType.Email.EMAIL, email, token)
-    }
-
-    suspend fun retrieveUserSession(): UserInfo? {
-        val user = client.auth.sessionManager.loadSession()
-        return user?.user
-    }
+class SupabaseRecipeDataSource(private val client: SupabaseClient) {
 
     suspend fun getSavedRecipes(userId: String, sortType: SortType): List<RecipeResponse> {
         return client.from(RecipeResponse.TABLE_NAME)
