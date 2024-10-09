@@ -12,22 +12,19 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.showEmpty
 import id.nisyafawwaz.nyampur.android.utils.extensions.showError
 import id.nisyafawwaz.nyampur.android.utils.extensions.showLoading
 import id.nisyafawwaz.nyampur.android.utils.list.GridItemDecoration
-import id.nisyafawwaz.nyampur.domain.mapper.toRequest
 import id.nisyafawwaz.nyampur.ui.AccountManager
-import id.nisyafawwaz.nyampur.ui.RecipeVM
+import id.nisyafawwaz.nyampur.ui.RecipeViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private val recipeVM: RecipeVM by viewModel()
+    private val recipeViewModel: RecipeViewModel by viewModel()
     private val accountManager: AccountManager by inject()
 
     private val quickMealAdapter = QuickMealAdapter {
-        if (it.isSaved) {
-            recipeVM.deleteSavedRecipe(it.toRequest(accountManager.getCurrentUser()?.id.orEmpty()))
-        } else {
-            recipeVM.saveRecipe(it.toRequest(accountManager.getCurrentUser()?.id.orEmpty()))
+        recipeViewModel.run {
+            if (it.isSaved) deleteSavedRecipe(it) else saveRecipe(it)
         }
     }
 
@@ -52,7 +49,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initProcess() {
-        recipeVM.getRecipes(type = DEFAULT_TYPE, userId = accountManager.getCurrentUser()?.id.orEmpty(), page = 1)
+        recipeViewModel.getRecipes(
+            type = DEFAULT_TYPE,
+            userId = accountManager.getCurrentUser()?.id.orEmpty(),
+            page = 1
+        )
     }
 
     override fun initObservers() {
@@ -62,8 +63,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun observerDeleteSavedRecipeResult() {
-        recipeVM.deleteSavedRecipeResult.observeLiveData(
-            this,
+        recipeViewModel.deleteSavedRecipeResult.observeLiveData(
+            viewLifecycleOwner,
             onSuccess = {
                 quickMealAdapter.updateSavedRecipe(it.title, false)
             },
@@ -77,8 +78,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun observerSaveRecipeResult() {
-        recipeVM.saveRecipesResult.observeLiveData(
-            requireActivity(),
+        recipeViewModel.saveRecipesResult.observeLiveData(
+            viewLifecycleOwner,
             onSuccess = {
                 quickMealAdapter.updateSavedRecipe(it.title, true)
             },
@@ -92,8 +93,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun observerRecipeResult() = with(binding) {
-        recipeVM.getRecipesResult.observeLiveData(
-            requireActivity(),
+        recipeViewModel.getRecipesResult.observeLiveData(
+            viewLifecycleOwner,
             onLoading = {
                 msvQuickMeals.showLoading()
             },

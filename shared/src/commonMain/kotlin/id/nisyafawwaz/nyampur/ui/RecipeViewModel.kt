@@ -2,7 +2,7 @@ package id.nisyafawwaz.nyampur.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.nisyafawwaz.nyampur.data.models.responses.RecipeResponse
+import id.nisyafawwaz.nyampur.domain.mapper.toRequest
 import id.nisyafawwaz.nyampur.domain.models.RecipeModel
 import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.domain.usecases.recipes.DeleteSavedRecipeUseCase
@@ -20,9 +20,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 private typealias GetRecipesResult = ResultState<List<RecipeModel>>
+private typealias GetRecipeResult = ResultState<RecipeModel>
 
-class RecipeVM : ViewModel(), KoinComponent {
+class RecipeViewModel : ViewModel(), KoinComponent {
 
+    private val accountManager: AccountManager by inject()
     private val getRecipesUseCase: GetRecipesUseCase by inject()
     private val saveRecipeUseCase: SaveRecipeUseCase by inject()
     private val getSavedRecipeUseCase: GetSavedRecipeUseCase by inject()
@@ -31,13 +33,13 @@ class RecipeVM : ViewModel(), KoinComponent {
     private val _getRecipesResult = MutableStateFlow<GetRecipesResult>(ResultState.Idle)
     val getRecipesResult = _getRecipesResult.asStateFlow()
 
-    private val _saveRecipesResult = MutableStateFlow<ResultState<RecipeModel>>(ResultState.Idle)
+    private val _saveRecipesResult = MutableStateFlow<GetRecipeResult>(ResultState.Idle)
     val saveRecipesResult = _saveRecipesResult.asStateFlow()
 
-    private val _deleteSavedRecipeResult = MutableStateFlow<ResultState<RecipeModel>>(ResultState.Idle)
+    private val _deleteSavedRecipeResult = MutableStateFlow<GetRecipeResult>(ResultState.Idle)
     val deleteSavedRecipeResult = _deleteSavedRecipeResult.asStateFlow()
 
-    private val _getSavedRecipesResult = MutableStateFlow<ResultState<List<RecipeModel>>>(ResultState.Idle)
+    private val _getSavedRecipesResult = MutableStateFlow<GetRecipesResult>(ResultState.Idle)
     val getSavedRecipesResult = _getSavedRecipesResult.asStateFlow()
 
     fun getRecipes(type: String, userId: String, page: Int) {
@@ -56,17 +58,19 @@ class RecipeVM : ViewModel(), KoinComponent {
         }
     }
 
-    fun saveRecipe(response: RecipeResponse) {
+    fun saveRecipe(recipe: RecipeModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            saveRecipeUseCase.execute(response).collectLatest {
+            val request = recipe.toRequest(accountManager.getCurrentUser()?.id.orEmpty())
+            saveRecipeUseCase.execute(request).collectLatest {
                 _saveRecipesResult.emit(it)
             }
         }
     }
 
-    fun deleteSavedRecipe(response: RecipeResponse) {
+    fun deleteSavedRecipe(recipe: RecipeModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            deleteSavedRecipeUseCase.execute(response).collectLatest {
+            val request = recipe.toRequest(accountManager.getCurrentUser()?.id.orEmpty())
+            deleteSavedRecipeUseCase.execute(request).collectLatest {
                 _deleteSavedRecipeResult.emit(it)
             }
         }

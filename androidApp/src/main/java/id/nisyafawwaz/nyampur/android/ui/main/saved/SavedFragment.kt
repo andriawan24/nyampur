@@ -12,14 +12,14 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.showEmpty
 import id.nisyafawwaz.nyampur.android.utils.extensions.showError
 import id.nisyafawwaz.nyampur.android.utils.extensions.showLoading
 import id.nisyafawwaz.nyampur.ui.AccountManager
-import id.nisyafawwaz.nyampur.ui.RecipeVM
+import id.nisyafawwaz.nyampur.ui.RecipeViewModel
 import id.nisyafawwaz.nyampur.utils.enums.SortType
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SavedFragment : BaseFragment<FragmentSavedBinding>() {
 
-    private val recipeVM: RecipeVM by viewModel()
+    private val recipeViewModel: RecipeViewModel by viewModel()
     private val accountManager: AccountManager by inject()
     private val savedRecipeAdapter = SavedRecipeAdapter()
     private var currentSort = SortType.RECENTLY
@@ -43,7 +43,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
     }
 
     override fun initProcess() {
-        recipeVM.getSavedRecipes(userId = accountManager.getCurrentUser()?.id.orEmpty(), sortType = currentSort)
+        recipeViewModel.getSavedRecipes(userId = accountManager.getCurrentUser()?.id.orEmpty(), sortType = currentSort)
     }
 
     override fun initActions() {
@@ -63,8 +63,8 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
     }
 
     private fun observeSavedRecipesResult() {
-        recipeVM.getSavedRecipesResult.observeLiveData(
-            this,
+        recipeViewModel.getSavedRecipesResult.observeLiveData(
+            viewLifecycleOwner,
             onEmpty = {
                 binding.msvSavedRecipes.showEmpty()
             },
