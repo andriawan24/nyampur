@@ -7,13 +7,8 @@ plugins {
 dependencies {
     implementation(project(":shared"))
     implementation(fall.bundles.androidCore)
-
+    
     // Glide
     implementation(fall.glide)
-
-    // Material
-    implementation(fall.material)
-
-    // Koin
     implementation(fall.koin.android)
 }
