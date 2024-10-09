@@ -43,14 +43,7 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-
-    // AndroidX
-    implementation(fall.androidx.appcompat)
-    implementation(fall.androidx.activity)
-    implementation(fall.androidx.constraintlayout)
-
-    // Swipe Refresh Layout
-    implementation(fall.androidx.swiperefreshlayout)
+    implementation(fall.bundles.androidCore)
 
     // Glide
     implementation(fall.glide)
