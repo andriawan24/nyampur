@@ -69,12 +69,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 quickMealAdapter.updateSavedRecipe(it.title, false)
             },
             onFailure = {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.message_failed_save_recipe), Toast.LENGTH_SHORT
-                ).show()
+                showError(getString(R.string.message_failed_delete_recipe))
             }
         )
+    }
+
+    private fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun observerSaveRecipeResult() {
@@ -84,10 +85,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 quickMealAdapter.updateSavedRecipe(it.title, true)
             },
             onFailure = {
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.message_failed_save_recipe), Toast.LENGTH_SHORT
-                ).show()
+                showError(getString(R.string.message_failed_save_recipe))
             }
         )
     }
