@@ -17,7 +17,7 @@ class GetRecipesUseCase(private val recipeRepository: RecipeRepository) {
             if (userId.isNotBlank()) {
                 val savedRecipes = recipeRepository.getSavedRecipes(userId, SortType.RECENTLY)
                 recipes.forEach { recipe ->
-                    if (savedRecipes.any { it.title.contains(recipe.title, true) }) {
+                    if (savedRecipes.any { it.title.equals(recipe.title, true) }) {
                         recipe.isSaved = true
                     }
                 }
