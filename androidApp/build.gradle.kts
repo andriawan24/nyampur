@@ -1,14 +1,20 @@
 plugins {
-    alias(fall.plugins.androidApplication)
-    alias(fall.plugins.kotlinAndroid)
-    alias(fall.plugins.androidConfiguration)
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.androidConfiguration)
+}
+
+android {
+    namespace = NyampurConfig.ANDROID_APPLICATION_ID
+    defaultConfig {
+        applicationId = NyampurConfig.ANDROID_APPLICATION_ID
+        versionCode = NyampurConfig.VERSION_CODE
+        versionName = NyampurConfig.VERSION_NAME
+    }
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation(fall.bundles.androidCore)
-    
-    // Glide
-    implementation(fall.glide)
-    implementation(fall.koin.android)
+    implementation(libs.bundles.androidCore)
+    implementation(libs.koin.android)
 }

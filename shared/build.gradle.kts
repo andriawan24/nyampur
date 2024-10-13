@@ -4,11 +4,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 plugins {
-    alias(fall.plugins.kotlinMultiplatform)
-    alias(fall.plugins.androidLibrary)
-    alias(fall.plugins.buildKonfig)
-    alias(fall.plugins.kotlinSerialization)
-    alias(fall.plugins.sharedAndroidConfiguration)
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.buildKonfig)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.sharedAndroidConfiguration)
 }
 
 kotlin {
@@ -30,33 +30,30 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project.dependencies.platform(fall.supabase.bom))
-            api(fall.supabase.postgrest.kt)
-            api(fall.supabase.gotrue.kt)
-            api(fall.supabase.realtime.kt)
-
-            api(fall.ktor.client.core)
-            api(fall.ktor.client.logging)
-            api(fall.ktor.serialization.kotlinx.json)
-            api(fall.ktor.client.resources)
-            api(fall.ktor.client.auth)
-
-            api(fall.androidx.lifecycle.viewmodel)
-
-            api(fall.koin.core)
-            api(fall.koin.test)
+            api(project.dependencies.platform(libs.supabase.bom))
+            api(libs.supabase.postgrest.kt)
+            api(libs.supabase.gotrue.kt)
+            api(libs.supabase.realtime.kt)
+            api(libs.ktor.client.core)
+            api(libs.ktor.client.logging)
+            api(libs.ktor.serialization.kotlinx.json)
+            api(libs.ktor.client.resources)
+            api(libs.ktor.client.auth)
+            api(libs.androidx.lifecycle.viewmodel)
+            api(libs.koin.core)
+            api(libs.koin.test)
         }
 
         androidMain.dependencies {
-            implementation(fall.ktor.client.okhttp)
+            implementation(libs.ktor.client.okhttp)
         }
 
         iosMain.dependencies {
-            implementation(fall.ktor.client.darwin)
+            implementation(libs.ktor.client.darwin)
         }
 
         commonTest.dependencies {
-            api(fall.kotlin.test)
+            api(libs.kotlin.test)
         }
     }
 }
@@ -83,4 +80,8 @@ buildkonfig {
             props["supabase_url"]?.toString() ?: "https://fakeapi.com"
         )
     }
+}
+
+android {
+    namespace = NyampurConfig.APPLICATION_ID
 }

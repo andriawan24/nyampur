@@ -1,8 +1,8 @@
 plugins {
-    alias(fall.plugins.androidApplication).apply(false)
-    alias(fall.plugins.androidLibrary).apply(false)
-    alias(fall.plugins.kotlinAndroid).apply(false)
-    alias(fall.plugins.kotlinMultiplatform).apply(false)
-    alias(fall.plugins.kotlinSerialization).apply(false)
-    alias(fall.plugins.buildKonfig).apply(false)
+    alias(libs.plugins.androidApplication).apply(false)
+    alias(libs.plugins.androidLibrary).apply(false)
+    alias(libs.plugins.kotlinAndroid).apply(false)
+    alias(libs.plugins.kotlinMultiplatform).apply(false)
+    alias(libs.plugins.kotlinSerialization).apply(false)
+    alias(libs.plugins.buildKonfig).apply(false)
 }
