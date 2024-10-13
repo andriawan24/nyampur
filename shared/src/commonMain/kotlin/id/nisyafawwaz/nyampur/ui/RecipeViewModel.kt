@@ -30,6 +30,8 @@ class RecipeViewModel : ViewModel(), KoinComponent {
     private val getSavedRecipeUseCase: GetSavedRecipeUseCase by inject()
     private val deleteSavedRecipeUseCase: DeleteSavedRecipeUseCase by inject()
 
+    private val userId = accountManager.getCurrentUser()?.id.orEmpty()
+
     private val _getRecipesResult = MutableStateFlow<GetRecipesResult>(ResultState.Idle)
     val getRecipesResult = _getRecipesResult.asStateFlow()
 
@@ -60,8 +62,7 @@ class RecipeViewModel : ViewModel(), KoinComponent {
 
     fun saveRecipe(recipe: RecipeModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            val request = recipe.toRequest(accountManager.getCurrentUser()?.id.orEmpty())
-            saveRecipeUseCase.execute(request).collectLatest {
+            saveRecipeUseCase.execute(recipe.toRequest(userId)).collectLatest {
                 _saveRecipesResult.emit(it)
             }
         }
@@ -69,8 +70,7 @@ class RecipeViewModel : ViewModel(), KoinComponent {
 
     fun deleteSavedRecipe(recipe: RecipeModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            val request = recipe.toRequest(accountManager.getCurrentUser()?.id.orEmpty())
-            deleteSavedRecipeUseCase.execute(request).collectLatest {
+            deleteSavedRecipeUseCase.execute(recipe.toRequest(userId)).collectLatest {
                 _deleteSavedRecipeResult.emit(it)
             }
         }

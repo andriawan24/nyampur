@@ -21,7 +21,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
 
     private val recipeViewModel: RecipeViewModel by viewModel()
     private val accountManager: AccountManager by inject()
-    private val savedRecipeAdapter = SavedRecipeAdapter()
+    private val savedRecipeAdapter: SavedRecipeAdapter by lazy { SavedRecipeAdapter() }
     private var currentSort = SortType.RECENTLY
 
     override val binding: FragmentSavedBinding by lazy {
