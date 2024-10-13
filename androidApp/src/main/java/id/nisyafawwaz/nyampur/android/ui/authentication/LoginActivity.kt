@@ -102,7 +102,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun onResume() {
         super.onResume()
-        binding.btnContinue.enable()
+        binding.apply {
+            btnContinue.isEnabled = !etEmail.text.isNullOrBlank() && Patterns.EMAIL_ADDRESS.matcher(etEmail.text.toString()).matches()
+        }
     }
 
     companion object {
