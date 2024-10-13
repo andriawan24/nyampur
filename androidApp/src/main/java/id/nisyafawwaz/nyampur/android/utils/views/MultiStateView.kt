@@ -61,7 +61,7 @@ class MultiStateView @JvmOverloads constructor(
         }
 
         val emptyViewResId = a.getResourceId(R.styleable.MultiStateView_msvEmptyView, -1)
-        if (loadingViewResId > -1) {
+        if (emptyViewResId > -1) {
             val inflatedEmptyView = inflater.inflate(emptyViewResId, this, false)
             emptyView = inflatedEmptyView
             addView(inflatedEmptyView, inflatedEmptyView.layoutParams)
