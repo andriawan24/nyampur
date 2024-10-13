@@ -8,24 +8,22 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputLayout
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityOtpBinding
 import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
 import id.nisyafawwaz.nyampur.android.utils.constants.emptyString
+import id.nisyafawwaz.nyampur.android.utils.extensions.disable
 import id.nisyafawwaz.nyampur.android.utils.extensions.getCompatColorList
 import id.nisyafawwaz.nyampur.android.utils.extensions.gone
 import id.nisyafawwaz.nyampur.android.utils.extensions.hideKeyboard
+import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
-import id.nisyafawwaz.nyampur.android.utils.extensions.onClickThrottle
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClickWithThrottle
 import id.nisyafawwaz.nyampur.android.utils.extensions.setNavigationBarInset
 import id.nisyafawwaz.nyampur.android.utils.extensions.visible
-import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OtpActivity : BaseActivity<ActivityOtpBinding>() {
@@ -95,23 +93,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         }
     }
 
-    private fun setErrorMessage(error: String? = null) {
-        if (!error.isNullOrBlank()) {
-            binding.tvErrorOtp.apply {
-                visible()
-                text = error
-            }
-            textInputOtpLayouts.forEach {
-                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_error_stroke_color))
-            }
-        } else {
-            binding.tvErrorOtp.gone()
-            textInputOtpLayouts.forEach {
-                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_otp_stroke_color))
-            }
-        }
-    }
-
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
         if (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_DEL) {
             if (binding.etInputCode1.isFocused) {
@@ -141,33 +122,53 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                 finish()
             }
 
-            btnContinue.onClickThrottle {
+            btnContinue.onClickWithThrottle {
                 authenticationViewModel.validateEmailOtp(otpValue, email)
             }
         }
     }
 
     override fun initObserver() {
-        lifecycleScope.launch {
-            authenticationViewModel.validateEmailOtpResult.collectLatest {
-                when (it) {
-                    ResultState.Idle -> {
-                        // Do nothing
-                    }
+        authenticationViewModel.validateEmailOtpResult.observeLiveData(
+            this,
+            onLoading = {
+                showLoading()
+            },
+            onSuccess = {
+                hideLoading()
+                MainActivity.start(this@OtpActivity)
+            },
+            onFailure = {
+                setErrorMessage(it.message.orEmpty())
+                hideLoading()
+            }
+        )
+    }
 
-                    ResultState.Loading -> {
-                        // TODO: Handle loading
-                    }
+    private fun hideLoading() {
+        binding.pbLoading.gone()
+    }
 
-                    is ResultState.Error -> {
-                        // TODO: Properly handle error exception
-                        setErrorMessage(it.error.message.orEmpty())
-                    }
+    private fun showLoading() {
+        binding.apply {
+            pbLoading.visible()
+            btnContinue.disable()
+        }
+    }
 
-                    is ResultState.Success -> {
-                        MainActivity.start(this@OtpActivity)
-                    }
-                }
+    private fun setErrorMessage(error: String? = null) {
+        if (!error.isNullOrBlank()) {
+            binding.tvErrorOtp.apply {
+                visible()
+                text = error
+            }
+            textInputOtpLayouts.forEach {
+                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_error_stroke_color))
+            }
+        } else {
+            binding.tvErrorOtp.gone()
+            textInputOtpLayouts.forEach {
+                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_otp_stroke_color))
             }
         }
     }

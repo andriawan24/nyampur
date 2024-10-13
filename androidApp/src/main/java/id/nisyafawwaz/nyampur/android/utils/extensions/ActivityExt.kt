@@ -35,6 +35,6 @@ fun Context.getCompatColorList(@ColorRes color: Int): ColorStateList {
 fun FragmentManager.showFragment(fragment: Fragment, @IdRes intoLayoutId: Int) {
     beginTransaction().apply {
         replace(intoLayoutId, fragment)
-        commitNowAllowingStateLoss()
+        commit()
     }
 }

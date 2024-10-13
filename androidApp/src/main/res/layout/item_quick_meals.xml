@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/ivFood"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="@dimen/dimen_0dp"
@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.CircleImageView"
         app:srcCompat="@drawable/img_food_placeholder" />
 
     <com.google.android.material.button.MaterialButton
@@ -23,11 +24,11 @@
         style="@style/Widget.Material3.Button.IconButton.Filled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dimen_12dp"
+        android:layout_margin="@dimen/dimen_8dp"
         app:backgroundTint="#80EFEFEF"
         app:cornerRadius="@dimen/dimen_8dp"
         app:icon="@drawable/ic_heart_outline"
-        app:iconSize="@dimen/dimen_34dp"
+        app:iconSize="@dimen/dimen_18dp"
         app:iconTintMode="multiply"
         app:layout_constraintEnd_toEndOf="@id/ivFood"
         app:layout_constraintTop_toTopOf="@id/ivFood" />
@@ -38,6 +39,8 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +48,7 @@
         tools:text="Pho" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivCookTime"
+        android:id="@+id/imgCookTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
@@ -59,31 +62,31 @@
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_4dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivCookTime"
+        app:layout_constraintBottom_toBottomOf="@id/imgCookTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivCookTime"
-        app:layout_constraintTop_toTopOf="@id/ivCookTime"
+        app:layout_constraintStart_toEndOf="@id/imgCookTime"
+        app:layout_constraintTop_toTopOf="@id/imgCookTime"
         tools:text="10 Minutes" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivIngredients"
+        android:id="@+id/imgLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_8dp"
         app:layout_constraintStart_toStartOf="@id/tvFoodName"
-        app:layout_constraintTop_toBottomOf="@id/ivCookTime"
-        app:srcCompat="@drawable/ic_ingredient" />
+        app:layout_constraintTop_toBottomOf="@id/imgCookTime"
+        app:srcCompat="@drawable/ic_level" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvIngredients"
+        android:id="@+id/tvLevel"
         style="@style/NyampurTextStyle.Medium.Small"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_4dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivIngredients"
+        app:layout_constraintBottom_toBottomOf="@id/imgLevel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ivIngredients"
-        app:layout_constraintTop_toTopOf="@id/ivIngredients"
+        app:layout_constraintStart_toEndOf="@id/imgLevel"
+        app:layout_constraintTop_toTopOf="@id/imgLevel"
         tools:text="3 Ingredients" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

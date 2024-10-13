@@ -1,160 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_24dp"
-            android:layout_marginTop="@dimen/dimen_24dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/NyampurTextStyle.Bold.Large"
-                android:layout_width="@dimen/dimen_0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/label_home" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgProfile"
-                android:layout_width="@dimen/dimen_36dp"
-                android:layout_height="@dimen/dimen_36dp"
-                app:srcCompat="@drawable/img_placeholder" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_24dp"
-            android:layout_marginTop="@dimen/dimen_24dp"
-            app:boxBackgroundColor="@color/colorGreyBackground"
-            app:boxCornerRadiusBottomEnd="@dimen/dimen_12dp"
-            app:boxCornerRadiusBottomStart="@dimen/dimen_12dp"
-            app:boxCornerRadiusTopEnd="@dimen/dimen_12dp"
-            app:boxCornerRadiusTopStart="@dimen/dimen_12dp"
-            app:boxStrokeColor="@color/colorStrokeGrey"
-            app:hintEnabled="false"
-            app:startIconDrawable="@drawable/ic_search">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/satoshi_medium"
-                android:hint="@string/hint_search"
-                android:paddingStart="@dimen/dimen_42dp"
-                android:paddingEnd="@dimen/dimen_12dp"
-                android:textColor="@color/colorTextPrimary"
-                android:textColorHint="@color/colorTextSecondary"
-                android:textSize="@dimen/text_size_14sp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_24dp"
-            android:layout_marginTop="@dimen/dimen_24dp"
-            app:cardBackgroundColor="@color/colorOrangeBackground"
-            app:cardCornerRadius="@dimen/dimen_12dp"
-            app:cardElevation="@dimen/dimen_0dp"
-            app:strokeWidth="@dimen/dimen_0dp">
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_24dp"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/NyampurTextStyle.Bold.Large"
                     android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingVertical="@dimen/dimen_12dp"
-                    android:paddingStart="@dimen/dimen_12dp"
-                    android:paddingEnd="@dimen/dimen_0dp">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/imgAiGenerated"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_ai_generated" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            style="@style/NyampurTextStyle.Bold.Primary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dimen_4dp"
-                            android:text="@string/label_ai_generated" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/NyampurTextStyle.Bold"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_4dp"
-                        android:text="@string/description_ai_generated"
-                        android:textSize="@dimen/text_size_12sp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_12dp"
-                        android:paddingHorizontal="@dimen/dimen_32dp"
-                        android:insetBottom="@dimen/dimen_0dp"
-                        android:insetRight="@dimen/dimen_0dp"
-                        android:insetLeft="@dimen/dimen_0dp"
-                        android:insetTop="@dimen/dimen_0dp"
-                        android:text="@string/action_lets_start"
-                        app:cornerRadius="@dimen/dimen_8dp" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:text="@string/label_home" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/img_search_banner" />
+                    android:id="@+id/imgProfile"
+                    android:layout_width="@dimen/dimen_36dp"
+                    android:layout_height="@dimen/dimen_36dp"
+                    app:srcCompat="@drawable/img_placeholder" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_24dp"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                app:boxBackgroundColor="@color/colorGreyBackground"
+                app:boxCornerRadiusBottomEnd="@dimen/dimen_12dp"
+                app:boxCornerRadiusBottomStart="@dimen/dimen_12dp"
+                app:boxCornerRadiusTopEnd="@dimen/dimen_12dp"
+                app:boxCornerRadiusTopStart="@dimen/dimen_12dp"
+                app:boxStrokeColor="@color/colorStrokeGrey"
+                app:hintEnabled="false"
+                app:startIconDrawable="@drawable/ic_search">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/NyampurTextStyle.Bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_24dp"
-            android:layout_marginTop="@dimen/dimen_24dp"
-            android:text="@string/title_quick_simple_meals"
-            android:textSize="@dimen/text_size_18sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/satoshi_medium"
+                    android:hint="@string/hint_search"
+                    android:paddingStart="@dimen/dimen_42dp"
+                    android:paddingEnd="@dimen/dimen_12dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textColorHint="@color/colorTextSecondary"
+                    android:textSize="@dimen/text_size_14sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvQuickMeals"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layoutManager="GridLayoutManager"
-            tools:listitem="@layout/item_quick_meals"
-            tools:spanCount="2" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_24dp"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                app:cardBackgroundColor="@color/colorOrangeBackground"
+                app:cardCornerRadius="@dimen/dimen_12dp"
+                app:cardElevation="@dimen/dimen_0dp"
+                app:strokeWidth="@dimen/dimen_0dp">
 
-</androidx.core.widget.NestedScrollView>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingVertical="@dimen/dimen_12dp"
+                        android:paddingStart="@dimen/dimen_12dp"
+                        android:paddingEnd="@dimen/dimen_0dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/imgAiGenerated"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_ai_generated" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/NyampurTextStyle.Bold.Primary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/dimen_4dp"
+                                android:text="@string/label_ai_generated" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/NyampurTextStyle.Bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_4dp"
+                            android:text="@string/description_ai_generated"
+                            android:textSize="@dimen/text_size_12sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dimen_0dp"
+                            android:layout_weight="1" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimen_12dp"
+                            android:insetLeft="@dimen/dimen_0dp"
+                            android:insetTop="@dimen/dimen_0dp"
+                            android:insetRight="@dimen/dimen_0dp"
+                            android:insetBottom="@dimen/dimen_0dp"
+                            android:minHeight="@dimen/dimen_35dp"
+                            android:paddingHorizontal="@dimen/dimen_32dp"
+                            android:paddingVertical="@dimen/dimen_8dp"
+                            android:text="@string/action_lets_start"
+                            android:textSize="@dimen/text_size_14sp"
+                            app:backgroundTint="@color/colorPrimary"
+                            app:backgroundTintMode="add"
+                            app:cornerRadius="@dimen/dimen_8dp" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="139dp"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/img_search_banner" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/NyampurTextStyle.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_24dp"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:text="@string/title_quick_simple_meals"
+                android:textSize="@dimen/text_size_18sp" />
+
+            <id.nisyafawwaz.nyampur.android.utils.views.MultiStateView
+                android:id="@+id/msvQuickMeals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:msvEmptyView="@layout/layout_default_empty"
+                app:msvErrorView="@layout/layout_default_error"
+                app:msvLoadingView="@layout/layout_default_loading">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvQuickMeals"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/item_quick_meals"
+                    tools:padding="@dimen/dimen_24dp"
+                    tools:spanCount="2" />
+
+            </id.nisyafawwaz.nyampur.android.utils.views.MultiStateView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

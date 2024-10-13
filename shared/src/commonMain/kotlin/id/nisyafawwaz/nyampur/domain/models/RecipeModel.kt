@@ -6,7 +6,9 @@ data class RecipeModel(
     val imageUrl: String,
     val cookTime: Int,
     val title: String,
-    val level: String
+    val level: String,
+    val usersId: String,
+    var isSaved: Boolean = false
 ) {
     companion object {
         fun from(response: RecipeResponse?): RecipeModel {
@@ -14,7 +16,8 @@ data class RecipeModel(
                 imageUrl = response?.imageUrl.orEmpty(),
                 cookTime = response?.cookTime ?: 0,
                 title = response?.title.orEmpty(),
-                level = response?.level.orEmpty()
+                level = response?.level.orEmpty(),
+                usersId = response?.usersId.orEmpty()
             )
         }
     }

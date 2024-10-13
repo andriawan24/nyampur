@@ -2,6 +2,7 @@ package id.nisyafawwaz.nyampur.android.ui.authentication
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -9,8 +10,9 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityLoginBinding
 import id.nisyafawwaz.nyampur.android.utils.extensions.doAfterTextChanged
+import id.nisyafawwaz.nyampur.android.utils.extensions.enable
 import id.nisyafawwaz.nyampur.android.utils.extensions.getValue
-import id.nisyafawwaz.nyampur.android.utils.extensions.onClickThrottle
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.removeExtraPaddingError
 import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
@@ -26,30 +28,34 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
-    override fun initIntent() = Unit
-
     override fun initViews() {
         binding.apply {
             tilEmail.removeExtraPaddingError()
             etEmail.doAfterTextChanged {
-                if (it.isBlank()) {
-                    tilEmail.apply {
-                        isErrorEnabled = true
-                        error = context.getString(R.string.error_email_empty)
+                when {
+                    it.isBlank() -> {
+                        tilEmail.apply {
+                            isErrorEnabled = true
+                            error = context.getString(R.string.error_email_empty)
+                        }
+                        btnContinue.isEnabled = false
                     }
-                    btnContinue.isEnabled = false
-                } else if (!Patterns.EMAIL_ADDRESS.matcher(it).matches()) {
-                    tilEmail.apply {
-                        isErrorEnabled = true
-                        error = context.getString(R.string.error_email_invalid)
+
+                    !Patterns.EMAIL_ADDRESS.matcher(it).matches() -> {
+                        tilEmail.apply {
+                            isErrorEnabled = true
+                            error = context.getString(R.string.error_email_invalid)
+                        }
+                        btnContinue.isEnabled = false
                     }
-                    btnContinue.isEnabled = false
-                } else {
-                    tilEmail.apply {
-                        isErrorEnabled = false
-                        error = null
+
+                    else -> {
+                        tilEmail.apply {
+                            isErrorEnabled = false
+                            error = null
+                        }
+                        btnContinue.isEnabled = true
                     }
-                    btnContinue.isEnabled = true
                 }
             }
         }
@@ -57,7 +63,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun initListener() {
         with(binding) {
-            btnContinue.onClickThrottle {
+            btnContinue.onClick {
                 authenticationViewModel.signInOtp(etEmail.getValue())
             }
         }
@@ -65,23 +71,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun initObserver() {
         lifecycleScope.launch {
-            // TODO: Create an observer for this livedata
             authenticationViewModel.signInOtpResult.collectLatest {
                 when (it) {
                     ResultState.Loading -> {
-                        // TODO: Handle loading
+                        binding.btnContinue.isEnabled = false
                     }
 
                     is ResultState.Error -> {
+                        Log.e(LoginActivity::class.simpleName, it.error.message.orEmpty(), it.error)
                         Toast.makeText(
                             this@LoginActivity,
                             it.error.message.orEmpty(),
                             Toast.LENGTH_SHORT
                         ).show()
+                        binding.btnContinue.isEnabled = true
                     }
 
                     is ResultState.Success -> {
                         OtpActivity.start(this@LoginActivity, binding.etEmail.getValue())
+                        binding.btnContinue.isEnabled = true
                     }
 
                     else -> {
@@ -89,6 +97,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                 }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.apply {
+            btnContinue.isEnabled = !etEmail.text.isNullOrBlank() && Patterns.EMAIL_ADDRESS.matcher(etEmail.text.toString()).matches()
         }
     }
 

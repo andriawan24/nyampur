@@ -4,10 +4,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.buildKonfig)
-    alias(libs.plugins.kotlinSerialization)
+    alias(fall.plugins.kotlinMultiplatform)
+    alias(fall.plugins.androidLibrary)
+    alias(fall.plugins.buildKonfig)
+    alias(fall.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -29,37 +29,33 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            // Supabase
-            api(project.dependencies.platform(libs.supabase.bom))
-            api(libs.supabase.postgrest.kt)
-            api(libs.supabase.gotrue.kt)
-            api(libs.supabase.realtime.kt)
+            api(project.dependencies.platform(fall.supabase.bom))
+            api(fall.supabase.postgrest.kt)
+            api(fall.supabase.gotrue.kt)
+            api(fall.supabase.realtime.kt)
 
-            // Ktor
-            api(libs.ktor.client.core)
-            api(libs.ktor.client.logging)
-            api(libs.ktor.serialization.kotlinx.json)
-            api(libs.ktor.client.resources)
-            api(libs.ktor.client.auth)
+            api(fall.ktor.client.core)
+            api(fall.ktor.client.logging)
+            api(fall.ktor.serialization.kotlinx.json)
+            api(fall.ktor.client.resources)
+            api(fall.ktor.client.auth)
 
-            // Viewmodel
-            api(libs.androidx.lifecycle.viewmodel)
+            api(fall.androidx.lifecycle.viewmodel)
 
-            // Koin
-            api(libs.koin.core)
-            api(libs.koin.test)
+            api(fall.koin.core)
+            api(fall.koin.test)
         }
 
         androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
+            implementation(fall.ktor.client.okhttp)
         }
 
         iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
+            implementation(fall.ktor.client.darwin)
         }
 
         commonTest.dependencies {
-            api(libs.kotlin.test)
+            api(fall.kotlin.test)
         }
     }
 }
@@ -71,7 +67,7 @@ buildkonfig {
     try {
         props.load(file(project.rootProject.file("local.properties")).inputStream())
     } catch (_: Exception) {
-        // Handle exception
+        // TODO: Handle exception
     }
 
     defaultConfigs {

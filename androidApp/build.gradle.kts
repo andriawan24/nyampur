@@ -1,18 +1,18 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
+    alias(fall.plugins.androidApplication)
+    alias(fall.plugins.kotlinAndroid)
 }
 
 android {
-    namespace = "${Configs.APPLICATION_ID}.android"
-    compileSdk = 34
+    namespace = Configs.ANDROID_APPLICATION_ID
+    compileSdk = Configs.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "${Configs.APPLICATION_ID}.android"
-        minSdk = 24
-        targetSdk = 34
+        applicationId = Configs.ANDROID_APPLICATION_ID
+        minSdk = Configs.MIN_SDK
+        targetSdk = Configs.TARGET_SDK
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.1"
     }
 
     buildFeatures {
@@ -32,26 +32,25 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = Configs.sourceCompatibility
+        targetCompatibility = Configs.targetCompatibility
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = Configs.JVM_TARGET
     }
 }
 
 dependencies {
-    implementation(projects.shared)
+    implementation(project(":shared"))
+    implementation(fall.bundles.androidCore)
 
-    // AndroidX
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
+    // Glide
+    implementation(fall.glide)
 
     // Material
-    implementation(libs.material)
+    implementation(fall.material)
 
     // Koin
-    implementation(libs.koin.android)
+    implementation(fall.koin.android)
 }

@@ -26,8 +26,7 @@ class AuthenticationViewModel : ViewModel(), KoinComponent {
     private val _validateEmailOtpResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Idle)
     val validateEmailOtpResult = _validateEmailOtpResult.asStateFlow()
 
-    private val _retrieveUserSessionResult =
-        MutableStateFlow<ResultState<UserInfo?>>(ResultState.Idle)
+    private val _retrieveUserSessionResult = MutableStateFlow<ResultState<UserInfo?>>(ResultState.Idle)
     val retrieveUserSessionResult = _retrieveUserSessionResult.asStateFlow()
 
     fun signInOtp(email: String) {

@@ -1,50 +1,87 @@
 package id.nisyafawwaz.nyampur.android.ui.main.saved
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import id.nisyafawwaz.nyampur.android.databinding.FragmentHomeBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import id.nisyafawwaz.nyampur.android.adapters.SavedRecipeAdapter
+import id.nisyafawwaz.nyampur.android.base.BaseFragment
 import id.nisyafawwaz.nyampur.android.databinding.FragmentSavedBinding
+import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
+import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
+import id.nisyafawwaz.nyampur.android.utils.extensions.showDefault
+import id.nisyafawwaz.nyampur.android.utils.extensions.showEmpty
+import id.nisyafawwaz.nyampur.android.utils.extensions.showError
+import id.nisyafawwaz.nyampur.android.utils.extensions.showLoading
+import id.nisyafawwaz.nyampur.ui.AccountManager
+import id.nisyafawwaz.nyampur.ui.RecipeViewModel
+import id.nisyafawwaz.nyampur.utils.enums.SortType
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SavedFragment : Fragment() {
+class SavedFragment : BaseFragment<FragmentSavedBinding>() {
 
-    private var hasInitialized = false
+    private val recipeViewModel: RecipeViewModel by viewModel()
+    private val accountManager: AccountManager by inject()
+    private val savedRecipeAdapter: SavedRecipeAdapter by lazy { SavedRecipeAdapter() }
+    private var currentSort = SortType.RECENTLY
 
-    private val binding: FragmentSavedBinding by lazy {
+    override val binding: FragmentSavedBinding by lazy {
         FragmentSavedBinding.inflate(layoutInflater)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return binding.root
+    override fun initViews() {
+        initAdapter()
+        initSortDropdown()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun initSortDropdown() = Unit
 
-        if (!hasInitialized) {
-            initViews()
-            hasInitialized = true
+    private fun initAdapter() {
+        binding.rvSaved.apply {
+            adapter = savedRecipeAdapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
-    private fun initViews() {
-
+    override fun initProcess() {
+        recipeViewModel.getSavedRecipes(userId = accountManager.getCurrentUser()?.id.orEmpty(), sortType = currentSort)
     }
 
-    override fun onStop() {
-        super.onStop()
-        hasInitialized = false
+    override fun initActions() {
+        binding.tvSortBy.onClick {
+            SortSavedBottomSheetFragment.newInstance(
+                currentlySelected = currentSort,
+                onSortChanged = {
+                    currentSort = it
+                    initProcess()
+                }
+            ).show(childFragmentManager, MainActivity::class.simpleName)
+        }
+    }
+
+    override fun initObservers() {
+        observeSavedRecipesResult()
+    }
+
+    private fun observeSavedRecipesResult() {
+        recipeViewModel.getSavedRecipesResult.observeLiveData(
+            viewLifecycleOwner,
+            onEmpty = {
+                binding.msvSavedRecipes.showEmpty()
+            },
+            onLoading = {
+                binding.msvSavedRecipes.showLoading()
+            },
+            onSuccess = {
+                binding.msvSavedRecipes.showDefault()
+                savedRecipeAdapter.addAll(it)
+            },
+            onFailure = {
+                binding.msvSavedRecipes.showError()
+            }
+        )
     }
 
     companion object {
-        fun newInstance(): SavedFragment {
-            return SavedFragment()
-        }
+        fun newInstance(): SavedFragment = SavedFragment()
     }
 }

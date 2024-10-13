@@ -1,19 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Saved Page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_24dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/NyampurTextStyle.Bold.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_save" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/NyampurTextStyle.Bold.TextSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_sort_by" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSortBy"
+                style="@style/NyampurTextStyle.Bold.TextPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8dp"
+                android:drawableEnd="@drawable/ic_dropdown"
+                android:drawablePadding="@dimen/dimen_4dp"
+                tools:text="Recently Added" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <id.nisyafawwaz.nyampur.android.utils.views.MultiStateView
+            android:id="@+id/msvSavedRecipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:msvEmptyView="@layout/layout_default_empty"
+            app:msvErrorView="@layout/layout_default_error"
+            app:msvLoadingView="@layout/layout_default_loading">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSaved"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                tools:listitem="@layout/item_saved_recipe" />
+
+        </id.nisyafawwaz.nyampur.android.utils.views.MultiStateView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>

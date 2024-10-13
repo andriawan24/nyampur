@@ -16,7 +16,7 @@ fun View.onClick(onClick: () -> Unit) {
     setOnClickListener { onClick.invoke() }
 }
 
-fun View.onClickThrottle(delay: Long = 1000L, onClick: () -> Unit) {
+fun View.onClickWithThrottle(delay: Long = 1000L, onClick: () -> Unit) {
     var job: Job? = null
 
     setOnClickListener {
@@ -26,9 +26,9 @@ fun View.onClickThrottle(delay: Long = 1000L, onClick: () -> Unit) {
 
         job = CoroutineScope(Dispatchers.Main).launch {
             onClick.invoke()
-            isEnabled = false
+            disable()
             delay(delay)
-            isEnabled = true
+            enable()
         }
     }
 }
@@ -72,3 +72,12 @@ fun View.gone() {
 fun View.invisible() {
     visibility = View.INVISIBLE
 }
+
+fun View.enable() {
+    this.isEnabled = true
+}
+
+fun View.disable() {
+    this.isEnabled = false
+}
+

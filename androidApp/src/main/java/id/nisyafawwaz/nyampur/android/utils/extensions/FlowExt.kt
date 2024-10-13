@@ -9,9 +9,10 @@ import kotlinx.coroutines.launch
 
 fun <T> StateFlow<ResultState<T>>.observeLiveData(
     lifecycleOwner: LifecycleOwner,
-    onLoading: () -> Unit,
+    onLoading: (() -> Unit)? = null,
     onSuccess: (T) -> Unit,
     onFailure: (Exception) -> Unit,
+    onEmpty: (() -> Unit)? = null,
     onIdle: (() -> Unit)? = null
 ) {
     lifecycleOwner.lifecycleScope.launch {
@@ -19,8 +20,9 @@ fun <T> StateFlow<ResultState<T>>.observeLiveData(
             when (it) {
                 ResultState.Idle -> onIdle?.invoke()
                 is ResultState.Error -> onFailure.invoke(it.error)
-                ResultState.Loading -> onLoading.invoke()
+                ResultState.Loading -> onLoading?.invoke()
                 is ResultState.Success -> onSuccess.invoke(it.data)
+                ResultState.Empty -> onEmpty?.invoke()
             }
         }
     }

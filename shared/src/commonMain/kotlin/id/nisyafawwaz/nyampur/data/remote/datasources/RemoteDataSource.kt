@@ -1,4 +1,4 @@
-package id.nisyafawwaz.nyampur.data.remote
+package id.nisyafawwaz.nyampur.data.remote.datasources
 
 import id.nisyafawwaz.nyampur.data.models.requests.GetRecipeRequest
 import id.nisyafawwaz.nyampur.data.models.responses.BaseResponse
