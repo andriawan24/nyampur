@@ -12,8 +12,8 @@ class DeleteSavedRecipeUseCase(private val recipeRepository: RecipeRepository) {
     fun execute(response: RecipeResponse): Flow<ResultState<RecipeModel>> = flow {
         emit(ResultState.Loading)
         try {
-            val result = recipeRepository.deleteSavedRecipe(response)
-            emit(ResultState.Success(result))
+            recipeRepository.deleteSavedRecipe(response)
+            emit(ResultState.Success(RecipeModel.from(response)))
         } catch (e: Exception) {
             print(e.message)
             emit(ResultState.Error(e))

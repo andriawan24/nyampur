@@ -7,6 +7,7 @@ import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.serializer.KotlinXSerializer
 import kotlinx.serialization.json.Json
+import kotlin.time.Duration.Companion.seconds
 
 object SupabaseConfig {
     fun getInstance(): SupabaseClient {
@@ -21,6 +22,7 @@ object SupabaseConfig {
                     ignoreUnknownKeys = true
                 }
             )
+            requestTimeout = 60.seconds
         }
     }
 }

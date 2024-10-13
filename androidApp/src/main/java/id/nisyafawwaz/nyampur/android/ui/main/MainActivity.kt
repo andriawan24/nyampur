@@ -61,9 +61,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        binding.bottomNavMain.apply {
-            setOnApplyWindowInsetsListener(null)
-            setPadding(0,0,0,0)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavMain) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(0, 0, 0, systemBars.bottom)
+            insets
         }
     }
 

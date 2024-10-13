@@ -25,17 +25,13 @@ class SupabaseRecipeDataSource(private val client: SupabaseClient) {
             .decodeList<RecipeResponse>()
     }
 
-    suspend fun saveRecipe(recipeResponse: RecipeResponse): RecipeResponse {
+    suspend fun saveRecipe(recipeResponse: RecipeResponse) {
         client.from(RecipeResponse.TABLE_NAME).insert(recipeResponse)
-        return recipeResponse
     }
 
-    suspend fun deleteSavedRecipe(recipeResponse: RecipeResponse): RecipeResponse {
+    suspend fun deleteSavedRecipe(recipeResponse: RecipeResponse) {
         client.from(RecipeResponse.TABLE_NAME).delete {
-            filter {
-                RecipeResponse::title eq recipeResponse.title
-            }
+            filter { RecipeResponse::title eq recipeResponse.title }
         }
-        return recipeResponse
     }
 }
