@@ -306,6 +306,7 @@ class MultiStateView @JvmOverloads constructor(
             this.state = state
         }
 
+        @Suppress("DEPRECATION")
         constructor(parcel: Parcel) : super(parcel) {
             state = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 parcel.readSerializable(null, ViewState::class.java) ?: ViewState.CONTENT

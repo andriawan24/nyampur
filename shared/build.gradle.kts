@@ -4,11 +4,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.buildKonfig)
-    alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.sharedAndroidConfiguration)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.configuration.shared.android)
 }
 
 kotlin {
@@ -59,7 +59,7 @@ kotlin {
 }
 
 buildkonfig {
-    packageName = "id.nisyafawwaz.nyampur"
+    packageName = NyampurConfig.APPLICATION_ID
 
     val props = Properties()
     try {

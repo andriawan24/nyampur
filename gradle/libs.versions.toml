@@ -4,7 +4,6 @@ applicationId = "id.nisyafawwaz.nyampur"
 [versions]
 agp = "8.7.0"
 glide = "4.16.0"
-gradle = "8.7.0"
 koinCore = "4.0.0"
 ktorClient = "2.3.12"
 lifecycleViewmodel = "2.8.6"
@@ -16,6 +15,7 @@ activity = "1.9.2"
 constraintlayout = "2.1.4"
 buildKonfig = "0.15.1"
 swiperefreshlayout = "1.1.0"
+ksp = "2.0.20-1.0.24"
 
 [libraries]
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
@@ -41,8 +41,12 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
+plugin-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+plugin-kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+plugin-ksp = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+
 [bundles]
-androidCore = [
+android-core = [
     "androidx-appcompat",
     "androidx-activity",
     "androidx-constraintlayout",
@@ -52,11 +56,12 @@ androidCore = [
 ]
 
 [plugins]
-androidApplication = { id = "com.android.application", version.ref = "agp" }
-androidLibrary = { id = "com.android.library", version.ref = "agp" }
-kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
-kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-androidConfiguration = { id = "android-configuration" }
-sharedAndroidConfiguration = { id = "shared-android-configuration" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+configuration-android = { id = "com.andriawan.android-configuration" }
+configuration-shared-android = { id = "com.andriawan.shared-android-configuration" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

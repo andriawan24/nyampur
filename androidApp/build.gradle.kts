@@ -1,7 +1,5 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.androidConfiguration)
+    alias(libs.plugins.configuration.android)
 }
 
 android {
@@ -15,6 +13,6 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation(libs.bundles.androidCore)
+    implementation(libs.bundles.android.core)
     implementation(libs.koin.android)
 }
