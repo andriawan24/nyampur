@@ -13,7 +13,7 @@ plugins {
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_18)
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
     }
 
     listOf(
