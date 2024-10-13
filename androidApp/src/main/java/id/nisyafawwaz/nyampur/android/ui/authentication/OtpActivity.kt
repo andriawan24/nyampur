@@ -14,6 +14,7 @@ import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityOtpBinding
 import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
 import id.nisyafawwaz.nyampur.android.utils.constants.emptyString
+import id.nisyafawwaz.nyampur.android.utils.extensions.disable
 import id.nisyafawwaz.nyampur.android.utils.extensions.getCompatColorList
 import id.nisyafawwaz.nyampur.android.utils.extensions.gone
 import id.nisyafawwaz.nyampur.android.utils.extensions.hideKeyboard
@@ -92,23 +93,6 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         }
     }
 
-    private fun setErrorMessage(error: String? = null) {
-        if (!error.isNullOrBlank()) {
-            binding.tvErrorOtp.apply {
-                visible()
-                text = error
-            }
-            textInputOtpLayouts.forEach {
-                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_error_stroke_color))
-            }
-        } else {
-            binding.tvErrorOtp.gone()
-            textInputOtpLayouts.forEach {
-                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_otp_stroke_color))
-            }
-        }
-    }
-
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
         if (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_DEL) {
             if (binding.etInputCode1.isFocused) {
@@ -148,15 +132,45 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
         authenticationViewModel.validateEmailOtpResult.observeLiveData(
             this,
             onLoading = {
-
+                showLoading()
             },
             onSuccess = {
+                hideLoading()
                 MainActivity.start(this@OtpActivity)
             },
             onFailure = {
                 setErrorMessage(it.message.orEmpty())
+                hideLoading()
             }
         )
+    }
+
+    private fun hideLoading() {
+        binding.pbLoading.gone()
+    }
+
+    private fun showLoading() {
+        binding.apply {
+            pbLoading.visible()
+            btnContinue.disable()
+        }
+    }
+
+    private fun setErrorMessage(error: String? = null) {
+        if (!error.isNullOrBlank()) {
+            binding.tvErrorOtp.apply {
+                visible()
+                text = error
+            }
+            textInputOtpLayouts.forEach {
+                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_error_stroke_color))
+            }
+        } else {
+            binding.tvErrorOtp.gone()
+            textInputOtpLayouts.forEach {
+                it.setBoxStrokeColorStateList(getCompatColorList(R.color.selector_text_input_layout_otp_stroke_color))
+            }
+        }
     }
 
     companion object {
