@@ -13,6 +13,5 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation(libs.bundles.android.core)
     implementation(libs.koin.android)
 }
