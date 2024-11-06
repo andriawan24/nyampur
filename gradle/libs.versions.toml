@@ -2,48 +2,48 @@
 applicationId = "id.nisyafawwaz.nyampur"
 
 [versions]
-agp = "8.7.0"
+agp = "8.7.2"
 glide = "4.16.0"
 koinCore = "4.0.0"
 ktorClient = "2.3.12"
-lifecycleViewmodel = "2.8.6"
+lifecycleViewmodel = "2.8.7"
 supabase-bom = "2.5.2"
 kotlin = "2.0.20"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.2"
-constraintlayout = "2.1.4"
+activity = "1.9.3"
+constraintlayout = "2.2.0"
 buildKonfig = "0.15.1"
 swiperefreshlayout = "1.1.0"
 ksp = "2.0.20-1.0.24"
 
 [libraries]
-androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
-androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koinCore" }
-ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClient" }
-ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorClient" }
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClient" }
-ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorClient" }
-ktor-client-resources = { module = "io.ktor:ktor-client-resources", version.ref = "ktorClient" }
-ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktorClient" }
-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClient" }
-supabase-bom = { module = "io.github.jan-tennert.supabase:bom", version.ref = "supabase-bom" }
-supabase-gotrue-kt = { module = "io.github.jan-tennert.supabase:gotrue-kt" }
-supabase-postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt" }
-supabase-realtime-kt = { module = "io.github.jan-tennert.supabase:realtime-kt" }
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinCore" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinCore" }
+koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koinCore" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorClient" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktorClient" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorClient" }
+ktor-client-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktorClient" }
+ktor-client-resources = { group = "io.ktor", name = "ktor-client-resources", version.ref = "ktorClient" }
+ktor-client-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktorClient" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorClient" }
+supabase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version.ref = "supabase-bom" }
+supabase-gotrue-kt = { group = "io.github.jan-tennert.supabase", name = "gotrue-kt" }
+supabase-postgrest-kt = { group = "io.github.jan-tennert.supabase", name = "postgrest-kt" }
+supabase-realtime-kt = { group = "io.github.jan-tennert.supabase", name = "realtime-kt" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
-plugin-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-plugin-kgp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-ksp = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+plugin-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+plugin-kgp = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+plugin-ksp = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
 
 [bundles]
 android-core = [

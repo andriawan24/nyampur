@@ -17,6 +17,7 @@ val useCaseModules = module {
     singleOf(::RetrieveUserSessionUseCase)
     singleOf(::AccountManager)
 
+    // Use Cases
     singleOf(::GetRecipesUseCase)
     singleOf(::SaveRecipeUseCase)
     singleOf(::GetSavedRecipeUseCase)

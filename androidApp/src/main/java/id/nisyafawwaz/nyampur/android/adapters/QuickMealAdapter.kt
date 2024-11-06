@@ -11,6 +11,7 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.databinding.ItemQuickMealsBinding
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.domain.models.RecipeModel
+import java.util.Locale
 
 class QuickMealAdapter(
     private val onFavoriteClicked: (data: RecipeModel) -> Unit
@@ -25,7 +26,7 @@ class QuickMealAdapter(
         fun bind(recipe: RecipeModel) {
             with(binding) {
                 tvFoodName.text = recipe.title
-                tvCookTime.text = recipe.cookTime.toString()
+                tvCookTime.text = String.format(Locale.getDefault(), "%d", recipe.cookTime)
                 tvLevel.text = recipe.level
 
                 Glide.with(root.context)
@@ -35,7 +36,10 @@ class QuickMealAdapter(
                     .into(ivFood)
 
                 btnFavorite.apply {
-                    icon = ContextCompat.getDrawable(root.context, if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline)
+                    icon = ContextCompat.getDrawable(
+                        root.context,
+                        if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline
+                    )
                     onClick {
                         onFavoriteClicked.invoke(recipe)
                     }
