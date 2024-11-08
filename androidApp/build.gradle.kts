@@ -1,5 +1,11 @@
 plugins {
     alias(libs.plugins.configuration.android)
+    alias(libs.plugins.ktlint)
+}
+
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
 }
 
 android {
