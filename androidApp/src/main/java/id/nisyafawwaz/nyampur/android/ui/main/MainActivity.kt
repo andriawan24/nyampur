@@ -13,7 +13,6 @@ import id.nisyafawwaz.nyampur.android.ui.main.saved.SavedFragment
 import id.nisyafawwaz.nyampur.android.utils.extensions.showFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
-
     override val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -29,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.menu_home -> {
                     supportFragmentManager.showFragment(
                         HomeFragment.newInstance(),
-                        binding.flFragment.id
+                        binding.flFragment.id,
                     )
                     true
                 }
@@ -37,7 +36,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 R.id.menu_save -> {
                     supportFragmentManager.showFragment(
                         SavedFragment.newInstance(),
-                        binding.flFragment.id
+                        binding.flFragment.id,
                     )
                     true
                 }
@@ -50,7 +49,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun initDefaultHomeMenu() {
         supportFragmentManager.showFragment(
             HomeFragment.newInstance(),
-            binding.flFragment.id
+            binding.flFragment.id,
         )
     }
 
@@ -63,8 +62,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavMain) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(0, 0, 0, systemBars.bottom)
+            v.setPadding(0, 0, 0, 0)
             insets
         }
     }
@@ -72,12 +70,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initListener() = Unit
 
     companion object {
-        fun start(context: Context, clearTask: Boolean = true) {
-            val intent = Intent(context, MainActivity::class.java).apply {
-                if (clearTask) {
-                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        fun start(
+            context: Context,
+            clearTask: Boolean = true,
+        ) {
+            val intent =
+                Intent(context, MainActivity::class.java).apply {
+                    if (clearTask) {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
                 }
-            }
             context.startActivity(intent)
         }
     }

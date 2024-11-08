@@ -18,7 +18,6 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SavedFragment : BaseFragment<FragmentSavedBinding>() {
-
     private val recipeViewModel: RecipeViewModel by viewModel()
     private val accountManager: AccountManager by inject()
     private val savedRecipeAdapter: SavedRecipeAdapter by lazy { SavedRecipeAdapter() }
@@ -53,7 +52,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
                 onSortChanged = {
                     currentSort = it
                     initProcess()
-                }
+                },
             ).show(childFragmentManager, MainActivity::class.simpleName)
         }
     }
@@ -77,7 +76,7 @@ class SavedFragment : BaseFragment<FragmentSavedBinding>() {
             },
             onFailure = {
                 binding.msvSavedRecipes.showError()
-            }
+            },
         )
     }
 

@@ -1,7 +1,5 @@
 package id.nisyafawwaz.nyampur.android.utils.constants
 
-object AppConstants {
-
-}
+object AppConstants
 
 fun emptyString() = ""

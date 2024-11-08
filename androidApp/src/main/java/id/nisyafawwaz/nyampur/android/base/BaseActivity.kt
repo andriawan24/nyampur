@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
-
     abstract val binding: VB
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +17,10 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     }
 
     protected open fun initIntent() = Unit
+
     abstract fun initViews()
+
     abstract fun initListener()
+
     protected open fun initObserver() = Unit
 }

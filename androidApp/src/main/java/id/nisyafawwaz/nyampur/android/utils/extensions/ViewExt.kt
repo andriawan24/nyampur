@@ -16,7 +16,10 @@ fun View.onClick(onClick: () -> Unit) {
     setOnClickListener { onClick.invoke() }
 }
 
-fun View.onClickWithThrottle(delay: Long = 1000L, onClick: () -> Unit) {
+fun View.onClickWithThrottle(
+    delay: Long = 1000L,
+    onClick: () -> Unit,
+) {
     var job: Job? = null
 
     setOnClickListener {
@@ -24,12 +27,13 @@ fun View.onClickWithThrottle(delay: Long = 1000L, onClick: () -> Unit) {
             return@setOnClickListener
         }
 
-        job = CoroutineScope(Dispatchers.Main).launch {
-            onClick.invoke()
-            disable()
-            delay(delay)
-            enable()
-        }
+        job =
+            CoroutineScope(Dispatchers.Main).launch {
+                onClick.invoke()
+                disable()
+                delay(delay)
+                enable()
+            }
     }
 }
 
@@ -80,4 +84,3 @@ fun View.enable() {
 fun View.disable() {
     this.isEnabled = false
 }
-

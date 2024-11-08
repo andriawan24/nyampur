@@ -19,7 +19,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
-
     private val authenticationViewModel: AuthenticationViewModel by viewModel()
 
     override val binding: ActivitySplashScreenBinding by lazy {
@@ -30,10 +29,11 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
 
     override fun initViews() {
         enableEdgeToEdge(
-            navigationBarStyle = SystemBarStyle.light(
-                Color.TRANSPARENT,
-                Color.TRANSPARENT
-            )
+            navigationBarStyle =
+                SystemBarStyle.light(
+                    Color.TRANSPARENT,
+                    Color.TRANSPARENT,
+                ),
         )
         binding.root.setStatusBarInset()
         lifecycleScope.launch {

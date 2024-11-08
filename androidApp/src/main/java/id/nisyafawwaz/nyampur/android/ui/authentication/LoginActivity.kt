@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
-
     private val authenticationViewModel: AuthenticationViewModel by viewModel()
 
     override val binding: ActivityLoginBinding by lazy {
@@ -81,7 +80,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         Toast.makeText(
                             this@LoginActivity,
                             it.error.message.orEmpty(),
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT,
                         ).show()
                         binding.btnContinue.isEnabled = true
                     }

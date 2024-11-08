@@ -14,15 +14,13 @@ import id.nisyafawwaz.nyampur.domain.models.RecipeModel
 import java.util.Locale
 
 class QuickMealAdapter(
-    private val onFavoriteClicked: (data: RecipeModel) -> Unit
+    private val onFavoriteClicked: (data: RecipeModel) -> Unit,
 ) : RecyclerView.Adapter<QuickMealAdapter.QuickMealViewHolder>() {
-
     private var recipeDiffer = AsyncListDiffer(this, DIFF_CALLBACK)
 
     inner class QuickMealViewHolder(
-        private val binding: ItemQuickMealsBinding
+        private val binding: ItemQuickMealsBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(recipe: RecipeModel) {
             with(binding) {
                 tvFoodName.text = recipe.title
@@ -36,10 +34,11 @@ class QuickMealAdapter(
                     .into(ivFood)
 
                 btnFavorite.apply {
-                    icon = ContextCompat.getDrawable(
-                        root.context,
-                        if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline
-                    )
+                    icon =
+                        ContextCompat.getDrawable(
+                            root.context,
+                            if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline,
+                        )
                     onClick {
                         onFavoriteClicked.invoke(recipe)
                     }
@@ -48,23 +47,32 @@ class QuickMealAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuickMealViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): QuickMealViewHolder {
         return QuickMealViewHolder(
             ItemQuickMealsBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
-            )
+                false,
+            ),
         )
     }
 
     override fun getItemCount(): Int = recipeDiffer.currentList.size
 
-    override fun onBindViewHolder(holder: QuickMealViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: QuickMealViewHolder,
+        position: Int,
+    ) {
         holder.bind(recipeDiffer.currentList[position])
     }
 
-    fun updateSavedRecipe(name: String, isSaved: Boolean) {
+    fun updateSavedRecipe(
+        name: String,
+        isSaved: Boolean,
+    ) {
         val recipeIndex = recipeDiffer.currentList.indexOfFirst { it.title == name }
         if (recipeIndex != -1) {
             recipeDiffer.currentList[recipeIndex].isSaved = isSaved
@@ -77,14 +85,21 @@ class QuickMealAdapter(
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RecipeModel>() {
-            override fun areItemsTheSame(oldItem: RecipeModel, newItem: RecipeModel): Boolean {
-                return oldItem === newItem
-            }
+        private val DIFF_CALLBACK =
+            object : DiffUtil.ItemCallback<RecipeModel>() {
+                override fun areItemsTheSame(
+                    oldItem: RecipeModel,
+                    newItem: RecipeModel,
+                ): Boolean {
+                    return oldItem === newItem
+                }
 
-            override fun areContentsTheSame(oldItem: RecipeModel, newItem: RecipeModel): Boolean {
-                return oldItem.title == newItem.title
+                override fun areContentsTheSame(
+                    oldItem: RecipeModel,
+                    newItem: RecipeModel,
+                ): Boolean {
+                    return oldItem.title == newItem.title
+                }
             }
-        }
     }
 }
