@@ -5,7 +5,8 @@ import id.nisyafawwaz.nyampur.ui.RecipeViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-val viewModelModules = module {
-    viewModelOf(::AuthenticationViewModel)
-    viewModelOf(::RecipeViewModel)
-}
+val viewModelModules =
+    module {
+        viewModelOf(::AuthenticationViewModel)
+        viewModelOf(::RecipeViewModel)
+    }
