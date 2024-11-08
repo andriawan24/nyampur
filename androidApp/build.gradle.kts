@@ -1,56 +1,17 @@
 plugins {
-    alias(fall.plugins.androidApplication)
-    alias(fall.plugins.kotlinAndroid)
+    alias(libs.plugins.configuration.android)
 }
 
 android {
-    namespace = Configs.ANDROID_APPLICATION_ID
-    compileSdk = Configs.COMPILE_SDK
-
+    namespace = NyampurConfig.ANDROID_APPLICATION_ID
     defaultConfig {
-        applicationId = Configs.ANDROID_APPLICATION_ID
-        minSdk = Configs.MIN_SDK
-        targetSdk = Configs.TARGET_SDK
-        versionCode = 1
-        versionName = "0.0.1"
-    }
-
-    buildFeatures {
-        viewBinding = true
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = Configs.sourceCompatibility
-        targetCompatibility = Configs.targetCompatibility
-    }
-
-    kotlinOptions {
-        jvmTarget = Configs.JVM_TARGET
+        applicationId = NyampurConfig.ANDROID_APPLICATION_ID
+        versionCode = NyampurConfig.VERSION_CODE
+        versionName = NyampurConfig.VERSION_NAME
     }
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation(fall.bundles.androidCore)
-
-    // Glide
-    implementation(fall.glide)
-
-    // Material
-    implementation(fall.material)
-
-    // Koin
-    implementation(fall.koin.android)
+    implementation(libs.koin.android)
 }

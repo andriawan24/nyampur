@@ -1,4 +1,4 @@
-package id.nisyafawwaz.nyampur
+package id.nisyafawwaz.nyampur.data.remote
 
 import io.ktor.client.HttpClient
 

@@ -8,9 +8,7 @@ import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import id.nisyafawwaz.nyampur.android.R
@@ -200,56 +198,56 @@ class MultiStateView @JvmOverloads constructor(
         when (viewState) {
             ViewState.LOADING -> {
                 requireNotNull(loadingView).apply {
-                    contentView?.visibility = View.GONE
-                    errorView?.visibility = View.GONE
-                    emptyView?.visibility = View.GONE
+                    contentView?.visibility = GONE
+                    errorView?.visibility = GONE
+                    emptyView?.visibility = GONE
 
                     if (animateLayoutChanges) {
                         animateLayoutChange(getView(previousState))
                     } else {
-                        visibility = View.VISIBLE
+                        visibility = VISIBLE
                     }
                 }
             }
 
             ViewState.EMPTY -> {
                 requireNotNull(emptyView).apply {
-                    contentView?.visibility = View.GONE
-                    errorView?.visibility = View.GONE
-                    loadingView?.visibility = View.GONE
+                    contentView?.visibility = GONE
+                    errorView?.visibility = GONE
+                    loadingView?.visibility = GONE
 
                     if (animateLayoutChanges) {
                         animateLayoutChange(getView(previousState))
                     } else {
-                        visibility = View.VISIBLE
+                        visibility = VISIBLE
                     }
                 }
             }
 
             ViewState.ERROR -> {
                 requireNotNull(errorView).apply {
-                    contentView?.visibility = View.GONE
-                    loadingView?.visibility = View.GONE
-                    emptyView?.visibility = View.GONE
+                    contentView?.visibility = GONE
+                    loadingView?.visibility = GONE
+                    emptyView?.visibility = GONE
 
                     if (animateLayoutChanges) {
                         animateLayoutChange(getView(previousState))
                     } else {
-                        visibility = View.VISIBLE
+                        visibility = VISIBLE
                     }
                 }
             }
 
             ViewState.CONTENT -> {
                 requireNotNull(contentView).apply {
-                    loadingView?.visibility = View.GONE
-                    errorView?.visibility = View.GONE
-                    emptyView?.visibility = View.GONE
+                    loadingView?.visibility = GONE
+                    errorView?.visibility = GONE
+                    emptyView?.visibility = GONE
 
                     if (animateLayoutChanges) {
                         animateLayoutChange(getView(previousState))
                     } else {
-                        visibility = View.VISIBLE
+                        visibility = VISIBLE
                     }
                 }
             }
@@ -277,13 +275,13 @@ class MultiStateView @JvmOverloads constructor(
             addListener(
                 object : AnimatorListenerAdapter() {
                     override fun onAnimationStart(animation: Animator) {
-                        previousView.visibility = View.VISIBLE
+                        previousView.visibility = VISIBLE
                     }
 
                     override fun onAnimationEnd(animation: Animator) {
-                        previousView.visibility = View.GONE
+                        previousView.visibility = GONE
                         val currentView = requireNotNull(getView(viewState))
-                        currentView.visibility = View.VISIBLE
+                        currentView.visibility = VISIBLE
                         ObjectAnimator
                             .ofFloat(currentView, "alpha", 0.0f, 1.0f)
                             .setDuration(250L)
@@ -300,12 +298,13 @@ class MultiStateView @JvmOverloads constructor(
 
     private class SavedState : BaseSavedState {
 
-        internal val state: ViewState
+        val state: ViewState
 
         constructor(superState: Parcelable, state: ViewState) : super(superState) {
             this.state = state
         }
 
+        @Suppress("DEPRECATION")
         constructor(parcel: Parcel) : super(parcel) {
             state = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 parcel.readSerializable(null, ViewState::class.java) ?: ViewState.CONTENT

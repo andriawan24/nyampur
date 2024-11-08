@@ -10,7 +10,6 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityLoginBinding
 import id.nisyafawwaz.nyampur.android.utils.extensions.doAfterTextChanged
-import id.nisyafawwaz.nyampur.android.utils.extensions.enable
 import id.nisyafawwaz.nyampur.android.utils.extensions.getValue
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.removeExtraPaddingError
@@ -92,9 +91,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         binding.btnContinue.isEnabled = true
                     }
 
-                    else -> {
-                        // Do nothing
-                    }
+                    else -> Unit
                 }
             }
         }

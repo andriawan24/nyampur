@@ -4,10 +4,11 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 plugins {
-    alias(fall.plugins.kotlinMultiplatform)
-    alias(fall.plugins.androidLibrary)
-    alias(fall.plugins.buildKonfig)
-    alias(fall.plugins.kotlinSerialization)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.buildKonfig)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.configuration.shared.android)
 }
 
 kotlin {
@@ -29,39 +30,36 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project.dependencies.platform(fall.supabase.bom))
-            api(fall.supabase.postgrest.kt)
-            api(fall.supabase.gotrue.kt)
-            api(fall.supabase.realtime.kt)
-
-            api(fall.ktor.client.core)
-            api(fall.ktor.client.logging)
-            api(fall.ktor.serialization.kotlinx.json)
-            api(fall.ktor.client.resources)
-            api(fall.ktor.client.auth)
-
-            api(fall.androidx.lifecycle.viewmodel)
-
-            api(fall.koin.core)
-            api(fall.koin.test)
+            api(project.dependencies.platform(libs.supabase.bom))
+            api(libs.supabase.postgrest.kt)
+            api(libs.supabase.gotrue.kt)
+            api(libs.supabase.realtime.kt)
+            api(libs.ktor.client.core)
+            api(libs.ktor.client.logging)
+            api(libs.ktor.serialization.kotlinx.json)
+            api(libs.ktor.client.resources)
+            api(libs.ktor.client.auth)
+            api(libs.androidx.lifecycle.viewmodel)
+            api(libs.koin.core)
+            api(libs.koin.test)
         }
 
         androidMain.dependencies {
-            implementation(fall.ktor.client.okhttp)
+            implementation(libs.ktor.client.okhttp)
         }
 
         iosMain.dependencies {
-            implementation(fall.ktor.client.darwin)
+            implementation(libs.ktor.client.darwin)
         }
 
         commonTest.dependencies {
-            api(fall.kotlin.test)
+            api(libs.kotlin.test)
         }
     }
 }
 
 buildkonfig {
-    packageName = Configs.APPLICATION_ID
+    packageName = NyampurConfig.APPLICATION_ID
 
     val props = Properties()
     try {
@@ -85,15 +83,5 @@ buildkonfig {
 }
 
 android {
-    namespace = Configs.APPLICATION_ID
-    compileSdk = Configs.COMPILE_SDK
-
-    defaultConfig {
-        minSdk = Configs.MIN_SDK
-    }
-
-    compileOptions {
-        sourceCompatibility = Configs.sourceCompatibility
-        targetCompatibility = Configs.targetCompatibility
-    }
+    namespace = NyampurConfig.APPLICATION_ID
 }

@@ -1,7 +1,7 @@
 package id.nisyafawwaz.nyampur.data.repository
 
 import id.nisyafawwaz.nyampur.data.models.responses.RecipeResponse
-import id.nisyafawwaz.nyampur.data.remote.datasources.RemoteDataSource
+import id.nisyafawwaz.nyampur.data.remote.datasources.api.RemoteDataSource
 import id.nisyafawwaz.nyampur.data.remote.datasources.supabase.SupabaseRecipeDataSource
 import id.nisyafawwaz.nyampur.domain.models.RecipeModel
 import id.nisyafawwaz.nyampur.domain.repository.RecipeRepository
