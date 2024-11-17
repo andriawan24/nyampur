@@ -20,7 +20,7 @@ import io.ktor.serialization.kotlinx.json.json
 actual val httpClient: HttpClient
     get() = HttpClient(OkHttp) {
         defaultRequest {
-            host = "52.221.248.254"
+            host = "52.23.207.131"
             url {
                 protocol = URLProtocol.HTTP
             }
