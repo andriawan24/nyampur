@@ -98,27 +98,18 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
-        if (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_DEL) {
-            if (binding.etInputCode1.isFocused) {
-                return super.dispatchKeyEvent(event)
-            } else {
-                val focusedInputIndex =
-                    textInputOtpLayouts.indexOfFirst {
-                        it.editText?.isFocused == true
-                    }
-
-                if (textInputOtpLayouts[focusedInputIndex].editText?.text.toString().isNotBlank()) {
-                    return super.dispatchKeyEvent(event)
-                } else {
-                    val textInput = textInputOtpLayouts.getOrNull(focusedInputIndex - 1)
-                    textInput?.editText?.setText(emptyString())
-                    textInput?.requestFocus()
-                    return true
+        if (event.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_DEL && !binding.etInputCode1.isFocused) {
+            val focusedInputIndex = textInputOtpLayouts.indexOfFirst { it.editText?.isFocused == true }
+            if (textInputOtpLayouts[focusedInputIndex].editText?.text.toString().isBlank()) {
+                textInputOtpLayouts.getOrNull(focusedInputIndex - 1)?.let {
+                    it.editText?.setText(emptyString())
+                    it.requestFocus()
                 }
+                return true
             }
-        } else {
-            return super.dispatchKeyEvent(event)
         }
+
+        return super.dispatchKeyEvent(event)
     }
 
     override fun initListener() {

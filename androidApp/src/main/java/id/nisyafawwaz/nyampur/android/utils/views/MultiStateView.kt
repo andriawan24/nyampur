@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import id.nisyafawwaz.nyampur.android.R
+import id.nisyafawwaz.nyampur.android.utils.extensions.gone
 
 class MultiStateView
     @JvmOverloads
@@ -140,7 +141,7 @@ class MultiStateView
 
             when (viewState) {
                 ViewState.CONTENT -> setView(ViewState.CONTENT)
-                else -> contentView?.visibility = View.GONE
+                else -> contentView?.gone()
             }
         }
 
