@@ -4,7 +4,7 @@ echo "*********************************************************"
 echo "Running git pre-commit hook. Running Spotless Apply... "
 echo "*********************************************************"
 
-./gradlew ktlintCheck
+../gradlew ktlintCheck
 
 ktlintCheckStatus=$?
 
