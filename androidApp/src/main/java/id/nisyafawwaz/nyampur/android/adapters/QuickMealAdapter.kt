@@ -25,7 +25,7 @@ class QuickMealAdapter(
             with(binding) {
                 tvFoodName.text = recipe.title
                 tvCookTime.text = String.format(Locale.getDefault(), "%d", recipe.cookTime)
-                tvLevel.text = "Hello World"
+                tvLevel.text = recipe.level
 
                 Glide.with(root.context)
                     .load(recipe.imageUrl)
@@ -34,10 +34,11 @@ class QuickMealAdapter(
                     .into(ivFood)
 
                 btnFavorite.apply {
-                    icon = ContextCompat.getDrawable(
-                        root.context,
-                        if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline,
-                    )
+                    icon =
+                        ContextCompat.getDrawable(
+                            root.context,
+                            if (recipe.isSaved) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline,
+                        )
                     onClick {
                         onFavoriteClicked.invoke(recipe)
                     }
