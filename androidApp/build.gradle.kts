@@ -1,11 +1,7 @@
 plugins {
     alias(libs.plugins.configuration.android)
     alias(libs.plugins.ktlint)
-}
-
-ktlint {
-    verbose.set(true)
-    outputToConsole.set(true)
+    alias(libs.plugins.detekt)
 }
 
 android {
@@ -15,6 +11,21 @@ android {
         versionCode = NyampurConfig.VERSION_CODE
         versionName = NyampurConfig.VERSION_NAME
     }
+}
+
+detekt {
+    toolVersion = "1.23.7"
+
+    source.setFrom("src/main/java")
+    config.setFrom(rootProject.file("detekt/config.yml"))
+
+    parallel = true
+    autoCorrect = true
+}
+
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
 }
 
 dependencies {
