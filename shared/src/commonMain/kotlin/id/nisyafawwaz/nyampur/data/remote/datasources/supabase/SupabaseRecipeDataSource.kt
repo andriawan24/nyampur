@@ -18,8 +18,8 @@ class SupabaseRecipeDataSource(private val client: SupabaseClient) {
                     SortType.RECENTLY -> order("created_at", Order.DESCENDING)
                     SortType.LEVEL -> order("level", Order.ASCENDING)
                     SortType.MINUTES -> order("cook_time", Order.ASCENDING)
-                    SortType.INCREASING -> order("title", Order.ASCENDING)
-                    SortType.DECREASING -> order("title", Order.DESCENDING)
+                    SortType.A_TO_Z -> order("title", Order.ASCENDING)
+                    SortType.Z_TO_A -> order("title", Order.DESCENDING)
                 }
             }
             .decodeList<RecipeResponse>()

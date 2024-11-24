@@ -10,6 +10,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.databinding.FragmentSortSavedRecipeBottomSheetBinding
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
+import id.nisyafawwaz.nyampur.android.utils.extensions.orDefault
 import id.nisyafawwaz.nyampur.utils.enums.SortType
 
 class SortSavedBottomSheetFragment : BottomSheetDialogFragment() {
@@ -20,12 +21,12 @@ class SortSavedBottomSheetFragment : BottomSheetDialogFragment() {
     private var onSortChanged: ((type: SortType) -> Unit)? = null
     private var currentlySelected = SortType.RECENTLY
     private val sortRadios by lazy {
-        listOf(
-            binding.radioRecentlyAdded,
-            binding.radioLevel,
-            binding.radioMinutesToMake,
-            binding.radioAToZ,
-            binding.radioZToA,
+        mapOf(
+            SortType.RECENTLY to binding.radioRecentlyAdded,
+            SortType.LEVEL to binding.radioLevel,
+            SortType.MINUTES to binding.radioMinutesToMake,
+            SortType.A_TO_Z to binding.radioAToZ,
+            SortType.Z_TO_A to binding.radioZToA,
         )
     }
     private var currentlyCheckedRadio: AppCompatRadioButton? = null
@@ -53,16 +54,18 @@ class SortSavedBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
     private fun initProcess() {
-        sortRadios.getOrNull(SortType.entries.indexOf(currentlySelected))?.isChecked = true
+        sortRadios[currentlySelected]?.isChecked = true
     }
 
     private fun initActionListener() {
         binding.btnClose.onClick { dismiss() }
-        sortRadios.forEach { sortRadio ->
+        sortRadios.values.forEach { sortRadio ->
             sortRadio.setOnCheckedChangeListener { _, _ ->
                 currentlyCheckedRadio?.isChecked = false
                 currentlyCheckedRadio = sortRadio
-                onSortChanged?.invoke(SortType.entries.getOrNull(sortRadios.indexOf(sortRadio)) ?: SortType.RECENTLY)
+                onSortChanged?.invoke(
+                    SortType.entries.getOrNull(sortRadios.values.indexOf(sortRadio)).orDefault(SortType.RECENTLY),
+                )
                 dismiss()
             }
         }
@@ -74,8 +77,8 @@ class SortSavedBottomSheetFragment : BottomSheetDialogFragment() {
             onSortChanged: ((type: SortType) -> Unit)?,
         ): SortSavedBottomSheetFragment {
             return SortSavedBottomSheetFragment().apply {
-                this.onSortChanged = onSortChanged
                 this.currentlySelected = currentlySelected
+                this.onSortChanged = onSortChanged
             }
         }
     }
