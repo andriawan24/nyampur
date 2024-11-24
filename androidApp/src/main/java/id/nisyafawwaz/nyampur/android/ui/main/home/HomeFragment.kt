@@ -18,15 +18,15 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
-
     private val recipeViewModel: RecipeViewModel by viewModel()
     private val accountManager: AccountManager by inject()
 
-    private val quickMealAdapter = QuickMealAdapter {
-        recipeViewModel.run {
-            if (it.isSaved) deleteSavedRecipe(it) else saveRecipe(it)
+    private val quickMealAdapter =
+        QuickMealAdapter {
+            recipeViewModel.run {
+                if (it.isSaved) deleteSavedRecipe(it) else saveRecipe(it)
+            }
         }
-    }
 
     override val binding: FragmentHomeBinding by lazy {
         FragmentHomeBinding.inflate(layoutInflater)
@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         recipeViewModel.getRecipes(
             type = DEFAULT_TYPE,
             userId = accountManager.getCurrentUser()?.id.orEmpty(),
-            page = 1
+            page = 1,
         )
     }
 
@@ -70,7 +70,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             },
             onFailure = {
                 showError(getString(R.string.message_failed_delete_recipe))
-            }
+            },
         )
     }
 
@@ -80,40 +80,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun observerSaveRecipeResult() {
         recipeViewModel.saveRecipesResult.observeLiveData(
-            viewLifecycleOwner,
-            onSuccess = {
-                quickMealAdapter.updateSavedRecipe(it.title, true)
-            },
-            onFailure = {
-                showError(getString(R.string.message_failed_save_recipe))
-            }
+            lifecycleOwner = viewLifecycleOwner,
+            onSuccess = { quickMealAdapter.updateSavedRecipe(it.title, true) },
+            onFailure = { showError(getString(R.string.message_failed_save_recipe)) },
         )
     }
 
-    private fun observerRecipeResult() = with(binding) {
-        recipeViewModel.getRecipesResult.observeLiveData(
-            viewLifecycleOwner,
-            onLoading = {
-                msvQuickMeals.showLoading()
-            },
-            onEmpty = {
-                root.isRefreshing = false
-                msvQuickMeals.showEmpty()
-            },
-            onSuccess = { recipes ->
-                root.isRefreshing = false
-                quickMealAdapter.addAll(recipes)
-                msvQuickMeals.showDefault()
-            },
-            onFailure = {
-                root.isRefreshing = false
-                msvQuickMeals.showError()
-            }
-        )
-    }
+    private fun observerRecipeResult() =
+        with(binding) {
+            recipeViewModel.getRecipesResult.observeLiveData(
+                lifecycleOwner = viewLifecycleOwner,
+                onLoading = { msvQuickMeals.showLoading() },
+                onEmpty = {
+                    root.isRefreshing = false
+                    msvQuickMeals.showEmpty()
+                },
+                onSuccess = { recipes ->
+                    root.isRefreshing = false
+                    quickMealAdapter.addAll(recipes)
+                    msvQuickMeals.showDefault()
+                },
+                onFailure = {
+                    root.isRefreshing = false
+                    msvQuickMeals.showError()
+                },
+            )
+        }
 
     companion object {
         private const val DEFAULT_TYPE = "sarapan"
+
         fun newInstance(): HomeFragment = HomeFragment()
     }
 }

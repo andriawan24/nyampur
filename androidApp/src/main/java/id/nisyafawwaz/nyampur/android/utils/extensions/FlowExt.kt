@@ -13,7 +13,7 @@ fun <T> StateFlow<ResultState<T>>.observeLiveData(
     onSuccess: (T) -> Unit,
     onFailure: (Exception) -> Unit,
     onEmpty: (() -> Unit)? = null,
-    onIdle: (() -> Unit)? = null
+    onIdle: (() -> Unit)? = null,
 ) {
     lifecycleOwner.lifecycleScope.launch {
         collectLatest {

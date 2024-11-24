@@ -1,13 +1,14 @@
 package id.nisyafawwaz.nyampur.android.utils.extensions
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
+import io.ktor.utils.io.printStack
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,7 +17,11 @@ fun View.onClick(onClick: () -> Unit) {
     setOnClickListener { onClick.invoke() }
 }
 
-fun View.onClickWithThrottle(delay: Long = 1000L, onClick: () -> Unit) {
+fun View.onClickWithThrottle(
+    delay: Long = 1000L,
+    scope: CoroutineScope,
+    onClick: () -> Unit,
+) {
     var job: Job? = null
 
     setOnClickListener {
@@ -24,12 +29,18 @@ fun View.onClickWithThrottle(delay: Long = 1000L, onClick: () -> Unit) {
             return@setOnClickListener
         }
 
-        job = CoroutineScope(Dispatchers.Main).launch {
-            onClick.invoke()
-            disable()
-            delay(delay)
-            enable()
-        }
+        job =
+            scope.launch {
+                try {
+                    onClick.invoke()
+                    disable()
+                    delay(delay)
+                } catch (e: Exception) {
+                    Log.e(View::class.simpleName, "onClickWithThrottle: ${e.printStack()}")
+                } finally {
+                    enable()
+                }
+            }
     }
 }
 
@@ -80,4 +91,3 @@ fun View.enable() {
 fun View.disable() {
     this.isEnabled = false
 }
-
