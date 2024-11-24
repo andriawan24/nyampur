@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -137,7 +138,9 @@ class MultiStateView
 
         override fun onAttachedToWindow() {
             super.onAttachedToWindow()
-            if (contentView == null) throw IllegalArgumentException("Content view is not defined")
+            if (contentView == null) {
+                Log.e(MultiStateView::class.simpleName, "ContentView is not defined")
+            }
 
             when (viewState) {
                 ViewState.CONTENT -> setView(ViewState.CONTENT)
