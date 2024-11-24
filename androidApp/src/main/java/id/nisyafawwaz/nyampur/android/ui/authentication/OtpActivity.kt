@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputLayout
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
@@ -118,7 +119,7 @@ class OtpActivity : BaseActivity<ActivityOtpBinding>() {
                 finish()
             }
 
-            btnContinue.onClickWithThrottle {
+            btnContinue.onClickWithThrottle(scope = lifecycleScope) {
                 authenticationViewModel.validateEmailOtp(otpValue, email)
             }
         }

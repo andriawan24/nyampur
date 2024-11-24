@@ -80,23 +80,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun observerSaveRecipeResult() {
         recipeViewModel.saveRecipesResult.observeLiveData(
-            viewLifecycleOwner,
-            onSuccess = {
-                quickMealAdapter.updateSavedRecipe(it.title, true)
-            },
-            onFailure = {
-                showError(getString(R.string.message_failed_save_recipe))
-            },
+            lifecycleOwner = viewLifecycleOwner,
+            onSuccess = { quickMealAdapter.updateSavedRecipe(it.title, true) },
+            onFailure = { showError(getString(R.string.message_failed_save_recipe)) },
         )
     }
 
     private fun observerRecipeResult() =
         with(binding) {
             recipeViewModel.getRecipesResult.observeLiveData(
-                viewLifecycleOwner,
-                onLoading = {
-                    msvQuickMeals.showLoading()
-                },
+                lifecycleOwner = viewLifecycleOwner,
+                onLoading = { msvQuickMeals.showLoading() },
                 onEmpty = {
                     root.isRefreshing = false
                     msvQuickMeals.showEmpty()

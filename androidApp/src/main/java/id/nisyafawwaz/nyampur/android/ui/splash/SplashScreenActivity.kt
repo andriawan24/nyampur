@@ -46,17 +46,13 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         lifecycleScope.launch {
             authenticationViewModel.retrieveUserSessionResult.collectLatest {
                 when (it) {
-                    is ResultState.Error -> {
-                        LoginActivity.start(this@SplashScreenActivity)
-                    }
-
-                    is ResultState.Success -> {
+                    is ResultState.Error -> LoginActivity.start(this@SplashScreenActivity)
+                    is ResultState.Success ->
                         if (it.data != null) {
                             MainActivity.start(this@SplashScreenActivity)
                         } else {
                             LoginActivity.start(this@SplashScreenActivity)
                         }
-                    }
 
                     else -> Unit
                 }

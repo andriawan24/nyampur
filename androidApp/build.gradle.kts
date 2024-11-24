@@ -1,3 +1,5 @@
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+
 plugins {
     alias(libs.plugins.configuration.android)
     alias(libs.plugins.ktlint)
@@ -14,18 +16,33 @@ android {
 }
 
 detekt {
-    toolVersion = "1.23.7"
-
-    source.setFrom("src/main/java")
+    toolVersion = libs.versions.detekt.get()
+    source.setFrom(
+        "src/main/java",
+        "src/main/kotlin",
+        "src/test/java",
+        "src/test/kotlin",
+    )
     config.setFrom(rootProject.file("detekt/config.yml"))
-
+    baseline = rootProject.file("detekt/baseline.xml")
     parallel = true
     autoCorrect = true
+    buildUponDefaultConfig = true
 }
 
 ktlint {
     verbose.set(true)
     outputToConsole.set(true)
+    android.set(true)
+    ignoreFailures.set(false)
+    reporters {
+        reporter(ReporterType.HTML)
+        reporter(ReporterType.CHECKSTYLE)
+    }
+    filter {
+        exclude("**/generated/**")
+        exclude("**/kotlin/**")
+    }
 }
 
 dependencies {
