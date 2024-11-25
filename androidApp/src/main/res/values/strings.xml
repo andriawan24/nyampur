@@ -36,4 +36,5 @@
     <string name="sort_times">Minutes to Make (quick to slow)</string>
     <string name="sort_increasing">A - Z</string>
     <string name="sort_decreasing">Z - A</string>
+    <string name="action_logout">Sign Out</string>
 </resources>

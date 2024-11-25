@@ -2,6 +2,7 @@ package id.nisyafawwaz.nyampur.data.remote.datasources.supabase
 
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.OtpType
+import io.github.jan.supabase.gotrue.SignOutScope
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.OTP
 import io.github.jan.supabase.gotrue.user.UserInfo
@@ -19,5 +20,9 @@ class SupabaseAuthDataSource(private val client: SupabaseClient) {
     suspend fun retrieveUserSession(): UserInfo? {
         val user = client.auth.sessionManager.loadSession()
         return user?.user
+    }
+
+    suspend fun signOut() {
+        client.auth.signOut()
     }
 }

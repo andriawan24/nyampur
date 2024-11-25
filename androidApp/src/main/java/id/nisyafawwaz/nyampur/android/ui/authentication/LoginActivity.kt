@@ -104,9 +104,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     companion object {
-        fun start(context: Context) {
+        fun start(
+            context: Context,
+            isClearTask: Boolean = true,
+        ) {
             Intent(context, LoginActivity::class.java).apply {
-                context.startActivity(this)
+                if (isClearTask) {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+            }.also {
+                context.startActivity(it)
             }
         }
     }
