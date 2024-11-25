@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
+import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityProfileBinding
 import id.nisyafawwaz.nyampur.android.ui.authentication.LoginActivity
@@ -35,12 +36,12 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
     override fun initListener() {
         binding.btnSignOut.onClick {
             AlertDialog.Builder(this)
-                .setTitle("Sign Out")
-                .setMessage("Are you sure you want to logout?")
-                .setPositiveButton("No") { dialog, _ ->
+                .setTitle(R.string.title_sign_out)
+                .setMessage(R.string.message_sign_out)
+                .setPositiveButton(R.string.action_no) { dialog, _ ->
                     dialog.dismiss()
                 }
-                .setNegativeButton("Yes") { dialog, _ ->
+                .setNegativeButton(R.string.action_yes) { dialog, _ ->
                     dialog.dismiss()
                     authenticationViewModel.signOut()
                 }
