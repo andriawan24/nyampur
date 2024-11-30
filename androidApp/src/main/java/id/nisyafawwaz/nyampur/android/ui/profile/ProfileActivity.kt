@@ -8,7 +8,6 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityProfileBinding
 import id.nisyafawwaz.nyampur.android.ui.authentication.LoginActivity
-import id.nisyafawwaz.nyampur.android.utils.constants.emptyString
 import id.nisyafawwaz.nyampur.android.utils.extensions.disable
 import id.nisyafawwaz.nyampur.android.utils.extensions.enable
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
@@ -27,10 +26,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
     }
 
     override fun initViews() {
-        binding.apply {
-            tvName.text = accountManager.getCurrentUser()?.userMetadata?.getOrDefault("name", emptyString()).toString()
-            tvEmail.text = accountManager.getCurrentUser()?.email.orEmpty()
-        }
+        binding.tvName.text = accountManager.getCurrentUser()?.email.orEmpty()
     }
 
     override fun initListener() {
