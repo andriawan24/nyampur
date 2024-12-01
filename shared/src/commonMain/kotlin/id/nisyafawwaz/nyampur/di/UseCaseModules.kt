@@ -2,6 +2,7 @@ package id.nisyafawwaz.nyampur.di
 
 import id.nisyafawwaz.nyampur.domain.usecases.auth.RetrieveUserSessionUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.auth.SendEmailOtpUseCase
+import id.nisyafawwaz.nyampur.domain.usecases.auth.SignInWithGoogleUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.auth.SignOutUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.auth.ValidateEmailOtpUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.recipes.DeleteSavedRecipeUseCase
@@ -17,6 +18,7 @@ val useCaseModules = module {
     singleOf(::ValidateEmailOtpUseCase)
     singleOf(::RetrieveUserSessionUseCase)
     singleOf(::AccountManager)
+    singleOf(::SignInWithGoogleUseCase)
     singleOf(::SignOutUseCase)
 
     // Use Cases

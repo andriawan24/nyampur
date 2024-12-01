@@ -5,9 +5,10 @@ import androidx.lifecycle.viewModelScope
 import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.domain.usecases.auth.RetrieveUserSessionUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.auth.SendEmailOtpUseCase
+import id.nisyafawwaz.nyampur.domain.usecases.auth.SignInWithGoogleUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.auth.SignOutUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.auth.ValidateEmailOtpUseCase
-import io.github.jan.supabase.gotrue.user.UserInfo
+import io.github.jan.supabase.auth.user.UserInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -18,12 +19,16 @@ import org.koin.core.component.inject
 class AuthenticationViewModel : ViewModel(), KoinComponent {
 
     private val sendEmailOtpUseCase: SendEmailOtpUseCase by inject()
+    private val signInGoogleUseCase: SignInWithGoogleUseCase by inject()
     private val validateEmailOtpUseCase: ValidateEmailOtpUseCase by inject()
     private val retrieveUserSessionUseCase: RetrieveUserSessionUseCase by inject()
     private val signOutUseCase: SignOutUseCase by inject()
 
     private val _signInOtpResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Idle)
     val signInOtpResult = _signInOtpResult.asStateFlow()
+
+    private val _signInWithGoogleResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Idle)
+    val signInWithGoogleResult = _signInWithGoogleResult.asStateFlow()
 
     private val _validateEmailOtpResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Idle)
     val validateEmailOtpResult = _validateEmailOtpResult.asStateFlow()
@@ -38,6 +43,14 @@ class AuthenticationViewModel : ViewModel(), KoinComponent {
         viewModelScope.launch {
             sendEmailOtpUseCase.execute(email).collectLatest {
                 _signInOtpResult.emit(it)
+            }
+        }
+    }
+
+    fun signInWithGoogle(idToken: String) {
+        viewModelScope.launch {
+            signInGoogleUseCase.execute(idToken).collectLatest {
+                _signInWithGoogleResult.emit(it)
             }
         }
     }

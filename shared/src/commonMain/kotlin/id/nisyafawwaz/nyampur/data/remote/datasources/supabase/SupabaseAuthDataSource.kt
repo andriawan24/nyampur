@@ -1,11 +1,12 @@
 package id.nisyafawwaz.nyampur.data.remote.datasources.supabase
 
 import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.gotrue.OtpType
-import io.github.jan.supabase.gotrue.SignOutScope
-import io.github.jan.supabase.gotrue.auth
-import io.github.jan.supabase.gotrue.providers.builtin.OTP
-import io.github.jan.supabase.gotrue.user.UserInfo
+import io.github.jan.supabase.auth.OtpType
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.Google
+import io.github.jan.supabase.auth.providers.builtin.IDToken
+import io.github.jan.supabase.auth.providers.builtin.OTP
+import io.github.jan.supabase.auth.user.UserInfo
 
 class SupabaseAuthDataSource(private val client: SupabaseClient) {
 
@@ -15,6 +16,13 @@ class SupabaseAuthDataSource(private val client: SupabaseClient) {
 
     suspend fun validateEmailOtp(token: String, email: String) {
         client.auth.verifyEmailOtp(OtpType.Email.EMAIL, email, token)
+    }
+
+    suspend fun signInWithGoogle(token: String) {
+        client.auth.signInWith(IDToken) {
+            idToken = token
+            provider = Google
+        }
     }
 
     suspend fun retrieveUserSession(): UserInfo? {
