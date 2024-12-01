@@ -7,7 +7,6 @@ import android.view.ViewGroup.MarginLayoutParams
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
-import io.ktor.utils.io.printStack
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -36,7 +35,7 @@ fun View.onClickWithThrottle(
                     disable()
                     delay(delay)
                 } catch (e: Exception) {
-                    Log.e(View::class.simpleName, "onClickWithThrottle: ${e.printStack()}")
+                    Log.e(View::class.simpleName, "onClickWithThrottle failed: ${e.message}", e)
                 } finally {
                     enable()
                 }

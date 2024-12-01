@@ -1,4 +1,12 @@
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+import java.util.Properties
+
+val props = Properties()
+try {
+    props.load(file(project.rootProject.file("local.properties")).inputStream())
+} catch (_: Exception) {
+    // TODO: Handle exception
+}
 
 plugins {
     alias(libs.plugins.configuration.android)
@@ -8,10 +16,33 @@ plugins {
 
 android {
     namespace = NyampurConfig.ANDROID_APPLICATION_ID
+
     defaultConfig {
         applicationId = NyampurConfig.ANDROID_APPLICATION_ID
         versionCode = NyampurConfig.VERSION_CODE
         versionName = NyampurConfig.VERSION_NAME
+    }
+
+    buildTypes {
+        debug {
+            isDebuggable = true
+            isShrinkResources = false
+            isMinifyEnabled = false
+            buildConfigField("String", "GOOGLE_CLIENT_WEB_ID", "\"${props["google_client_id"]?.toString() ?: "https://fakeapi.com"}\"")
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        }
+
+        release {
+            isDebuggable = false
+            isShrinkResources = true
+            isMinifyEnabled = true
+            buildConfigField("String", "GOOGLE_CLIENT_WEB_ID", "\"${props["google_client_id"]?.toString() ?: "https://fakeapi.com"}\"")
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -48,4 +79,7 @@ ktlint {
 dependencies {
     implementation(project(":shared"))
     implementation(libs.koin.android)
+    implementation(libs.androidx.credentials)
+    implementation(libs.googleid)
+    implementation(libs.androidx.credentials.play.services.auth)
 }

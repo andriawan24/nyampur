@@ -32,7 +32,7 @@ kotlin {
         commonMain.dependencies {
             api(project.dependencies.platform(libs.supabase.bom))
             api(libs.supabase.postgrest.kt)
-            api(libs.supabase.gotrue.kt)
+            api(libs.supabase.auth.kt)
             api(libs.supabase.realtime.kt)
             api(libs.ktor.client.core)
             api(libs.ktor.client.logging)
