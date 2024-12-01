@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import id.nisyafawwaz.nyampur.android.BuildConfig
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityLoginBinding
@@ -97,7 +98,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 val googleIdOptions =
                     GetGoogleIdOption.Builder()
                         .setFilterByAuthorizedAccounts(false)
-                        .setServerClientId("112464382295-b1k1gkqetc1lip65d526ebagtflrukpp.apps.googleusercontent.com")
+                        .setServerClientId(BuildConfig.GOOGLE_CLIENT_WEB_ID)
                         .setNonce(hashedNonce)
                         .build()
 
