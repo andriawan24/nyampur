@@ -2,7 +2,6 @@ package id.nisyafawwaz.nyampur.domain.usecases.auth
 
 import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.domain.repository.AuthRepository
-import io.github.jan.supabase.gotrue.user.UserInfo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
