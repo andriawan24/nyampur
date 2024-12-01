@@ -1,7 +1,6 @@
 package id.nisyafawwaz.nyampur.data.models.responses
 
-import io.github.jan.supabase.gotrue.user.UserInfo
-import kotlinx.datetime.LocalDateTime
+import io.github.jan.supabase.auth.user.UserInfo
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -2,7 +2,7 @@ package id.nisyafawwaz.nyampur.data.repository
 
 import id.nisyafawwaz.nyampur.data.remote.datasources.supabase.SupabaseAuthDataSource
 import id.nisyafawwaz.nyampur.domain.repository.AuthRepository
-import io.github.jan.supabase.gotrue.user.UserInfo
+import io.github.jan.supabase.auth.user.UserInfo
 
 class AuthRepositoryImpl(private val supabaseRecipeDataSource: SupabaseAuthDataSource) : AuthRepository {
 
@@ -14,10 +14,13 @@ class AuthRepositoryImpl(private val supabaseRecipeDataSource: SupabaseAuthDataS
         supabaseRecipeDataSource.validateEmailOtp(token, email)
     }
 
+    override suspend fun signInWithGoogle(idToken: String) {
+        supabaseRecipeDataSource.signInWithGoogle(idToken)
+    }
+
     override suspend fun retrieveUserSession(): UserInfo? {
         return supabaseRecipeDataSource.retrieveUserSession()
     }
-
     override suspend fun signOut(): Boolean {
         supabaseRecipeDataSource.signOut()
         return true
