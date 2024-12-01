@@ -35,10 +35,7 @@ fun View.onClickWithThrottle(
                     disable()
                     delay(delay)
                 } catch (e: Exception) {
-                    Log.e(
-                        View::class.simpleName,
-                        "onClickWithThrottle: ${e.printStackTrace()}",
-                    )
+                    Log.e(View::class.simpleName, "onClickWithThrottle failed: ${e.message}", e)
                 } finally {
                     enable()
                 }

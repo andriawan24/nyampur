@@ -20,14 +20,14 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityLoginBinding
 import id.nisyafawwaz.nyampur.android.ui.main.MainActivity
+import id.nisyafawwaz.nyampur.android.utils.constants.emptyString
 import id.nisyafawwaz.nyampur.android.utils.extensions.doAfterTextChanged
 import id.nisyafawwaz.nyampur.android.utils.extensions.getValue
+import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.removeExtraPaddingError
-import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.ui.AuthenticationViewModel
 import io.github.jan.supabase.exceptions.RestException
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.security.MessageDigest
@@ -93,7 +93,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                 val rawNonce = UUID.randomUUID().toString()
                 val bytes = rawNonce.toByteArray(Charsets.UTF_8)
                 val digest = MessageDigest.getInstance("SHA-256").digest(bytes)
-                val hashedNonce = digest.fold("") { str, it -> str + "%02x".format(it) }
+                val hashedNonce = digest.fold(emptyString()) { str, it -> str + "%02x".format(it) }
 
                 val googleIdOptions =
                     GetGoogleIdOption.Builder()
@@ -113,22 +113,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(result.credential.data)
                         val googleIdToken = googleIdTokenCredential.idToken
                         authenticationViewModel.signInWithGoogle(googleIdToken)
-                    } catch (e: GetCredentialException) {
-                        Log.e(LoginActivity::class.simpleName, "initListener: $e")
-                        Toast.makeText(this@LoginActivity, e.message, Toast.LENGTH_SHORT).show()
-                    } catch (e: GoogleIdTokenParsingException) {
-                        Log.e(LoginActivity::class.simpleName, "initListener: $e")
-                        Toast.makeText(this@LoginActivity, e.message, Toast.LENGTH_SHORT).show()
-                    } catch (e: RestException) {
-                        Log.e(LoginActivity::class.simpleName, "initListener: $e")
-                        Toast.makeText(this@LoginActivity, e.message, Toast.LENGTH_SHORT).show()
                     } catch (e: Exception) {
-                        Log.e(LoginActivity::class.simpleName, "initListener: $e")
-                        Toast.makeText(this@LoginActivity, e.message, Toast.LENGTH_SHORT).show()
+                        handleException(e)
                     }
                 }
             }
         }
+    }
+
+    private fun handleException(e: Exception) {
+        Log.e(LoginActivity::class.simpleName, "initListener: $e")
+        val userMessage =
+            when (e) {
+                is GetCredentialException -> "Unable to retrieve credentials. Please try again."
+                is GoogleIdTokenParsingException -> "Error parsing Google ID token."
+                is RestException -> "Network error occurred. Please check your connection."
+                else -> "An unexpected error occurred."
+            }
+        Toast.makeText(this@LoginActivity, userMessage, Toast.LENGTH_SHORT).show()
+        binding.btnContinue.isEnabled = true
     }
 
     override fun initObserver() {
@@ -137,58 +140,35 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     private fun observeSignInWithGoogle() {
-        lifecycleScope.launch {
-            authenticationViewModel.signInWithGoogleResult.collectLatest {
-                when (it) {
-                    ResultState.Loading -> binding.btnContinue.isEnabled = false
-                    is ResultState.Error -> {
-                        Log.e(LoginActivity::class.simpleName, it.error.message.orEmpty(), it.error)
-                        Toast.makeText(
-                            this@LoginActivity,
-                            it.error.message.orEmpty(),
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                        binding.btnContinue.isEnabled = true
-                    }
-
-                    is ResultState.Success -> {
-                        MainActivity.start(this@LoginActivity)
-                        binding.btnContinue.isEnabled = true
-                    }
-
-                    else -> Unit
-                }
-            }
-        }
+        authenticationViewModel.signInWithGoogleResult.observeLiveData(
+            this@LoginActivity,
+            onLoading = {
+                binding.btnContinue.isEnabled = false
+            },
+            onSuccess = {
+                MainActivity.start(this@LoginActivity)
+                binding.btnContinue.isEnabled = true
+            },
+            onFailure = {
+                handleException(it)
+            },
+        )
     }
 
     private fun observeSendEmailOtp() {
-        lifecycleScope.launch {
-            authenticationViewModel.signInOtpResult.collectLatest {
-                when (it) {
-                    ResultState.Loading -> {
-                        binding.btnContinue.isEnabled = false
-                    }
-
-                    is ResultState.Error -> {
-                        Log.e(LoginActivity::class.simpleName, it.error.message.orEmpty(), it.error)
-                        Toast.makeText(
-                            this@LoginActivity,
-                            it.error.message.orEmpty(),
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                        binding.btnContinue.isEnabled = true
-                    }
-
-                    is ResultState.Success -> {
-                        OtpActivity.start(this@LoginActivity, binding.etEmail.getValue())
-                        binding.btnContinue.isEnabled = true
-                    }
-
-                    else -> Unit
-                }
-            }
-        }
+        authenticationViewModel.signInOtpResult.observeLiveData(
+            this@LoginActivity,
+            onLoading = {
+                binding.btnContinue.isEnabled = false
+            },
+            onSuccess = {
+                OtpActivity.start(this@LoginActivity, binding.etEmail.getValue())
+                binding.btnContinue.isEnabled = true
+            },
+            onFailure = {
+                handleException(it)
+            },
+        )
     }
 
     override fun onResume() {

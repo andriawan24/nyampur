@@ -4,6 +4,7 @@ import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.domain.repository.AuthRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withTimeout
 
 class SignInWithGoogleUseCase(private val authRepository: AuthRepository) {
 
