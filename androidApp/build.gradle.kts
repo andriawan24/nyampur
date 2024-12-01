@@ -13,6 +13,12 @@ android {
         versionCode = NyampurConfig.VERSION_CODE
         versionName = NyampurConfig.VERSION_NAME
     }
+
+    buildTypes {
+        debug {
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        }
+    }
 }
 
 detekt {
@@ -48,4 +54,7 @@ ktlint {
 dependencies {
     implementation(project(":shared"))
     implementation(libs.koin.android)
+    implementation(libs.androidx.credentials)
+    implementation(libs.googleid)
+    implementation(libs.androidx.credentials.play.services.auth)
 }

@@ -1,25 +1,30 @@
 [versions]
 agp = "8.7.2"
+credentials = "1.3.0"
 glide = "4.16.0"
+googleid = "1.1.1"
 koinCore = "4.0.0"
-ktorClient = "2.3.12"
+ktorClient = "3.0.1"
 lifecycleViewmodel = "2.8.7"
-supabase-bom = "2.5.2"
-kotlin = "2.0.20"
+supabase-bom = "3.0.2"
+kotlin = "2.1.0"
 appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.3"
 constraintlayout = "2.2.0"
-buildKonfig = "0.15.1"
+buildKonfig = "0.15.2"
 swiperefreshlayout = "1.1.0"
-ksp = "2.0.20-1.0.24"
+ksp = "2.1.0-1.0.29"
 detekt = "1.23.7"
-ktlint = "12.1.1"
+ktlint = "12.1.2"
 
 [libraries]
+androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
+androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinCore" }
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinCore" }
 koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koinCore" }
@@ -31,7 +36,7 @@ ktor-client-resources = { group = "io.ktor", name = "ktor-client-resources", ver
 ktor-client-auth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktorClient" }
 ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktorClient" }
 supabase-bom = { group = "io.github.jan-tennert.supabase", name = "bom", version.ref = "supabase-bom" }
-supabase-gotrue-kt = { group = "io.github.jan-tennert.supabase", name = "gotrue-kt" }
+supabase-auth-kt = { group = "io.github.jan-tennert.supabase", name = "auth-kt" }
 supabase-postgrest-kt = { group = "io.github.jan-tennert.supabase", name = "postgrest-kt" }
 supabase-realtime-kt = { group = "io.github.jan-tennert.supabase", name = "realtime-kt" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
@@ -43,16 +48,6 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 plugin-gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 plugin-kgp = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-ksp = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
-
-[bundles]
-android-core = [
-    "androidx-appcompat",
-    "androidx-activity",
-    "androidx-constraintlayout",
-    "androidx-swiperefreshlayout",
-    "material",
-    "glide"
-]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -66,3 +61,13 @@ configuration-shared-android = { id = "com.andriawan.shared-android-configuratio
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+
+[bundles]
+android-core = [
+    "androidx-appcompat",
+    "androidx-activity",
+    "androidx-constraintlayout",
+    "androidx-swiperefreshlayout",
+    "material",
+    "glide"
+]
