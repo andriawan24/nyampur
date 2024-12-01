@@ -5,6 +5,9 @@ import android.content.Intent
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
@@ -21,12 +24,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val authenticationViewModel: AuthenticationViewModel by viewModel()
-
-    override val binding: ActivityLoginBinding by lazy {
-        ActivityLoginBinding.inflate(layoutInflater)
-    }
+    override val binding: ActivityLoginBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
 
     override fun initViews() {
+        setupStatusBar()
         binding.apply {
             tilEmail.removeExtraPaddingError()
             etEmail.doAfterTextChanged {
@@ -56,6 +57,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupStatusBar() {
+        enableEdgeToEdge()
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val navigationBars = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, navigationBars.bottom)
+            insets
         }
     }
 
@@ -104,9 +115,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     companion object {
-        fun start(context: Context) {
+        fun start(
+            context: Context,
+            isClearTask: Boolean = true,
+        ) {
             Intent(context, LoginActivity::class.java).apply {
-                context.startActivity(this)
+                if (isClearTask) {
+                    flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                }
+            }.also {
+                context.startActivity(it)
             }
         }
     }

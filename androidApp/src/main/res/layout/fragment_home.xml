@@ -96,7 +96,6 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/imgAiGenerated"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 app:srcCompat="@drawable/ic_ai_generated" />
@@ -124,21 +123,12 @@
                             android:layout_weight="1" />
 
                         <com.google.android.material.button.MaterialButton
+                            style="@style/NyampurButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_12dp"
-                            android:insetLeft="@dimen/dimen_0dp"
-                            android:insetTop="@dimen/dimen_0dp"
-                            android:insetRight="@dimen/dimen_0dp"
-                            android:insetBottom="@dimen/dimen_0dp"
-                            android:minHeight="@dimen/dimen_35dp"
-                            android:paddingHorizontal="@dimen/dimen_32dp"
                             android:paddingVertical="@dimen/dimen_8dp"
-                            android:text="@string/action_lets_start"
-                            android:textSize="@dimen/text_size_14sp"
-                            app:backgroundTint="@color/colorPrimary"
-                            app:backgroundTintMode="add"
-                            app:cornerRadius="@dimen/dimen_8dp" />
+                            android:text="@string/action_lets_start" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 

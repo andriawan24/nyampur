@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import id.nisyafawwaz.nyampur.domain.models.ResultState
 import id.nisyafawwaz.nyampur.domain.usecases.auth.RetrieveUserSessionUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.auth.SendEmailOtpUseCase
+import id.nisyafawwaz.nyampur.domain.usecases.auth.SignOutUseCase
 import id.nisyafawwaz.nyampur.domain.usecases.auth.ValidateEmailOtpUseCase
 import io.github.jan.supabase.gotrue.user.UserInfo
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,7 @@ class AuthenticationViewModel : ViewModel(), KoinComponent {
     private val sendEmailOtpUseCase: SendEmailOtpUseCase by inject()
     private val validateEmailOtpUseCase: ValidateEmailOtpUseCase by inject()
     private val retrieveUserSessionUseCase: RetrieveUserSessionUseCase by inject()
+    private val signOutUseCase: SignOutUseCase by inject()
 
     private val _signInOtpResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Idle)
     val signInOtpResult = _signInOtpResult.asStateFlow()
@@ -28,6 +30,9 @@ class AuthenticationViewModel : ViewModel(), KoinComponent {
 
     private val _retrieveUserSessionResult = MutableStateFlow<ResultState<UserInfo?>>(ResultState.Idle)
     val retrieveUserSessionResult = _retrieveUserSessionResult.asStateFlow()
+
+    private val _signOutResult = MutableStateFlow<ResultState<Boolean>>(ResultState.Idle)
+    val signOutResult = _signOutResult.asStateFlow()
 
     fun signInOtp(email: String) {
         viewModelScope.launch {
@@ -49,6 +54,14 @@ class AuthenticationViewModel : ViewModel(), KoinComponent {
         viewModelScope.launch {
             retrieveUserSessionUseCase.execute().collectLatest {
                 _retrieveUserSessionResult.emit(it)
+            }
+        }
+    }
+
+    fun signOut() {
+        viewModelScope.launch {
+            signOutUseCase.execute().collectLatest {
+                _signOutResult.emit(it)
             }
         }
     }

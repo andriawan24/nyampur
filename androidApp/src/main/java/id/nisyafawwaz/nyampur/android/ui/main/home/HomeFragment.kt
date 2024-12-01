@@ -6,7 +6,9 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.adapters.QuickMealAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseFragment
 import id.nisyafawwaz.nyampur.android.databinding.FragmentHomeBinding
+import id.nisyafawwaz.nyampur.android.ui.profile.ProfileActivity
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.showDefault
 import id.nisyafawwaz.nyampur.android.utils.extensions.showEmpty
 import id.nisyafawwaz.nyampur.android.utils.extensions.showError
@@ -106,6 +108,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 },
             )
         }
+
+    override fun initActions() {
+        super.initActions()
+        binding.imgProfile.onClick {
+            ProfileActivity.start(requireContext())
+        }
+    }
 
     companion object {
         private const val DEFAULT_TYPE = "sarapan"

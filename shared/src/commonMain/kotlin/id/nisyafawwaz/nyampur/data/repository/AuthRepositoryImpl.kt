@@ -17,4 +17,9 @@ class AuthRepositoryImpl(private val supabaseRecipeDataSource: SupabaseAuthDataS
     override suspend fun retrieveUserSession(): UserInfo? {
         return supabaseRecipeDataSource.retrieveUserSession()
     }
+
+    override suspend fun signOut(): Boolean {
+        supabaseRecipeDataSource.signOut()
+        return true
+    }
 }

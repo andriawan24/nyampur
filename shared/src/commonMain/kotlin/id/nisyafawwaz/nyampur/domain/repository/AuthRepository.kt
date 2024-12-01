@@ -6,4 +6,5 @@ interface AuthRepository {
     suspend fun sendEmailSignInOtp(email: String)
     suspend fun validateEmailOtp(token: String, email: String)
     suspend fun retrieveUserSession(): UserInfo?
+    suspend fun signOut(): Boolean
 }

@@ -34,6 +34,10 @@
         <item name="android:textSize">@dimen/text_size_12sp</item>
     </style>
 
+    <style name="NyampurTextStyle.Medium.TextSecondary">
+        <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
+
     <style name="NyampurTextStyle.Medium.Smallest">
         <item name="android:textSize">@dimen/text_size_10sp</item>
     </style>
