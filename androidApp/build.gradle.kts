@@ -79,7 +79,14 @@ ktlint {
 dependencies {
     implementation(project(":shared"))
     implementation(libs.koin.android)
+
+    // Google sign in
     implementation(libs.androidx.credentials)
-    implementation(libs.googleid)
     implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+    // CameraX
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.view)
 }
