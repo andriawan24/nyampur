@@ -4,8 +4,8 @@ import java.util.Properties
 val props = Properties()
 try {
     props.load(file(project.rootProject.file("local.properties")).inputStream())
-} catch (_: Exception) {
-    // TODO: Handle exception
+} catch (e: Exception) {
+    throw e
 }
 
 plugins {
@@ -89,4 +89,5 @@ dependencies {
     implementation(libs.androidx.camera.core)
     implementation(libs.androidx.camera.camera2)
     implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.lifecycle)
 }
