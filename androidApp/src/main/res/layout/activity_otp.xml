@@ -305,19 +305,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnContinue"
+            style="@style/NyampurButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
-            android:fontFamily="@font/satoshi_bold"
-            android:insetLeft="@dimen/dimen_0dp"
-            android:insetTop="@dimen/dimen_0dp"
-            android:insetRight="@dimen/dimen_0dp"
-            android:insetBottom="@dimen/dimen_0dp"
-            android:paddingVertical="@dimen/dimen_12dp"
-            android:text="@string/action_continue"
-            android:textSize="@dimen/text_size_16sp"
-            app:backgroundTint="@color/selector_button_background_color"
-            app:cornerRadius="@dimen/dimen_8dp" />
+            android:text="@string/action_continue" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

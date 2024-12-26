@@ -41,4 +41,8 @@
     <string name="message_sign_out">Are you sure you want to logout?</string>
     <string name="action_no">No</string>
     <string name="action_yes">Yes</string>
+    <string name="message_capture_image">Please ensure that the ingredient is in the camera frame.</string>
+    <string name="message_camera_permission_required">You need grant camera permission to use this feature</string>
+    <string name="title_ingredients">Ingredients</string>
+    <string name="description_ingredients">Add all your ingredients to determine the variety of food or drinks you can make.</string>
 </resources>

@@ -165,6 +165,7 @@
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"
                     android:overScrollMode="never"
+                    android:paddingHorizontal="@dimen/dimen_8dp"
                     tools:layoutManager="GridLayoutManager"
                     tools:listitem="@layout/item_quick_meals"
                     tools:padding="@dimen/dimen_24dp"

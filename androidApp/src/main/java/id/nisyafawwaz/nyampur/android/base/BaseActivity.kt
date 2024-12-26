@@ -4,6 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
+/**
+ * Used as base activity for all activities in this project,
+ * containing functions to reduce boilerplate to init an activity
+ */
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     /**
      * Ensure all activities use [ViewBinding] instance

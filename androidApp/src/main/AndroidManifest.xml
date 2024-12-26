@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera.any" />
 
     <application
         android:name=".MainApplication"
@@ -23,20 +26,22 @@
         <activity
             android:name=".ui.authentication.LoginActivity"
             android:exported="true"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.authentication.OtpActivity"
             android:exported="true"
-            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme" />
+            android:exported="true" />
         <activity
             android:name=".ui.profile.ProfileActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme" />
+            android:exported="true" />
+        <activity
+            android:name=".ui.camera.CameraActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.camera.ImagesResultActivity"
+            android:exported="true" />
     </application>
 </manifest>

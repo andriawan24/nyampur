@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    tools:context=".ui.camera.CameraActivity">
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewCamera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <id.nisyafawwaz.nyampur.android.ui.camera.views.CustomOverlayView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBack"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_24dp"
+        android:layout_marginTop="@dimen/dimen_56dp"
+        android:insetLeft="@dimen/dimen_0dp"
+        android:insetTop="@dimen/dimen_0dp"
+        android:insetRight="@dimen/dimen_0dp"
+        android:insetBottom="@dimen/dimen_0dp"
+        android:minWidth="@dimen/dimen_42dp"
+        android:minHeight="@dimen/dimen_42dp"
+        android:padding="@dimen/dimen_12dp"
+        app:backgroundTint="@color/colorWhite"
+        app:cornerRadius="@dimen/dimen_8dp"
+        app:icon="@drawable/ic_back"
+        app:iconTint="@color/colorTextPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/NyampurTextStyle.Bold.16.White"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_24dp"
+        android:layout_marginTop="@dimen/dimen_24dp"
+        android:text="@string/message_capture_image"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/btnBack" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnShutter"
+        style="@style/Widget.Material3.Button.IconButton.Outlined"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_32dp"
+        android:insetLeft="@dimen/dimen_0dp"
+        android:insetTop="@dimen/dimen_0dp"
+        android:insetRight="@dimen/dimen_0dp"
+        android:insetBottom="@dimen/dimen_0dp"
+        android:minWidth="@dimen/dimen_98dp"
+        android:minHeight="@dimen/dimen_98dp"
+        app:icon="@drawable/ic_camera_button"
+        app:iconGravity="textStart"
+        app:iconSize="@dimen/dimen_70dp"
+        app:iconTint="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/colorWhite"
+        app:strokeWidth="@dimen/dimen_3dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
