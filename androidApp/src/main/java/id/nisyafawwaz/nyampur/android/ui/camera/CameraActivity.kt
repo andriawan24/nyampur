@@ -20,6 +20,7 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityCameraBinding
 import id.nisyafawwaz.nyampur.android.utils.constants.Extras
+import id.nisyafawwaz.nyampur.android.utils.extensions.getTakePhotoDirectory
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.logs.debug
 import kotlinx.coroutines.Runnable
@@ -117,8 +118,9 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
     }
 
     private fun takePhoto() {
-        val outputFile = File(filesDir, "${System.currentTimeMillis()}.jpg")
+        val outputFile = File(getTakePhotoDirectory(), "${System.currentTimeMillis()}.jpg")
         val outputOption = ImageCapture.OutputFileOptions.Builder(outputFile).build()
+
         imageCapture.takePicture(
             outputOption,
             cameraExecutor,
@@ -139,6 +141,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                             finish()
                         } else {
                             ImagesResultActivity.start(this@CameraActivity, uri.toString())
+                            finish()
                         }
                     }
                 }

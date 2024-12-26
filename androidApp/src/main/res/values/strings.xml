@@ -45,4 +45,8 @@
     <string name="message_camera_permission_required">You need grant camera permission to use this feature</string>
     <string name="title_ingredients">Ingredients</string>
     <string name="description_ingredients">Add all your ingredients to determine the variety of food or drinks you can make.</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="title_back_to_home">Back to Home</string>
+    <string name="message_deleted_progress">We can’t recover the photos once you delete it.</string>
 </resources>

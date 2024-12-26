@@ -10,6 +10,7 @@ import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import java.io.File
 
 fun Activity.hideKeyboard() {
     val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager
@@ -40,4 +41,10 @@ fun FragmentManager.showFragment(
         replace(intoLayoutId, fragment)
         commit()
     }
+}
+
+fun Context.getTakePhotoDirectory(): File {
+    val outputDir = File(filesDir, "ingredients")
+    if (!outputDir.exists()) outputDir.mkdir()
+    return outputDir
 }
