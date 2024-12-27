@@ -69,4 +69,8 @@
     <style name="NyampurTextStyle.Medium.Small.Error">
         <item name="android:textColor">@color/colorRed</item>
     </style>
+
+    <style name="NyampurTextStyle.Medium.16.Error">
+        <item name="android:textColor">@color/colorRed</item>
+    </style>
 </resources>

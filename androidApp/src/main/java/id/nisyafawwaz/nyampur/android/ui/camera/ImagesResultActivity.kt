@@ -9,6 +9,7 @@ import id.nisyafawwaz.nyampur.android.adapters.PhotosItemAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityImagesResultBinding
 import id.nisyafawwaz.nyampur.android.ui.common.ConfirmationBottomSheet
+import id.nisyafawwaz.nyampur.android.utils.extensions.getPathsFromTakePhotoDir
 import id.nisyafawwaz.nyampur.android.utils.extensions.getTakePhotoDirectory
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.extensions.px
@@ -19,7 +20,7 @@ class ImagesResultActivity : BaseActivity<ActivityImagesResultBinding>() {
     private val photosAdapter: PhotosItemAdapter by lazy {
         PhotosItemAdapter(
             onPhotoItemClicked = { imagePath ->
-                GalleryActivity.start(this@ImagesResultActivity)
+                GalleryActivity.start(this@ImagesResultActivity, imagePath)
             },
             onAddPhotoClicked = {
                 startActivity(CameraActivity.createIntent(this))
@@ -38,9 +39,11 @@ class ImagesResultActivity : BaseActivity<ActivityImagesResultBinding>() {
     override fun onResume() {
         super.onResume()
 
-        val imagePaths = getTakePhotoDirectory().listFiles().orEmpty().map { file -> file.path }
-        imagePathList.clear()
-        imagePathList.addAll(imagePaths)
+        val imagePaths = getPathsFromTakePhotoDir()
+        imagePathList.apply {
+            clear()
+            addAll(imagePaths)
+        }
         photosAdapter.addAll(imagePathList)
     }
 

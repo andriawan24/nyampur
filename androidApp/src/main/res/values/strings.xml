@@ -49,4 +49,8 @@
     <string name="action_delete">Delete</string>
     <string name="title_back_to_home">Back to Home</string>
     <string name="message_deleted_progress">We can’t recover the photos once you delete it.</string>
+    <string name="action_retake">Retake</string>
+    <string name="template_current_gallery_position">%1$d/%2$d</string>
+    <string name="title_delete_this_photo">Delete this photo?</string>
+    <string name="message_delete_this_photo">We can’t recover this photo once you delete it.</string>
 </resources>

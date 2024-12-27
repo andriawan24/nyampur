@@ -18,6 +18,7 @@ class PhotosItemAdapter(
 
     fun addAll(imagePaths: List<String>) {
         photosDiffer.submitList(imagePaths)
+        notifyDataSetChanged()
     }
 
     inner class PhotosItemViewHolder(

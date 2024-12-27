@@ -48,3 +48,7 @@ fun Context.getTakePhotoDirectory(): File {
     if (!outputDir.exists()) outputDir.mkdir()
     return outputDir
 }
+
+fun Context.getPathsFromTakePhotoDir(): List<String> {
+    return getTakePhotoDirectory().listFiles().orEmpty().map { file -> file.path }
+}

@@ -43,5 +43,8 @@
         <activity
             android:name=".ui.camera.ImagesResultActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.camera.GalleryActivity"
+            android:exported="true" />
     </application>
 </manifest>

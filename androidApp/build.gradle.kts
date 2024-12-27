@@ -28,6 +28,7 @@ android {
             isDebuggable = true
             isShrinkResources = false
             isMinifyEnabled = false
+            isDebuggable = true
             buildConfigField("String", "GOOGLE_CLIENT_WEB_ID", "\"${props["google_client_id"]?.toString() ?: "https://fakeapi.com"}\"")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
