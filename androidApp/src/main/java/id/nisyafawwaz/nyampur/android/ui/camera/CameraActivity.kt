@@ -126,8 +126,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
             cameraExecutor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exception: ImageCaptureException) {
-                    debug { "imageCaptureException: ${exception.message}" }
-                    Toast.makeText(this@CameraActivity, "There is an error while taking photo", Toast.LENGTH_SHORT).show()
+                    debug { "imageCaptureException: $exception" }
                 }
 
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
@@ -140,7 +139,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                             setResult(RESULT_OK, intent)
                             finish()
                         } else {
-                            ImagesResultActivity.start(this@CameraActivity, uri.toString())
+                            ImagesResultActivity.start(this@CameraActivity)
                             finish()
                         }
                     }

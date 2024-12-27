@@ -16,7 +16,7 @@ class PhotosItemAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val photosDiffer = AsyncListDiffer(this, DIFF_CALLBACK)
 
-    fun initData(imagePaths: List<String>) {
+    fun addAll(imagePaths: List<String>) {
         photosDiffer.submitList(imagePaths)
     }
 
