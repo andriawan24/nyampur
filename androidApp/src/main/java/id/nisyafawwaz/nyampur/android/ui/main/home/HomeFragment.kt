@@ -6,6 +6,7 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.adapters.QuickMealAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseFragment
 import id.nisyafawwaz.nyampur.android.databinding.FragmentHomeBinding
+import id.nisyafawwaz.nyampur.android.ui.camera.CameraActivity
 import id.nisyafawwaz.nyampur.android.ui.profile.ProfileActivity
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
@@ -110,9 +111,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
 
     override fun initActions() {
-        super.initActions()
-        binding.imgProfile.onClick {
-            ProfileActivity.start(requireContext())
+        binding.apply {
+            imgProfile.onClick {
+                ProfileActivity.start(requireContext())
+            }
+
+            btnStart.onClick {
+                CameraActivity.start(requireContext())
+            }
         }
     }
 

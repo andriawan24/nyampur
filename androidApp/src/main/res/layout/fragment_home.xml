@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_24dp"
                 android:layout_marginTop="@dimen/dimen_24dp"
+                android:visibility="gone"
                 app:boxBackgroundColor="@color/colorGreyBackground"
                 app:boxCornerRadiusBottomEnd="@dimen/dimen_12dp"
                 app:boxCornerRadiusBottomStart="@dimen/dimen_12dp"
@@ -123,6 +124,7 @@
                             android:layout_weight="1" />
 
                         <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnStart"
                             style="@style/NyampurButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
