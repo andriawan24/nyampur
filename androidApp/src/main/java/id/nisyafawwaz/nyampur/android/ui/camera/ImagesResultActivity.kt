@@ -16,7 +16,7 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.px
 import id.nisyafawwaz.nyampur.android.utils.list.GridItemDecoration
 
 class ImagesResultActivity : BaseActivity<ActivityImagesResultBinding>() {
-    private val imagePathList = mutableListOf<String>()
+    private val imagePaths = mutableListOf<String>()
     private val photosAdapter: PhotosItemAdapter by lazy {
         PhotosItemAdapter(
             onPhotoItemClicked = { imagePath ->
@@ -33,18 +33,28 @@ class ImagesResultActivity : BaseActivity<ActivityImagesResultBinding>() {
     }
 
     override fun initViews() {
+        initConfirmationListener()
         initRecycler()
+    }
+
+    private fun initConfirmationListener() {
+        supportFragmentManager.setFragmentResultListener(ConfirmationBottomSheet.KEY_CONFIRMATION_REQUEST, this) { _, bundle ->
+            if (bundle.getBoolean(ConfirmationBottomSheet.KEY_CONFIRMATION_RETURN, false)) {
+                getTakePhotoDirectory().deleteRecursively()
+                finish()
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
 
-        val imagePaths = getPathsFromTakePhotoDir()
-        imagePathList.apply {
-            clear()
-            addAll(imagePaths)
+        val updatedImagePaths = getPathsFromTakePhotoDir()
+        if (imagePaths != updatedImagePaths) {
+            imagePaths.clear()
+            imagePaths.addAll(updatedImagePaths)
+            photosAdapter.addAll(imagePaths)
         }
-        photosAdapter.addAll(imagePathList)
     }
 
     private fun initRecycler() {
@@ -56,13 +66,6 @@ class ImagesResultActivity : BaseActivity<ActivityImagesResultBinding>() {
     }
 
     override fun initListener() {
-        supportFragmentManager.setFragmentResultListener(ConfirmationBottomSheet.KEY_CONFIRMATION_REQUEST, this) { _, bundle ->
-            if (bundle.getBoolean(ConfirmationBottomSheet.KEY_CONFIRMATION_RETURN, false)) {
-                getTakePhotoDirectory().deleteRecursively()
-                finish()
-            }
-        }
-
         binding.apply {
             btnBack.onClick {
                 onBackPressedDispatcher.onBackPressed()

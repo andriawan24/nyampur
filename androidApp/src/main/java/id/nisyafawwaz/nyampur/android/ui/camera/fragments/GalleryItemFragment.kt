@@ -1,4 +1,4 @@
-package id.nisyafawwaz.nyampur.android.ui.camera
+package id.nisyafawwaz.nyampur.android.ui.camera.fragments
 
 import android.net.Uri
 import android.os.Bundle

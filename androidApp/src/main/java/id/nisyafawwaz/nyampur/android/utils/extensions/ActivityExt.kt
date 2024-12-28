@@ -50,5 +50,8 @@ fun Context.getTakePhotoDirectory(): File {
 }
 
 fun Context.getPathsFromTakePhotoDir(): List<String> {
-    return getTakePhotoDirectory().listFiles().orEmpty().map { file -> file.path }
+    return getTakePhotoDirectory().listFiles()
+        .orEmpty()
+        .sortedBy { file -> file.lastModified() }
+        .map { file -> file.path }
 }

@@ -16,6 +16,7 @@ import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityGalleryBinding
 import id.nisyafawwaz.nyampur.android.databinding.LayoutMenuGalleryBinding
+import id.nisyafawwaz.nyampur.android.ui.camera.fragments.GalleryItemFragment
 import id.nisyafawwaz.nyampur.android.ui.common.ConfirmationBottomSheet
 import id.nisyafawwaz.nyampur.android.utils.constants.Extras
 import id.nisyafawwaz.nyampur.android.utils.constants.emptyString
@@ -51,6 +52,7 @@ class GalleryActivity : BaseActivity<ActivityGalleryBinding>() {
 
     override fun initViews() {
         hideSystemUi()
+        iniConfirmationResultListener()
         imagePaths.apply {
             clear()
             addAll(getPathsFromTakePhotoDir())
@@ -62,11 +64,43 @@ class GalleryActivity : BaseActivity<ActivityGalleryBinding>() {
         }
     }
 
+    private fun iniConfirmationResultListener() {
+        supportFragmentManager.setFragmentResultListener(
+            ConfirmationBottomSheet.KEY_CONFIRMATION_REQUEST,
+            this@GalleryActivity,
+        ) { _, bundle ->
+            if (bundle.getBoolean(ConfirmationBottomSheet.KEY_CONFIRMATION_RETURN, false)) {
+                // Delete file
+                val imageFile = getTakePhotoDirectory().listFiles { pathname -> pathname.path == imagePathSelected }?.firstOrNull()
+                val isDeleted = imageFile?.delete()
+
+                if (isDeleted == true) {
+                    val idx = imagePaths.indexOf(imagePathSelected)
+                    imagePaths.remove(imagePathSelected)
+                    pagerAdapter.notifyItemRemoved(idx)
+                    binding.tvPosition.text =
+                        getString(
+                            R.string.template_current_gallery_position,
+                            binding.viewPagerPhotos.currentItem + 1,
+                            imagePaths.size,
+                        )
+
+                    // Check if all images are deleted
+                    if (imagePaths.isEmpty()) {
+                        finish()
+                    }
+                } else {
+                    // TODO: Handle failed to delete file
+                }
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
 
         val updatedImagePaths = getPathsFromTakePhotoDir()
-        if (!updatedImagePaths.containsAll(imagePaths)) {
+        if (imagePaths != updatedImagePaths) {
             imagePaths.clear()
             imagePaths.addAll(updatedImagePaths)
             pagerAdapter.notifyItemRangeChanged(0, imagePaths.size)
@@ -80,44 +114,15 @@ class GalleryActivity : BaseActivity<ActivityGalleryBinding>() {
 
     override fun initListener() {
         val popupWindow = setupPopupWindow()
+
         binding.apply {
-            btnBack.onClick {
-                finish()
-            }
+            btnBack.onClick(::finish)
 
             btnMenu.onClick {
                 popupWindow?.showAsDropDown(btnMenu, (-70).px, 12.px)
             }
 
             viewPagerPhotos.registerOnPageChangeCallback(viewPagerCallback)
-
-            supportFragmentManager.setFragmentResultListener(
-                ConfirmationBottomSheet.KEY_CONFIRMATION_REQUEST,
-                this@GalleryActivity,
-            ) { _, bundle ->
-                if (bundle.getBoolean(ConfirmationBottomSheet.KEY_CONFIRMATION_RETURN, false)) {
-                    // Delete file
-                    val imageFile = getTakePhotoDirectory().listFiles { pathname -> pathname.path == imagePathSelected }?.firstOrNull()
-                    val isDeleted = imageFile?.delete()
-
-                    if (isDeleted == true) {
-                        val idx = imagePaths.indexOf(imagePathSelected)
-                        imagePaths.remove(imagePathSelected)
-                        pagerAdapter.notifyItemRemoved(idx)
-
-                        // Check if all images are deleted
-                        if (imagePaths.isNotEmpty()) {
-                            binding.apply {
-                                tvPosition.text = getString(R.string.template_current_gallery_position, 1, imagePaths.size)
-                            }
-                        } else {
-                            finish()
-                        }
-                    } else {
-                        // TODO: Handle failed to delete file
-                    }
-                }
-            }
         }
     }
 
