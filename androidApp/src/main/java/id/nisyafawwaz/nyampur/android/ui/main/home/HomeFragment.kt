@@ -2,6 +2,7 @@ package id.nisyafawwaz.nyampur.android.ui.main.home
 
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.button.MaterialButton
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.adapters.QuickMealAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseFragment
@@ -106,6 +107,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 onFailure = {
                     root.isRefreshing = false
                     msvQuickMeals.showError()
+                    msvQuickMeals.findViewById<MaterialButton>(R.id.btnRetry).onClick {
+                        recipeViewModel.getRecipes(
+                            type = DEFAULT_TYPE,
+                            userId = accountManager.getCurrentUser()?.id.orEmpty(),
+                            page = 1,
+                        )
+                    }
                 },
             )
         }
