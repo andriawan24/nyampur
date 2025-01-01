@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.databinding.ItemSavedRecipeBinding
+import id.nisyafawwaz.nyampur.android.utils.extensions.convertToReadableText
 import id.nisyafawwaz.nyampur.domain.models.RecipeModel
-import java.util.Locale
 
 class SavedRecipeAdapter : RecyclerView.Adapter<SavedRecipeAdapter.ViewHolder>() {
     private var recipeDiffer = AsyncListDiffer(this, DIFF_CALLBACK)
@@ -37,7 +37,7 @@ class SavedRecipeAdapter : RecyclerView.Adapter<SavedRecipeAdapter.ViewHolder>()
         fun bind(recipe: RecipeModel) {
             with(binding) {
                 tvFoodName.text = recipe.title
-                tvCookTime.text = String.format(Locale.getDefault(), "%d", recipe.cookTime)
+                tvCookTime.text = recipe.cookTime.convertToReadableText()
                 tvLevel.text = recipe.level
 
                 Glide.with(root.context)
