@@ -81,6 +81,16 @@ buildkonfig {
             "SUPABASE_URL",
             props["supabase_url"]?.toString() ?: "https://fakeapi.com"
         )
+        buildConfigField(
+            FieldSpec.Type.STRING,
+            "GEMINI_API_KEY",
+            props["gemini_api_key"]?.toString().orEmpty()
+        )
+        buildConfigField(
+            FieldSpec.Type.STRING,
+            "GEMINI_MODEL_NAME",
+            props["gemini_model_name"]?.toString().orEmpty()
+        )
     }
 }
 

@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.lifecycleScope
 import com.google.common.util.concurrent.ListenableFuture
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
@@ -22,6 +23,7 @@ import id.nisyafawwaz.nyampur.android.databinding.ActivityCameraBinding
 import id.nisyafawwaz.nyampur.android.utils.constants.Extras
 import id.nisyafawwaz.nyampur.android.utils.extensions.getTakePhotoDirectory
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
+import id.nisyafawwaz.nyampur.android.utils.extensions.onClickWithThrottle
 import id.nisyafawwaz.nyampur.android.utils.logs.debug
 import kotlinx.coroutines.Runnable
 import java.io.File
@@ -111,7 +113,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                 finish()
             }
 
-            btnShutter.onClick {
+            btnShutter.onClickWithThrottle(scope = lifecycleScope) {
                 takePhoto()
             }
         }
@@ -120,7 +122,6 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
     private fun takePhoto() {
         val outputFile = File(getTakePhotoDirectory(), "${System.currentTimeMillis()}.jpg")
         val outputOption = ImageCapture.OutputFileOptions.Builder(outputFile).build()
-
         imageCapture.takePicture(
             outputOption,
             cameraExecutor,

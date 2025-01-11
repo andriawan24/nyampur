@@ -46,5 +46,8 @@
         <activity
             android:name=".ui.camera.GalleryActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.ingredients.IngredientListActivity"
+            android:exported="true" />
     </application>
 </manifest>

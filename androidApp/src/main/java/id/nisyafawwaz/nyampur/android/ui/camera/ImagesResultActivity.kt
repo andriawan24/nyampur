@@ -9,6 +9,7 @@ import id.nisyafawwaz.nyampur.android.adapters.PhotosItemAdapter
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityImagesResultBinding
 import id.nisyafawwaz.nyampur.android.ui.common.ConfirmationBottomSheet
+import id.nisyafawwaz.nyampur.android.ui.ingredients.IngredientListActivity
 import id.nisyafawwaz.nyampur.android.utils.extensions.getPathsFromTakePhotoDir
 import id.nisyafawwaz.nyampur.android.utils.extensions.getTakePhotoDirectory
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
@@ -72,6 +73,7 @@ class ImagesResultActivity : BaseActivity<ActivityImagesResultBinding>() {
             }
 
             btnContinue.onClick {
+                IngredientListActivity.start(this@ImagesResultActivity)
             }
 
             onBackPressedDispatcher.addCallback(

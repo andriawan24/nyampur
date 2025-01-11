@@ -4,6 +4,7 @@
     <style name="NyampurTextStyle">
         <item name="android:fontFamily">@font/satoshi_regular</item>
         <item name="android:textSize">@dimen/text_size_14sp</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
     </style>
 
     <style name="NyampurTextStyle.Medium">
