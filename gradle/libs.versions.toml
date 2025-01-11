@@ -1,6 +1,8 @@
 [versions]
-agp = "8.7.2"
+agp = "8.8.0"
+cameraCore = "1.4.1"
 credentials = "1.3.0"
+generativeai = "0.9.0-1.0.1-wasm"
 glide = "4.16.0"
 googleid = "1.1.1"
 koinCore = "4.0.0"
@@ -19,10 +21,15 @@ detekt = "1.23.7"
 ktlint = "12.1.2"
 
 [libraries]
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraCore" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraCore" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "cameraCore" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraCore" }
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
 androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+generativeai = { module = "dev.shreyaspatil.generativeai:generativeai-google", version.ref = "generativeai" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinCore" }

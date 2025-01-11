@@ -18,6 +18,16 @@
     </style>
 
     <style name="NyampurButton.Error">
-        <item name="backgroundTint">@color/design_default_color_error</item>
+        <item name="backgroundTint">@color/colorRed</item>
+    </style>
+
+    <style name="NyampurButton.Secondary">
+        <item name="backgroundTint">@color/colorGrey</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <style name="NyampurButton.Danger">
+        <item name="backgroundTint">@color/colorRedBackground</item>
+        <item name="android:textColor">@color/colorRed</item>
     </style>
 </resources>

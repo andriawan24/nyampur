@@ -1,4 +1,5 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec
+import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
@@ -42,10 +43,11 @@ kotlin {
             api(libs.androidx.lifecycle.viewmodel)
             api(libs.koin.core)
             api(libs.koin.test)
+            api(libs.generativeai)
         }
 
         androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
+            api(libs.ktor.client.okhttp)
         }
 
         iosMain.dependencies {
@@ -78,6 +80,16 @@ buildkonfig {
             FieldSpec.Type.STRING,
             "SUPABASE_URL",
             props["supabase_url"]?.toString() ?: "https://fakeapi.com"
+        )
+        buildConfigField(
+            FieldSpec.Type.STRING,
+            "GEMINI_API_KEY",
+            props["gemini_api_key"]?.toString().orEmpty()
+        )
+        buildConfigField(
+            FieldSpec.Type.STRING,
+            "GEMINI_MODEL_NAME",
+            props["gemini_model_name"]?.toString().orEmpty()
         )
     }
 }

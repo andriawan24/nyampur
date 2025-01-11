@@ -4,8 +4,8 @@ import java.util.Properties
 val props = Properties()
 try {
     props.load(file(project.rootProject.file("local.properties")).inputStream())
-} catch (_: Exception) {
-    // TODO: Handle exception
+} catch (e: Exception) {
+    throw e
 }
 
 plugins {
@@ -28,7 +28,9 @@ android {
             isDebuggable = true
             isShrinkResources = false
             isMinifyEnabled = false
+            isDebuggable = true
             buildConfigField("String", "GOOGLE_CLIENT_WEB_ID", "\"${props["google_client_id"]?.toString() ?: "https://fakeapi.com"}\"")
+            buildConfigField("String", "GEMINI_API_KEY", "\"${props["gemini_api_key"]?.toString() ?: "https://fakeapi.com"}\"")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
 
@@ -37,6 +39,7 @@ android {
             isShrinkResources = true
             isMinifyEnabled = true
             buildConfigField("String", "GOOGLE_CLIENT_WEB_ID", "\"${props["google_client_id"]?.toString() ?: "https://fakeapi.com"}\"")
+            buildConfigField("String", "GEMINI_API_KEY", "\"${props["gemini_api_key"]?.toString() ?: "https://fakeapi.com"}\"")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
@@ -79,7 +82,15 @@ ktlint {
 dependencies {
     implementation(project(":shared"))
     implementation(libs.koin.android)
+
+    // Google sign in
     implementation(libs.androidx.credentials)
-    implementation(libs.googleid)
     implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+    // CameraX
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.view)
+    implementation(libs.androidx.camera.lifecycle)
 }

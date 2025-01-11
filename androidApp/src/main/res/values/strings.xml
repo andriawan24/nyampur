@@ -41,4 +41,18 @@
     <string name="message_sign_out">Are you sure you want to logout?</string>
     <string name="action_no">No</string>
     <string name="action_yes">Yes</string>
+    <string name="message_capture_image">Please ensure that the ingredient is in the camera frame.</string>
+    <string name="message_camera_permission_required">You need grant camera permission to use this feature</string>
+    <string name="title_ingredients">Ingredients</string>
+    <string name="description_ingredients">Add all your ingredients to determine the variety of food or drinks you can make.</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="title_back_to_home">Back to Home</string>
+    <string name="message_deleted_progress">We can’t recover the photos once you delete it.</string>
+    <string name="action_retake">Retake</string>
+    <string name="template_current_gallery_position">%1$d/%2$d</string>
+    <string name="title_delete_this_photo">Delete this photo?</string>
+    <string name="message_delete_this_photo">We can’t recover this photo once you delete it.</string>
+    <string name="title_ingredient_list">Check the ingredients</string>
+    <string name="description_ingredient_list">Make sure the ingredient names are correct.</string>
 </resources>

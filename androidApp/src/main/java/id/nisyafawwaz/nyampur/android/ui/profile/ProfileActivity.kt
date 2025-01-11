@@ -2,12 +2,12 @@ package id.nisyafawwaz.nyampur.android.ui.profile
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.base.BaseActivity
 import id.nisyafawwaz.nyampur.android.databinding.ActivityProfileBinding
 import id.nisyafawwaz.nyampur.android.ui.authentication.LoginActivity
+import id.nisyafawwaz.nyampur.android.ui.common.ConfirmationBottomSheet
 import id.nisyafawwaz.nyampur.android.utils.extensions.disable
 import id.nisyafawwaz.nyampur.android.utils.extensions.enable
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
@@ -30,18 +30,19 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>() {
     }
 
     override fun initListener() {
+        supportFragmentManager.setFragmentResultListener(ConfirmationBottomSheet.KEY_CONFIRMATION_REQUEST, this) { _, bundle ->
+            if (bundle.getBoolean(ConfirmationBottomSheet.KEY_CONFIRMATION_RETURN, false)) {
+                authenticationViewModel.signOut()
+            }
+        }
+
         binding.btnSignOut.onClick {
-            AlertDialog.Builder(this)
-                .setTitle(R.string.title_sign_out)
-                .setMessage(R.string.message_sign_out)
-                .setPositiveButton(R.string.action_no) { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .setNegativeButton(R.string.action_yes) { dialog, _ ->
-                    dialog.dismiss()
-                    authenticationViewModel.signOut()
-                }
-                .show()
+            ConfirmationBottomSheet.newInstance(
+                title = getString(R.string.title_sign_out),
+                message = getString(R.string.message_sign_out),
+                buttonPositiveTitle = getString(R.string.action_yes),
+                buttonNegativeTitle = getString(R.string.action_cancel),
+            ).show(supportFragmentManager, ConfirmationBottomSheet::class.simpleName)
         }
     }
 

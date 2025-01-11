@@ -8,7 +8,9 @@
     <color name="colorBackgroundOrange">#FDF2ED</color>
     <color name="colorTextPrimary">#313131</color>
     <color name="colorTextSecondary">#616161</color>
-    <color name="colorRed">#FFB73439</color>
+    <color name="colorRed">#FFB92120</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorGrey</color>
     <color name="colorOrangeBackground">#FAE8D3</color>
+    <color name="colorPrimaryBackground">#FBE4DB</color>
+    <color name="colorRedBackground">#F8E9E9</color>
 </resources>

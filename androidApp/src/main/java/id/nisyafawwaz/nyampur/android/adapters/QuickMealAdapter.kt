@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.nisyafawwaz.nyampur.android.R
 import id.nisyafawwaz.nyampur.android.databinding.ItemQuickMealsBinding
+import id.nisyafawwaz.nyampur.android.utils.extensions.convertToReadableText
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.domain.models.RecipeModel
-import java.util.Locale
 
 class QuickMealAdapter(
     private val onFavoriteClicked: (data: RecipeModel) -> Unit,
@@ -24,7 +24,7 @@ class QuickMealAdapter(
         fun bind(recipe: RecipeModel) {
             with(binding) {
                 tvFoodName.text = recipe.title
-                tvCookTime.text = String.format(Locale.getDefault(), "%d", recipe.cookTime)
+                tvCookTime.text = recipe.cookTime.convertToReadableText()
                 tvLevel.text = recipe.level
 
                 Glide.with(root.context)

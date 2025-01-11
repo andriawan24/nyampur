@@ -10,6 +10,7 @@ class GridItemDecoration(
     private val gridCount: Int,
     private val verticalMargin: Int = 24.px,
     private val horizontalMargin: Int = 16.px,
+    private val outerVerticalMargin: Int = 24.px,
 ) : ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
@@ -22,27 +23,17 @@ class GridItemDecoration(
         val position = parent.getChildAdapterPosition(view)
         val totalCount = state.itemCount
 
-        outRect.top = verticalMargin
-
-        val index = position % gridCount
-        when (index) {
-            0 -> {
-                outRect.left = verticalMargin
-                outRect.right = horizontalMargin / 2
-            }
-
-            gridCount - 1 -> {
-                outRect.left = horizontalMargin / 2
-                outRect.right = verticalMargin
-            }
-
-            else -> {
-                outRect.left = horizontalMargin / 2
-                outRect.right = horizontalMargin / 2
-            }
+        if (position in (0..<gridCount)) {
+            outRect.top = outerVerticalMargin
         }
 
-        if (position > totalCount - gridCount - 1) {
+        val index = position % gridCount
+        outRect.left = horizontalMargin * (gridCount - index) / gridCount
+        outRect.right = horizontalMargin * (index + 1) / gridCount
+
+        if (position >= totalCount - gridCount) {
+            outRect.bottom = outerVerticalMargin
+        } else {
             outRect.bottom = verticalMargin
         }
     }

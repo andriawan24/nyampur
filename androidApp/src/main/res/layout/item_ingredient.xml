@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/ivRecipe"
+        android:layout_width="@dimen/dimen_76dp"
+        android:layout_height="@dimen/dimen_76dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:round="@dimen/dimen_8dp"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvName"
+        style="@style/NyampurTextStyle.Medium.16"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnEdit"
+        app:layout_constraintStart_toEndOf="@id/ivRecipe"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Milk" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEdit"
+        style="@style/Widget.Material3.Button.IconButton.Filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:insetLeft="@dimen/dimen_0dp"
+        android:insetTop="@dimen/dimen_0dp"
+        android:insetRight="@dimen/dimen_0dp"
+        android:insetBottom="@dimen/dimen_0dp"
+        android:minWidth="@dimen/dimen_42dp"
+        android:minHeight="@dimen/dimen_42dp"
+        android:padding="@dimen/dimen_12dp"
+        app:backgroundTint="@color/colorPrimaryBackground"
+        app:cornerRadius="@dimen/dimen_8dp"
+        app:icon="@drawable/ic_pencil_outline"
+        app:iconTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
