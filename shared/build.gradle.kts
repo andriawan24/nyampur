@@ -1,4 +1,5 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec
+import org.gradle.kotlin.dsl.implementation
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
@@ -42,10 +43,11 @@ kotlin {
             api(libs.androidx.lifecycle.viewmodel)
             api(libs.koin.core)
             api(libs.koin.test)
+            api(libs.generativeai)
         }
 
         androidMain.dependencies {
-            implementation(libs.ktor.client.okhttp)
+            api(libs.ktor.client.okhttp)
         }
 
         iosMain.dependencies {

@@ -30,6 +30,7 @@ android {
             isMinifyEnabled = false
             isDebuggable = true
             buildConfigField("String", "GOOGLE_CLIENT_WEB_ID", "\"${props["google_client_id"]?.toString() ?: "https://fakeapi.com"}\"")
+            buildConfigField("String", "GEMINI_API_KEY", "\"${props["gemini_api_key"]?.toString() ?: "https://fakeapi.com"}\"")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
 
@@ -38,6 +39,7 @@ android {
             isShrinkResources = true
             isMinifyEnabled = true
             buildConfigField("String", "GOOGLE_CLIENT_WEB_ID", "\"${props["google_client_id"]?.toString() ?: "https://fakeapi.com"}\"")
+            buildConfigField("String", "GEMINI_API_KEY", "\"${props["gemini_api_key"]?.toString() ?: "https://fakeapi.com"}\"")
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
