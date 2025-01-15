@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardViewPrefixBottomSheetRadiusStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/dimen_0dp"
+    app:contentPaddingBottom="@dimen/dimen_24dp"
+    app:contentPaddingLeft="@dimen/dimen_24dp"
+    app:contentPaddingRight="@dimen/dimen_24dp"
+    app:contentPaddingTop="@dimen/dimen_24dp"
+    app:strokeWidth="@dimen/dimen_0dp"
+    tools:background="@color/colorGreyBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/llTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                style="@style/NyampurTextStyle.Bold.TextPrimary"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_16dp"
+                android:layout_weight="1"
+                android:text="@string/title_edit_ingredient"
+                android:textSize="@dimen/text_size_22sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_close_dropdown" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/ivIngredient"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_0dp"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1,1"
+            app:layout_constraintTop_toBottomOf="@id/llTitle"
+            app:round="@dimen/dimen_12dp"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilIngredientName"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:hint="@string/hint_ingredient_name"
+            app:boxCornerRadiusBottomEnd="@dimen/dimen_8dp"
+            app:boxCornerRadiusBottomStart="@dimen/dimen_8dp"
+            app:boxCornerRadiusTopEnd="@dimen/dimen_8dp"
+            app:boxCornerRadiusTopStart="@dimen/dimen_8dp"
+            app:boxStrokeColor="@color/selector_text_input_layout_stroke_color"
+            app:boxStrokeErrorColor="@color/colorRed"
+            app:boxStrokeWidth="@dimen/dimen_1dp"
+            app:errorTextAppearance="@style/NyampurTextStyle.Medium.Small"
+            app:errorTextColor="@color/colorRed"
+            app:hintEnabled="true"
+            app:hintTextAppearance="@style/NyampurTextStyle.Medium"
+            app:hintTextColor="@color/colorTextSecondary"
+            app:layout_constraintTop_toBottomOf="@id/ivIngredient"
+            app:placeholderTextAppearance="@style/NyampurTextStyle.Medium"
+            app:placeholderTextColor="@color/colorTextSecondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/satoshi_medium"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/colorTextPrimary"
+                android:textColorHint="@color/colorTextSecondary"
+                android:textSize="@dimen/text_size_14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tilIngredientName">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNegative"
+                style="@style/NyampurButton.Secondary"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_16dp"
+                android:layout_weight="1"
+                android:text="@string/action_cancel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                style="@style/NyampurButton"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/action_save" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

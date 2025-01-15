@@ -1,8 +1,8 @@
 package id.nisyafawwaz.nyampur.android.adapters
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,12 +10,10 @@ import id.nisyafawwaz.nyampur.android.databinding.ItemIngredientBinding
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.domain.models.IngredientModel
 
-class IngredientAdapter(private val onEditClicked: (IngredientModel) -> Unit) : RecyclerView.Adapter<IngredientAdapter.ViewHolder>() {
+class IngredientAdapter(
+    private val onEditClicked: (IngredientModel) -> Unit
+) : RecyclerView.Adapter<IngredientAdapter.ViewHolder>() {
     private var ingredientsDiffer = AsyncListDiffer(this, DIFF_CALLBACK)
-
-    fun addAll(newData: List<IngredientModel>) {
-        ingredientsDiffer.submitList(newData)
-    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -36,7 +34,7 @@ class IngredientAdapter(private val onEditClicked: (IngredientModel) -> Unit) : 
         fun bind(ingredient: IngredientModel) {
             with(binding) {
                 tvName.text = ingredient.name
-                ivRecipe.setImageURI(Uri.parse(ingredient.imagePath))
+                ivRecipe.setImageURI(ingredient.imagePath.toUri())
                 btnEdit.onClick {
                     onEditClicked.invoke(ingredient)
                 }
@@ -51,6 +49,10 @@ class IngredientAdapter(private val onEditClicked: (IngredientModel) -> Unit) : 
         position: Int,
     ) {
         holder.bind(ingredientsDiffer.currentList[position])
+    }
+
+    fun addAll(newData: List<IngredientModel>) {
+        ingredientsDiffer.submitList(newData)
     }
 
     companion object {
