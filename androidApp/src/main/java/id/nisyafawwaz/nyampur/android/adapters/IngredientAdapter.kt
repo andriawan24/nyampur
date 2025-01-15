@@ -11,7 +11,7 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.domain.models.IngredientModel
 
 class IngredientAdapter(
-    private val onEditClicked: (IngredientModel) -> Unit
+    private val onEditClicked: (IngredientModel) -> Unit,
 ) : RecyclerView.Adapter<IngredientAdapter.ViewHolder>() {
     private var ingredientsDiffer = AsyncListDiffer(this, DIFF_CALLBACK)
 

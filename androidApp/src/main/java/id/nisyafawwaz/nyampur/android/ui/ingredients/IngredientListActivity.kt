@@ -16,6 +16,7 @@ import id.nisyafawwaz.nyampur.android.utils.extensions.getPathsFromTakePhotoDir
 import id.nisyafawwaz.nyampur.android.utils.extensions.observeLiveData
 import id.nisyafawwaz.nyampur.android.utils.extensions.onClick
 import id.nisyafawwaz.nyampur.android.utils.list.SpacerItemDecoration
+import id.nisyafawwaz.nyampur.domain.models.IngredientModel
 import id.nisyafawwaz.nyampur.ui.GeminiViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,6 +28,7 @@ class IngredientListActivity : BaseActivity<ActivityIngredientListBinding>() {
     private val geminiViewModel: GeminiViewModel by viewModel()
 
     private val imagePaths = mutableListOf<String>()
+    private val ingredients = mutableListOf<IngredientModel>()
     private val ingredientAdapter: IngredientAdapter by lazy {
         IngredientAdapter(
             onEditClicked = {
@@ -52,7 +54,6 @@ class IngredientListActivity : BaseActivity<ActivityIngredientListBinding>() {
 
     override fun onResume() {
         super.onResume()
-
         val updatedImagePaths = getPathsFromTakePhotoDir()
         if (imagePaths != updatedImagePaths) {
             imagePaths.clear()
@@ -64,7 +65,16 @@ class IngredientListActivity : BaseActivity<ActivityIngredientListBinding>() {
     private fun fetchIngredients() {
         lifecycleScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
-                Toast.makeText(this@IngredientListActivity, "Extracting ingredients, please wait...", Toast.LENGTH_SHORT).show()
+                binding.apply {
+                    btnBack.disable()
+                    btnContinue.disable()
+                }
+
+                Toast.makeText(
+                    this@IngredientListActivity,
+                    "Extracting ingredients, please wait...",
+                    Toast.LENGTH_SHORT,
+                ).show()
             }
 
             val images =
@@ -99,11 +109,13 @@ class IngredientListActivity : BaseActivity<ActivityIngredientListBinding>() {
                     btnBack.enable()
                     btnContinue.enable()
                 }
-                val ingredients =
+                ingredients.clear()
+                ingredients.addAll(
                     it.mapIndexed { index, ingredient ->
                         ingredient.imagePath = imagePaths.getOrNull(index).orEmpty()
                         ingredient
-                    }
+                    },
+                )
                 ingredientAdapter.addAll(ingredients)
             },
             onFailure = {

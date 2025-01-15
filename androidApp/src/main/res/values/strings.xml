@@ -55,4 +55,7 @@
     <string name="message_delete_this_photo">We can’t recover this photo once you delete it.</string>
     <string name="title_ingredient_list">Check the ingredients</string>
     <string name="description_ingredient_list">Make sure the ingredient names are correct.</string>
+    <string name="title_edit_ingredient">Edit Ingredient</string>
+    <string name="action_save">Save</string>
+    <string name="hint_ingredient_name">Ingredient Name</string>
 </resources>
